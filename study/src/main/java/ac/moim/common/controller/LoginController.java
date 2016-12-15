@@ -13,6 +13,7 @@ import org.springframework.social.oauth2.GrantType;
 import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,12 +42,13 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/oauth2callback")
-	public String oauth2Callback(@RequestParam(value = "code")String code) {
+	public String oauth2Callback(Model model, @RequestParam(value = "code")String code) {
 
 		OAuth2Operations oAuth2Operations = googleConnectionFactory.getOAuthOperations();
 		AccessGrant accessGrant = oAuth2Operations.exchangeForAccess(code, googleOAuth2Parameters.getRedirectUri(), null);
 		String accessToken = accessGrant.getAccessToken();
 		Long expireTime =  accessGrant.getExpireTime();
+
 		if (expireTime != null && expireTime < System.currentTimeMillis()) {
 			accessToken = accessGrant.getRefreshToken();
 			log.info("accessToken is expired. refresh token = {}" , accessToken);
@@ -58,6 +60,12 @@ public class LoginController {
 		PlusOperations plusOperations = google.plusOperations();
 		Person person = plusOperations.getGoogleProfile();
 
+		//TODO id, code, expireTime 을 저장
+		// id : 서비스에서 사용자 인식
+		// expireTime : access token 유효시간 체크 (filter)
+
+		//TODO 이전 화면으로 이동?
+		model.addAttribute("name", person.getGivenName() + " " + person.getFamilyName());
 		return "hello";
 	}
 }
