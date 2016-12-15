@@ -6,7 +6,7 @@
 	<groupId>ac.moim</groupId>
 	<artifactId>study</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>study</name>
 	<description>First project for study moim</description>
