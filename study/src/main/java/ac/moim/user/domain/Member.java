@@ -2,39 +2,37 @@ package ac.moim.user.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="MEMBER")
 public class Member {
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.AUTO)
-//	private Long USER_ID;
-	
 	@Id
-	@Column(nullable = false, unique = true)
-	private String USER_ID;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long MEMBER_ID;
 	
 	@Column(nullable = true)
-	private String USER_MAIL;
-		
-	public String getUSER_ID() {
-		return USER_ID;
+	private Character CHECK_MEMBER;
+
+	public Character getCHECK_MEMBER() {
+		return CHECK_MEMBER;
 	}
 
-	public void setUSER_ID(String uSER_ID) {
-		USER_ID = uSER_ID;
+	public void setCHECK_MEMBER(Character cHECK_MEMBER) {
+		CHECK_MEMBER = cHECK_MEMBER;
 	}
 
-	public String getUSER_MAIL() {
-		return USER_MAIL;
+	public Long getMEMBER_ID() {
+		return MEMBER_ID;
 	}
 
-	public void setUSER_MAIL(String uSER_MAIL) {
-		USER_MAIL = uSER_MAIL;
+	public void setMEMBER_ID(Long mEMBER_ID) {
+		MEMBER_ID = mEMBER_ID;
 	}
-
+	
 
 
 }
