@@ -1,6 +1,5 @@
 package ac.moim.common.controller;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.google.api.Google;
@@ -19,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * Created by SONG_HOHOON on 2016-12-06.
  */
@@ -33,13 +34,14 @@ public class LoginController {
 	private OAuth2Parameters googleOAuth2Parameters;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public RedirectView login() {
+	public RedirectView Login() {
 
 		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
 		String redirectedUrl = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);
 
 		return new RedirectView(redirectedUrl);
 	}
+
 
 	@RequestMapping(value = "/oauth2callback")
 	public String oauth2Callback(Model model, @RequestParam(value = "code")String code) {
@@ -51,7 +53,7 @@ public class LoginController {
 
 		if (expireTime != null && expireTime < System.currentTimeMillis()) {
 			accessToken = accessGrant.getRefreshToken();
-			log.info("accessToken is expired. refresh token = {}" , accessToken);
+			//log.info("accessToken is expired. refresh token = {}" , accessToken);
 		}
 
 		Connection<Google> connection = googleConnectionFactory.createConnection(accessGrant);
