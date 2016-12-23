@@ -17,6 +17,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "study")
+@SuppressWarnings("serial")
 public class Study extends BaseEntity implements Serializable {
 
 	@Id
