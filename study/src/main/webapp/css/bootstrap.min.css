@@ -4943,7 +4943,7 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
 	border-color: #101010;
 	position: relative;
-    left: 20%;
+    left: 15%;
 }
 
 .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus,
