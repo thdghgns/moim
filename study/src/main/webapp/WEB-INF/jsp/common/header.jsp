@@ -37,7 +37,7 @@
 						</li>
 						<li class="dropdown"
 							style="padding: 0px 15px 0px 15px !important; font-size:20"><a
-							href="${pageContext.request.contextPath}/jsp/studyMain.X"><strong>Study</strong></a>
+							href="jsp/views/studyMain.jsp"><strong>Study</strong></a>
 							<hr />
 							<ul role="menu" class="sub-menu">
 								<li><a href="/study">IT</a></li>
