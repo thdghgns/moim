@@ -1,6 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <head>
 </head>
 <body>
+	<div class="container">
+		<section role="main" id="content" class="content left">
+	</section>
+	</div>
 </body>
 </html>

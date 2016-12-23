@@ -12,10 +12,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class IndexController {
 
-	@RequestMapping(value = "/hello", method = RequestMethod.GET)
+	@RequestMapping(value = "/homeMain", method = RequestMethod.GET)
 	public String Welcome(Model model, @RequestParam(value="name", required=false, defaultValue="World") String name) {
 
 		model.addAttribute("name", name);
-		return "hello";
+		return "homeMain";
+	}
+	
+	@RequestMapping(value ="/studyMain", method =RequestMethod.GET)
+	public String StudyMain(){
+		return "studyMain";
 	}
 }

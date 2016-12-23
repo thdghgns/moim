@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<% String contentPage = request.getParameter("CONTENTPAGE"); %>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
-<jsp:include page="common/include.jsp" flush="false" />
-<jsp:include page="common/header.jsp" flush="false" />
-<jsp:include page="<%=contentPage%>" flush="false"/>
-<jsp:include page="common/footer.jsp" flush="false" />
+<tiles:insertAttribute name="include" />
+<tiles:insertAttribute name="header" />
+<tiles:insertAttribute name="body" />
+<tiles:insertAttribute name="footer" />
