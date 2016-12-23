@@ -16,6 +16,11 @@ import java.io.Serializable;
 @Table(name = "comment")
 public class Comment extends BaseEntity implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 305521798234827157L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;

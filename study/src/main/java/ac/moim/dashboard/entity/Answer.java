@@ -16,6 +16,11 @@ import java.io.Serializable;
 @Table(name = "answer")
 public class Answer extends BaseEntity implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2453858179253959149L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;

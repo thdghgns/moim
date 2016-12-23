@@ -21,6 +21,11 @@ import java.io.Serializable;
 })
 public class StudyMember extends BaseEntity implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7173719779454611227L;
+
 	@EmbeddedId
 	private StudyMemberId id;
 

@@ -17,6 +17,11 @@ import java.util.List;
 @Table(name = "subject")
 public class Subject extends BaseEntity implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -581904803889835888L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")

@@ -16,6 +16,11 @@ import java.io.Serializable;
 @Table(name = "notice")
 public class Notice extends BaseEntity implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1249845006082989619L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;

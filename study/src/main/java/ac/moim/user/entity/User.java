@@ -20,6 +20,11 @@ import java.util.List;
 @Table(name = "user")
 public class User extends BaseEntity implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6289556639755700710L;
+
 	@Id
 	@Column(name = "id", unique = true, nullable = false, length = 21)
 	private String id;
