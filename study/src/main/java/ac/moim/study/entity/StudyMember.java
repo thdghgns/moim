@@ -15,10 +15,10 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "study_member")
-@AssociationOverrides(value = {
-	@AssociationOverride(name = "id.study", joinColumns = @JoinColumn(name = "study_id")),
-	@AssociationOverride(name = "id.user", joinColumns = @JoinColumn(name = "user_id"))
-})
+//@AssociationOverrides(value = {
+//	@AssociationOverride(name = "id.study", joinColumns = @JoinColumn(name = "study_id")),
+//	@AssociationOverride(name = "id.user", joinColumns = @JoinColumn(name = "user_id"))
+//})
 public class StudyMember extends BaseEntity implements Serializable {
 
 	/**

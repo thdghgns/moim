@@ -14,13 +14,32 @@ public class IndexController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String Index(Model model) {
-		return "index";
+		return "views/homeMain";
 	}
 	
-	@RequestMapping(value = "/hello", method = RequestMethod.GET)
+	@RequestMapping(value = "/homeMain", method = RequestMethod.GET)
 	public String Welcome(Model model, @RequestParam(value="name", required=false, defaultValue="World") String name) {
 
 		model.addAttribute("name", name);
-		return "hello";
+		return "views/homeMain";
 	}
+	
+	@RequestMapping(value = "/studyMain", method = RequestMethod.GET)
+	public String StudyMain(){
+
+		return "views/studyMain";
+	}
+	
+	@RequestMapping(value = "/noticeMain", method = RequestMethod.GET)
+	public String NoticeMain(){
+
+		return "views/noticeMain";
+	}
+	
+	@RequestMapping(value = "/mypageMain", method = RequestMethod.GET)
+	public String MyPageMain(){
+
+		return "views/mypageMain";
+	}
+	
 }

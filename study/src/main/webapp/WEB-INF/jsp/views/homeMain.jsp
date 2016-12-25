@@ -20,7 +20,7 @@
 					<div class="c_widget ct_box"
 						style="padding: 20px; border-bottom: 1px dotted #CCC; background-color: #FFF;">
 						<h2 class="w_headline">
-							<a href="/study">IT<span class="page_count num"></a>
+							<a href="/study">IT<span class="page_count num"></span></a>
 						</h2>
 						<div class="w_list w_normal"
 							style="*zoom: 1; padding: 5px 5px 5px 5px !important;">

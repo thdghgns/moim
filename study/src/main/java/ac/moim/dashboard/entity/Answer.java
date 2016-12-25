@@ -25,8 +25,6 @@ public class Answer extends BaseEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@ManyToOne
-	@JoinColumn(name = "question_id")
 	private Integer questionId;
 
 	@Column(name = "content")

@@ -33,11 +33,11 @@
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
 						<li class="active" style="padding: 0px 15px 0px 15px !important; font-size:20">
-							<a href=""><strong>home</strong></a>
+							<a href="/homeMain"><strong>home</strong></a>
 						</li>
 						<li class="dropdown"
 							style="padding: 0px 15px 0px 15px !important; font-size:20"><a
-							href="${pageContext.request.contextPath}/jsp/studyMain.X"><strong>Study</strong></a>
+							href="/studyMain"><strong>Study</strong></a>
 							<hr />
 							<ul role="menu" class="sub-menu">
 								<li><a href="/study">IT</a></li>
@@ -46,7 +46,7 @@
 							</ul></li>
 						<li class="dropdown"
 							style="padding: 0px 15px 0px 15px !important; font-size:20"><a
-							href="/band"><span><strong>Notice</strong></span></a>
+							href="/noticeMain"><span><strong>Notice</strong></span></a>
 							<hr />
 							<ul role="menu" class="sub-menu">
 								<li><a href="/board1">Notice</a></li>
@@ -55,7 +55,7 @@
 							</ul></li>
 						<li class="dropdown"
 							style="padding: 0px 15px 0px 15px !important; font-size:20"><a
-							href="/free"><span><strong>My Page</strong></span></a>
+							href="/mypageMain"><span><strong>My Page</strong></span></a>
 							<hr />
 							<ul role="menu" class="sub-menu">
 								<li><a href="/mystudy">My Study</a></li>
