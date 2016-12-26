@@ -16,9 +16,6 @@ import java.io.Serializable;
 @Table(name = "resource")
 public class Resource extends BaseEntity implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5586510596467415725L;
 
 	@Id

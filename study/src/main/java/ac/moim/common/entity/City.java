@@ -18,9 +18,6 @@ import java.util.List;
 @Table(name = "city")
 public class City extends BaseEntity implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8229685397241049006L;
 
 	@Id

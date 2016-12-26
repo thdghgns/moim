@@ -1,21 +1,14 @@
 package ac.moim.study.entity;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
 import ac.moim.common.entity.BaseEntity;
 import ac.moim.common.entity.City;
 import ac.moim.common.entity.Subject;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by SONG_HOHOON on 2016-12-22.
@@ -32,8 +25,8 @@ public class Study extends BaseEntity implements Serializable {
 	@Column(name = "id")
 	private Integer id;
 
-//	@ManyToOne
-//	@JoinColumn(name = "subject_id")
+	@ManyToOne
+	@JoinColumn(name = "subject_id")
 	private Subject subjectId;
 
 	@Column(name = "title")
@@ -58,12 +51,12 @@ public class Study extends BaseEntity implements Serializable {
 	@Column(name = "hit")
 	private int hit = 0;
 
-//	@OneToMany(mappedBy = "id.study",fetch = FetchType.LAZY)
-//	private List<StudyMember> studyMemberList;
-//
-//	@OneToMany(mappedBy = "studyId", fetch = FetchType.LAZY)
-//	private List<Comment> commentList;
-//
-//	@OneToMany(mappedBy = "studyId", fetch = FetchType.LAZY)
-//	private List<Resource> resourceList;
+	@OneToMany(mappedBy = "id.study",fetch = FetchType.LAZY)
+	private List<StudyMember> studyMemberList;
+
+	@OneToMany(mappedBy = "studyId", fetch = FetchType.LAZY)
+	private List<Comment> commentList;
+
+	@OneToMany(mappedBy = "studyId", fetch = FetchType.LAZY)
+	private List<Resource> resourceList;
 }

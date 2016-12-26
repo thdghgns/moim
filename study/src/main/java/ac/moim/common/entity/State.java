@@ -16,9 +16,6 @@ import java.util.List;
 @Table(name = "state")
 public class State extends BaseEntity implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 71622074753189399L;
 
 	@Id

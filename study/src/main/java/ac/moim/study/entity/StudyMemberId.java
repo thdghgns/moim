@@ -13,9 +13,6 @@ import java.io.Serializable;
 @Data
 @Embeddable
 public class StudyMemberId implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6756338026513941399L;
 
 	@ManyToOne

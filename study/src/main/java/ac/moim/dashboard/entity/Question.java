@@ -1,17 +1,12 @@
 package ac.moim.dashboard.entity;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import ac.moim.common.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
 
 /**
  * Created by SONG_HOHOON on 2016-12-22.
@@ -22,9 +17,6 @@ import lombok.EqualsAndHashCode;
 @Table(name = "question")
 public class Question extends BaseEntity implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6493879580947679841L;
 
 	@Id
@@ -40,7 +32,6 @@ public class Question extends BaseEntity implements Serializable {
 	@Column(name = "hit")
 	private int hit = 0;
 
-//	@OneToMany(mappedBy = "questionId", fetch = FetchType.LAZY)
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fk.questionId", cascade = { CascadeType.ALL })
-//	private Set<Answer> answerList;
+	@OneToMany(mappedBy = "questionId", fetch = FetchType.LAZY)
+	private Set<Answer> answerList;
 }
