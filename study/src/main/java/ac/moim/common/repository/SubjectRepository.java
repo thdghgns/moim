@@ -8,4 +8,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  * Created by SONG_HOHOON on 2016-12-22.
  */
 public interface SubjectRepository extends JpaRepository<Subject, Integer>, JpaSpecificationExecutor<Subject> {
+	public Subject findByCode(String code);
 }

@@ -37,7 +37,7 @@ public class User extends BaseEntity implements Serializable {
 	private City cityId;
 
 	@Column(name = "gender")
-	private char gender;
+	private String gender;
 
 	@Column(name = "birthday")
 	private Date birthday;

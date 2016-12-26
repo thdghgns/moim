@@ -1,5 +1,7 @@
 package ac.moim.common.controller;
 
+import ac.moim.user.entity.User;
+import ac.moim.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.google.api.Google;
@@ -21,6 +23,9 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import lombok.extern.slf4j.Slf4j;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 /**
  * Created by SONG_HOHOON on 2016-12-06.
  */
@@ -35,6 +40,9 @@ public class LoginController {
 	@Autowired
 	private OAuth2Parameters googleOAuth2Parameters;
 
+	@Autowired
+	private UserService userService;
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public RedirectView Login() {
 
@@ -46,7 +54,7 @@ public class LoginController {
 
 
 	@RequestMapping(value = "/oauth2callback")
-	public String oauth2Callback(Model model, @RequestParam(value = "code")String code) {
+	public void oauth2Callback(HttpSession session, Model model, @RequestParam(value = "code")String code) {
 
 		OAuth2Operations oAuth2Operations = googleConnectionFactory.getOAuthOperations();
 		AccessGrant accessGrant = oAuth2Operations.exchangeForAccess(code, googleOAuth2Parameters.getRedirectUri(), null);
@@ -55,7 +63,7 @@ public class LoginController {
 
 		if (expireTime != null && expireTime < System.currentTimeMillis()) {
 			accessToken = accessGrant.getRefreshToken();
-			//log.info("accessToken is expired. refresh token = {}" , accessToken);
+			log.info("accessToken is expired. refresh token = {}" , accessToken);
 		}
 
 		Connection<Google> connection = googleConnectionFactory.createConnection(accessGrant);
@@ -64,12 +72,13 @@ public class LoginController {
 		PlusOperations plusOperations = google.plusOperations();
 		Person person = plusOperations.getGoogleProfile();
 
-		//TODO id, code, expireTime 을 저장
-		// id : 서비스에서 사용자 인식
-		// expireTime : access token 유효시간 체크 (filter)
+		User user = userService.saveUser(person);
+		if(user != null) {
+			session.setAttribute("user", user);
+			session.setAttribute("expireTime", expireTime);
+		}
 
-		//TODO 이전 화면으로 이동?
-		model.addAttribute("name", person.getGivenName() + " " + person.getFamilyName());
-		return "hello";
+//		model.addAttribute("name", person.getGivenName() + " " + person.getFamilyName());
+//		return "hello";
 	}
 }

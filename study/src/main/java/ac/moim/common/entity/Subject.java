@@ -30,6 +30,6 @@ public class Subject extends BaseEntity implements Serializable {
 	@Column(name = "name", unique = true, nullable = false)
 	private String name;
 
-	@OneToMany(mappedBy = "subjectCode", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "subjectId", fetch = FetchType.LAZY)
 	private List<Study> studyList;
 }

@@ -16,7 +16,7 @@ public class MembershipController {
 ////		return membershipService.Enroll("test");
 //		
 ////		Member newMember = new Member();
-//		User newUser = new User();
+//		UserDto newUser = new UserDto();
 //		
 //		newUser.setUSER_ID("01");
 //		newUser.setUSER_NAME("tester");
