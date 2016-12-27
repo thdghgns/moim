@@ -8,14 +8,8 @@
 
 	if (session.getAttribute("userName") != null) {
 		userName = (String) session.getAttribute("userName");
-	}
-	;
+	} ;
 %>
-<script src="http://code.jquery.com/jquery-latest.min.js">
-	$(document).ready(function() {
-		alert("!!");
-	});
-</script>
 <header id="header">
 	<div class="container">
 		<div class="navbar navbar-inverse" role="banner"
@@ -33,7 +27,12 @@
 							<img src="images/logo1.png" alt="Moim"> Moim
 						</h1>
 					</a>
+					<div class="search">
+						<a href="/login"><i class="fa fa-google-plus"></i></a>
+						<%=userName%>  
+					</div>
 				</div>
+
 			</div>
 			<div class="container">
 				<div class="text-center">
@@ -76,15 +75,6 @@
 							</li>
 						</ul>
 					</div>
-				</div>
-				<div class="search">
-					<form role="form">
-						<%=userName%>
-						<i class="fa fa-google-plus"></i>
-						<div class="field-toggle">
-							<input type="text" name="search" placeholder="Search">
-						</div>
-					</form>
 				</div>
 			</div>
 		</div>
