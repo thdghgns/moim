@@ -1,18 +1,100 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <body>
 	<div class="container">
-		<div class="sidebar-item categories">
-			<h3>Categories</h3>
-			<ul class="nav navbar-stacked">
-				<li><a href="#"><span>Lorem ipsum</span><span class=>임연규</span><span class="pull-right">(1)</span></a></li>
-				<li><a href="#">Dolor sit amet<span class=>캐모마일</span><span class="pull-right">(8)</span></a></li>
-				<li><a href="#">Adipisicing elit<span class="pull-right">(4)</span></a></li>
-				<li><a href="#">Sed do<span class="pull-right">(9)</span></a></li>
-				<li><a href="#">Eiusmod<span class="pull-right">(3)</span></a></li>
-				<li><a href="#">Mockup<span class="pull-right">(4)</span></a></li>
-				<li><a href="#">Ut enim ad minim <span class="pull-right">(2)</span></a></li>
-				<li><a href="#">Veniam, quis nostrud <span class="pull-right">(8)</span></a></li>
-			</ul>
+		<div class="search-notice pull-right">
+			<input type="text" class="search-form" autocomplete="off" placeholder="Search">
+			<i class="fa fa-search"></i> 
+		</div>
+		<div class="divTable">
+			<div class="divTableBody">
+				<div class="divTableRow">
+					<div class="divTableCell orderCell">순번</div>
+					<div class="divTableCell subjectCell">제목</div>
+					<div class="divTableCell dateCell">날짜</div>
+					<div class="divTableCell writerCell">작성자</div>
+					<div class="divTableCell hitsCell">조회수</div>
+				</div>
+				<div class="divTableRow">
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+				</div>
+				<div class="divTableRow">
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+				</div>
+				<div class="divTableRow">
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+				</div>
+				<div class="divTableRow">
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+				</div>
+				<div class="divTableRow">
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+				</div>
+				<div class="divTableRow">
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+				</div>
+				<div class="divTableRow">
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+				</div>
+				<div class="divTableRow">
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+				</div>
+				<div class="divTableRow">
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+					<div class="divTableCell">&nbsp;</div>
+				</div>
+			</div>
 		</div>
 	</div>
+	<div class="blog-pagination">
+		<ul class="pagination">
+			<li><a href="#">left</a></li>
+			<li><a href="#">1</a></li>
+			<li><a href="#">2</a></li>
+			<li class="active"><a href="#">3</a></li>
+			<li><a href="#">4</a></li>
+			<li><a href="#">5</a></li>
+			<li><a href="#">6</a></li>
+			<li><a href="#">7</a></li>
+			<li><a href="#">8</a></li>
+			<li><a href="#">9</a></li>
+			<li><a href="#">right</a></li>
+		</ul>
+	</div>
 </body>
+<!-- DivTable.com -->

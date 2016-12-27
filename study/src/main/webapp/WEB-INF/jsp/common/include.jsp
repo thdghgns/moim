@@ -9,5 +9,6 @@
 <link href="css/font-awesome.min.css" rel="stylesheet">
 <link href="css/animate.min.css" rel="stylesheet">
 <link href="css/lightbox.css" rel="stylesheet">
-<link href="css/main.css" rel="stylesheet">
+<link href="css/main.css?v=0.2" rel="stylesheet">
 <link href="css/responsive.css" rel="stylesheet">
+<link href="css/custom.css?v=0.1" rel="stylesheet">
