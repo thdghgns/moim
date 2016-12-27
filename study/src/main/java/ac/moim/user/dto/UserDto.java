@@ -11,7 +11,7 @@ import java.util.Date;
 public class UserDto {
 	@Data
 	public static class Request implements Serializable {
-
+		private static final long serialVersionUID = 6780591412701741764L;
 		private String id;
 		private String name;
 		private String mail;
