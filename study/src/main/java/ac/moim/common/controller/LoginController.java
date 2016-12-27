@@ -1,7 +1,7 @@
 package ac.moim.common.controller;
 
-import ac.moim.user.entity.User;
-import ac.moim.user.service.UserService;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.google.api.Google;
@@ -21,10 +21,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
+import ac.moim.user.entity.User;
+import ac.moim.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  * Created by SONG_HOHOON on 2016-12-06.
@@ -54,7 +53,7 @@ public class LoginController {
 
 
 	@RequestMapping(value = "/oauth2callback")
-	public void oauth2Callback(HttpSession session, Model model, @RequestParam(value = "code")String code) {
+	public String oauth2Callback(HttpSession session, Model model, @RequestParam(value = "code")String code) {
 
 		OAuth2Operations oAuth2Operations = googleConnectionFactory.getOAuthOperations();
 		AccessGrant accessGrant = oAuth2Operations.exchangeForAccess(code, googleOAuth2Parameters.getRedirectUri(), null);
@@ -74,10 +73,11 @@ public class LoginController {
 
 		User user = userService.saveUser(person);
 		if(user != null) {
-			session.setAttribute("user", user);
+			session.setAttribute("userName", user.getName());
 			session.setAttribute("expireTime", expireTime);
 		}
-
+				
+		return "views/homeMain";
 //		model.addAttribute("name", person.getGivenName() + " " + person.getFamilyName());
 //		return "hello";
 	}
