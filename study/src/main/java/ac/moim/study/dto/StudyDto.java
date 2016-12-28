@@ -13,6 +13,8 @@ public class StudyDto {
 	@Data
 	public static class Request implements Serializable{
 
+		private static final long serialVersionUID = -2230848846689871655L;
+
 		@NotNull
 		private String subjectCode;
 

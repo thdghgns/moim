@@ -30,12 +30,6 @@ public class IndexController {
 		return "views/studyMain";
 	}
 	
-	@RequestMapping(value = "/noticeMain", method = RequestMethod.GET)
-	public String NoticeMain(){
-
-		return "views/noticeMain";
-	}
-	
 	@RequestMapping(value = "/mypageMain", method = RequestMethod.GET)
 	public String MyPageMain(){
 

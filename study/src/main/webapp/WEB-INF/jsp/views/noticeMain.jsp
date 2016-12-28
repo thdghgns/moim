@@ -1,3 +1,0 @@
-<body>
-Notice Page
-</body>

@@ -1,0 +1,74 @@
+/* notice css */
+.divTable {
+	display: table;
+	width: 100%;
+	padding-bottom: 30px;
+}
+
+.divTableRow {
+	display: table-row;
+}
+
+.divTableHeading {
+	background-color: #EEE;
+	display: table-header-group;
+}
+
+.divTableCell, .divTableHead {
+	border-bottom: 1px solid #5CD1E5;
+	display: table-cell;
+	padding: 5px 10px;
+	color: #686868;
+}
+
+.divTableHeading {
+	background-color: #EEE;
+	display: table-header-group;
+	font-weight: bold;
+}
+
+.divTableFoot {
+	background-color: #EEE;
+	display: table-footer-group;
+	font-weight: bold;
+}
+
+.divTableBody {
+	display: table-row-group;
+}
+
+
+div.orderCell.divTableCell  {
+	width: 5%;
+}
+
+div.subjectCell.divTableCell  {
+	width: 50%;
+}
+
+div.dateCell.divTableCell  {
+	width: 5%;
+}
+
+div.writerCell.divTableCell  {
+	width: 5%;
+}
+
+div.hitsCell.divTableCell  {
+	width: 5%;
+}
+
+.search-notice i{
+  color: #00aeef;
+  cursor: pointer;
+  right: 70;
+  top: 2px;
+}
+.navbar-nav.post-nav li{
+	margin-right: 30px;
+}
+
+#notice-content {
+  height: 400px;
+  resize: none;
+}
