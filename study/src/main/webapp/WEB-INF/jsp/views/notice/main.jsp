@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <body>
 	<div class="container">
 		<div class="search-notice pull-right">
@@ -15,69 +16,15 @@
 					<div class="divTableCell writerCell">작성자</div>
 					<div class="divTableCell hitsCell">조회수</div>
 				</div>
-				<div class="divTableRow">
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-				</div>
-				<div class="divTableRow">
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-				</div>
-				<div class="divTableRow">
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-				</div>
-				<div class="divTableRow">
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-				</div>
-				<div class="divTableRow">
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-				</div>
-				<div class="divTableRow">
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-				</div>
-				<div class="divTableRow">
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-				</div>
-				<div class="divTableRow">
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-				</div>
-				<div class="divTableRow">
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-					<div class="divTableCell">&nbsp;</div>
-				</div>
+				<c:forEach var="contents" items="${noticeList}">
+					<div class="divTableRow">
+						<div class="divTableCell orderCell">${contents.id}</div>
+						<div class="divTableCell subjectCell">${contents.title}</div>
+						<div class="divTableCell dateCell">${contents.inputDate}</div>
+						<div class="divTableCell writerCell">${contents.inputUser}</div>
+						<div class="divTableCell hitsCell">${contents.hit}</div>
+					</div>
+				</c:forEach>
 			</div>
 		</div>
 		<div class="pull-right">
@@ -92,9 +39,9 @@
 	<div class="blog-pagination">
 		<ul class="pagination">
 			<li><a href="#">left</a></li>
-			<li><a href="#">1</a></li>
+			<li class="active"><a href="#">1</a></li>
 			<li><a href="#">2</a></li>
-			<li class="active"><a href="#">3</a></li>
+			<li><a href="#">3</a></li>
 			<li><a href="#">4</a></li>
 			<li><a href="#">5</a></li>
 			<li><a href="#">6</a></li>

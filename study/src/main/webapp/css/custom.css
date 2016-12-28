@@ -67,3 +67,8 @@ div.hitsCell.divTableCell  {
 .navbar-nav.post-nav li{
 	margin-right: 30px;
 }
+
+#notice-content {
+  height: 400px;
+  resize: none;
+}
