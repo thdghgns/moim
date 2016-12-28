@@ -12,3 +12,5 @@
 <link href="../css/main.css?v=0.1" rel="stylesheet">
 <link href="../css/responsive.css?v=0.1" rel="stylesheet">
 <link href="../css/custom.css?v=0.1" rel="stylesheet">
+
+<script  src="../js/jquery.js"></script> 
