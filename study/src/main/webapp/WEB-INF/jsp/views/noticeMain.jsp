@@ -3,8 +3,8 @@
 <body>
 	<div class="container">
 		<div class="search-notice pull-right">
-			<input type="text" class="search-form" autocomplete="off" placeholder="Search">
-			<i class="fa fa-search"></i> 
+			<input type="text" class="search-form" autocomplete="off"
+				placeholder="Search"> <i class="fa fa-search"></i>
 		</div>
 		<div class="divTable">
 			<div class="divTableBody">
@@ -80,7 +80,15 @@
 				</div>
 			</div>
 		</div>
+		<div class="pull-right">
+			<ul class="nav navbar-nav post-nav">
+				<li><a href="Dashboard/Create"><i class="fa fa-tag"></i>Creative</a></li>
+				<li><a href="#"><i class="fa fa-pencil-square-o"></i>Edit</a></li>
+				<li><a href="#"><i class="fa fa-times"></i>Delete</a></li>
+			</ul>
+		</div>
 	</div>
+
 	<div class="blog-pagination">
 		<ul class="pagination">
 			<li><a href="#">left</a></li>

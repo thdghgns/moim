@@ -2,7 +2,7 @@
 .divTable {
 	display: table;
 	width: 100%;
-	padding-bottom: 50px;
+	padding-bottom: 30px;
 }
 
 .divTableRow {
@@ -18,6 +18,7 @@
 	border-bottom: 1px solid #5CD1E5;
 	display: table-cell;
 	padding: 10px 10px;
+	color: #686868;
 }
 
 .divTableHeading {
@@ -62,4 +63,7 @@ div.hitsCell.divTableCell  {
   cursor: pointer;
   right: 70;
   top: 2px;
+}
+.navbar-nav.post-nav li{
+	margin-right: 30px;
 }
