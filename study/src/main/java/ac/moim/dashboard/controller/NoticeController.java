@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/Dashboard")
+@RequestMapping("/notice")
 public class NoticeController {
-	@RequestMapping(value = "/Create", method = RequestMethod.GET)
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String CreatePage() {
-		return "views/noticeCreate";
+		return "views/notice/create";
 	}
 
 }

@@ -53,7 +53,7 @@
 								</ul></li>
 							<li class="dropdown"
 								style="padding: 0px 15px 0px 15px !important; font-size: 20"><a
-								href="/noticeMain"><span><strong>Notice</strong></span></a>
+								href="/notice/main"><span><strong>Notice</strong></span></a>
 								<hr />
 								<ul role="menu" class="sub-menu">
 									<li><a href="/board1">Notice</a></li>

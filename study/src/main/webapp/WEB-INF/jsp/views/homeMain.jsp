@@ -150,7 +150,7 @@
 		<footer class="footer">
 			<div class="bottom_menu">
 				<ul>
-					<li><a href="/notice">Notice</a><span>|</span></li>
+					<li><a href="/notice/main">Notice</a><span>|</span></li>
 				</ul>
 			</div>
 		</footer>

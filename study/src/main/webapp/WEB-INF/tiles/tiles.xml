@@ -15,6 +15,11 @@
 	<definition name="*/*" extends="template">
 		<put-attribute name="body" value="/WEB-INF/jsp/{1}/{2}.jsp"/>
 	</definition>
+	
+		<!-- Pages -->
+	<definition name="*/*/*" extends="template">
+		<put-attribute name="body" value="/WEB-INF/jsp/{1}/{2}/{3}.jsp"/>
+	</definition>
 
 </tiles-definitions>
 
