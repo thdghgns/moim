@@ -17,7 +17,7 @@
 .divTableCell, .divTableHead {
 	border-bottom: 1px solid #5CD1E5;
 	display: table-cell;
-	padding: 10px 10px;
+	padding: 5px 10px;
 	color: #686868;
 }
 
