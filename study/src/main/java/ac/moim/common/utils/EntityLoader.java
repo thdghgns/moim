@@ -81,7 +81,7 @@ public class EntityLoader {
 	}
 	
 	
-	@PostConstruct
+/*	@PostConstruct
 	public void testStudyData() {
 		Integer id;
 		String title;
@@ -123,5 +123,5 @@ public class EntityLoader {
 		
 		studyRepository.save(study);
 
-	}
+	}*/
 }
