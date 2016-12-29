@@ -14,9 +14,4 @@ import ac.moim.common.entity.State;
  * Created by SONG_HOHOON on 2016-12-22.
  */
 public interface StateRepository extends JpaRepository<State, Integer>, JpaSpecificationExecutor<State> {
-
-	@Modifying
-	@Query(value="insert into state" 
-			+ " set code = code - ?1 and name = name - ?2",nativeQuery=true)
-	void updateByStateCodeAndName(Integer code, String name);
 }
