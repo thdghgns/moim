@@ -24,11 +24,20 @@ public class Subject extends BaseEntity implements Serializable {
 	@Column(name = "id")
 	private Integer id;
 
-	@Column(name = "code", unique = true, nullable = false)
-	private String code;
-
 	@Column(name = "name", unique = true, nullable = false)
 	private String name;
+
+	@Column(name = "parent_id")
+	private int parentId;
+
+	@Column(name = "level")
+	private int level;
+
+	@Column(name = "seq")
+	private int seq;
+
+	@Column(name = "delete_check")
+	private boolean deleteCheck = false;
 
 	@OneToMany(mappedBy = "subjectId", fetch = FetchType.LAZY)
 	private List<Study> studyList;

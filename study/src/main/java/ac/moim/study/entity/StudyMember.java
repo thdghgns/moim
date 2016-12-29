@@ -27,7 +27,7 @@ public class StudyMember extends BaseEntity implements Serializable {
 	private StudyMemberId id;
 
 	@Column(name = "classifier")
-	private char classifier;
+	private String classifier = "member";
 
 	@Transient
 	public Study getStudy() {

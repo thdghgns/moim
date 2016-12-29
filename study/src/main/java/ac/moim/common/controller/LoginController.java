@@ -1,5 +1,6 @@
 package ac.moim.common.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,14 +44,13 @@ public class LoginController {
 	private UserService userService;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public RedirectView Login() {
+	public RedirectView login() {
 
 		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
 		String redirectedUrl = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);
 
 		return new RedirectView(redirectedUrl);
 	}
-
 
 	@RequestMapping(value = "/oauth2callback")
 	public String oauth2Callback(HttpSession session, Model model, @RequestParam(value = "code")String code) {
@@ -73,12 +73,23 @@ public class LoginController {
 
 		User user = userService.saveUser(person);
 		if(user != null) {
-			session.setAttribute("userName", user.getName());
+			session.setAttribute("userId", user.getId());
 			session.setAttribute("expireTime", expireTime);
+			session.setAttribute("accessGrant", accessGrant);
 		}
-				
+
+		model.addAttribute("current-user", user.getName());
+
 		return "views/homeMain";
-//		model.addAttribute("name", person.getGivenName() + " " + person.getFamilyName());
-//		return "hello";
+	}
+
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
+
+		session.removeAttribute("userId");
+		session.removeAttribute("expireTime");
+		session.removeAttribute("accessGrant");
+
+		return "views/homeMain";
 	}
 }

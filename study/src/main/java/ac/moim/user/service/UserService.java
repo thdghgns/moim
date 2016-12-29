@@ -1,6 +1,7 @@
 package ac.moim.user.service;
 
 import ac.moim.user.dto.UserDto;
+import ac.moim.user.entity.User;
 import org.springframework.social.google.api.plus.Person;
 
 /**
@@ -8,5 +9,6 @@ import org.springframework.social.google.api.plus.Person;
  */
 public interface UserService {
 	public void saveUser(UserDto.Request user);
-	public ac.moim.user.entity.User saveUser(Person person);
+	public User saveUser(Person person);
+	public User getUser(String userId);
 }

@@ -19,8 +19,16 @@ public class UserServiceImpl implements UserService{
 	public void saveUser(UserDto.Request user) {
 	}
 
-	public ac.moim.user.entity.User saveUser(Person person) {
+	// TODO : cache 삭제 적용
+	@Override
+	public User saveUser(Person person) {
 		return userRepository.saveAndFlush(personToUser(person));
+	}
+
+	// TODO : cache 적용
+	@Override
+	public User getUser(String userId) {
+		return userRepository.findOne(userId);
 	}
 
 	private User personToUser(Person person) {

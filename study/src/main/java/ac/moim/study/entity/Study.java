@@ -46,7 +46,7 @@ public class Study extends BaseEntity implements Serializable {
 	private int memberLimit;
 
 	@Column(name = "delete_check")
-	private boolean deleteCheck;
+	private boolean deleteCheck = false;
 
 	@Column(name = "hit")
 	private int hit = 0;

@@ -16,7 +16,7 @@ public class StudyDto {
 		private static final long serialVersionUID = -2230848846689871655L;
 
 		@NotNull
-		private String subjectCode;
+		private String subjectId;
 
 		@NotNull
 		private String title;

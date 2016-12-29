@@ -16,20 +16,14 @@
 			style="width: 500px; height: 100px;">
 			<div class="container">
 				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse"
-						data-target=".navbar-collapse">
-						<span class="sr-only">Toggle navigation</span> <span
-							class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="hello">
+					<a class="navbar-brand" href="/homeMain">
 						<h1>
 							<img src="../images/logo1.png" alt="Moim"> Moim
 						</h1>
 					</a>
 					<div class="search">
-						<a href="/login"><i class="fa fa-google-plus"></i></a>
-						<span id=current-user><%=userName%></span> 
+						<a href="/login" class="fa fa-google-plus"></a>
+						<span id=current-user ></span>
 					</div>
 				</div>
 

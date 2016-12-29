@@ -2,10 +2,13 @@ package ac.moim.config;
 
 import javax.servlet.Filter;
 
+import ac.moim.common.interceptor.LoginInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
@@ -22,4 +25,11 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
 		characterEncodingFilter.setForceEncoding(true);
 		return characterEncodingFilter;
 	}
+
+	// TODO : excludePathPatterns 다시 설정해야됨.
+//	@Override
+//	public void addInterceptors(InterceptorRegistry registry) {
+//		registry.addInterceptor(new LoginInterceptor())
+//				.excludePathPatterns("/login/**");
+//	}
 }
