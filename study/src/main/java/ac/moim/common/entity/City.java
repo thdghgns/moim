@@ -28,7 +28,7 @@ public class City extends BaseEntity implements Serializable {
 	@JoinColumn(name = "state_id")
 	private State stateId;
 
-	@Column(name = "name", nullable = false, unique = true,length = 20)
+	@Column(name = "name", nullable = false, length = 20)
 	private String name;
 
 	@OneToMany(mappedBy = "cityId", fetch = FetchType.LAZY)
