@@ -23,19 +23,7 @@ public class IndexController {
 		model.addAttribute("name", name);
 		return "views/homeMain";
 	}
-	
-	@RequestMapping(value = "/studyMain", method = RequestMethod.GET)
-	public String StudyMain(){
-
-		return "views/studyMain";
-	}
-	
-	@RequestMapping(value = "/noticeMain", method = RequestMethod.GET)
-	public String NoticeMain(){
-
-		return "views/noticeMain";
-	}
-	
+		
 	@RequestMapping(value = "/mypageMain", method = RequestMethod.GET)
 	public String MyPageMain(){
 
