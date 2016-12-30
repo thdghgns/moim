@@ -26,10 +26,14 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
 		return characterEncodingFilter;
 	}
 
-	// TODO : excludePathPatterns 다시 설정해야됨.
-//	@Override
-//	public void addInterceptors(InterceptorRegistry registry) {
-//		registry.addInterceptor(new LoginInterceptor())
-//				.excludePathPatterns("/login/**");
-//	}
+	@Bean
+	public LoginInterceptor loginInterceptor() {
+		return new LoginInterceptor();
+	}
+
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(loginInterceptor())
+				.excludePathPatterns("/login", "/oauth2callback");
+	}
 }

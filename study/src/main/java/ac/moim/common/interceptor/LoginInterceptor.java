@@ -4,6 +4,7 @@ import ac.moim.user.entity.User;
 import ac.moim.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.oauth2.AccessGrant;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Created by SONG_HOHOON on 2016-12-29.
  */
-// TODO : 다시 해야됨.
+@Component
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 
 	@Autowired
