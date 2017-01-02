@@ -19,7 +19,7 @@
 				<c:forEach var="contents" items="${noticeList}">
 					<div class="divTableRow">
 						<div class="divTableCell orderCell">${contents.id}</div>
-						<div class="divTableCell subjectCell">${contents.title}</div>
+						<div class="divTableCell subjectCell"><a href="/notice/detail?indexNum=${contents.id}">${contents.title}</a></div>
 						<div class="divTableCell dateCell">${contents.inputDate}</div>
 						<div class="divTableCell writerCell">${contents.inputUser}</div>
 						<div class="divTableCell hitsCell">${contents.hit}</div>

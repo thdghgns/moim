@@ -30,6 +30,16 @@ public class NoticeServiceImpl implements NoticeService {
 		}
 		return results;
 	}
+	
+	public Notice NoticeDetailPage(Integer indexNum){
+		Notice result = new Notice();
+		try {
+			result = noticeRepository.findOne(indexNum);
+		} catch (Exception ex) {
+
+		}
+		return result;
+	}
 
 	public Boolean NoticeCreate(Notice notice) {
 		noticeRepository.saveAndFlush(notice);

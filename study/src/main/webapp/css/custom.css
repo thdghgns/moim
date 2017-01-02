@@ -68,7 +68,13 @@ div.hitsCell.divTableCell  {
 	margin-right: 30px;
 }
 
-#notice-content {
+#notice-create-content {
   height: 400px;
   resize: none;
+}
+
+#notice-detail-content {
+  height: 400px;
+  resize: none;
+  background-color: #FFFFFF;
 }

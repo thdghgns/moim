@@ -29,6 +29,12 @@ public class NoticeController {
 		return "views/notice/main";
 	}
 	
+	@RequestMapping(value = "/detail", method = RequestMethod.GET)
+	public String NoticeDetailPage(Model model,  @RequestParam(value="indexNum", required=true) Integer indexNum){	
+		model.addAttribute("detailList", noticeService.NoticeDetailPage(indexNum));
+		return "views/notice/detail";
+	}
+	
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String NoticeCreatePage() {
 		return "views/notice/create";

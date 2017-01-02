@@ -6,5 +6,6 @@ import ac.moim.dashboard.entity.Notice;
 
 public interface NoticeService {
 	public HashMap<String, Object> NoticeMainPage(Integer pageNum);
+	public Notice NoticeDetailPage(Integer indexNum);
 	public Boolean NoticeCreate(Notice notice);
 }
