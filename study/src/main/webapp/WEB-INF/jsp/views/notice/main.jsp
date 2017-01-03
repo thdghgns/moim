@@ -30,8 +30,6 @@
 		<div class="pull-right">
 			<ul class="nav navbar-nav post-nav">
 				<li><a href="/notice/create"><i class="fa fa-tag"></i>Creative</a></li>
-				<li><a href="#"><i class="fa fa-pencil-square-o"></i>Edit</a></li>
-				<li><a href="#"><i class="fa fa-times"></i>Delete</a></li>
 			</ul>
 		</div>
 	</div>

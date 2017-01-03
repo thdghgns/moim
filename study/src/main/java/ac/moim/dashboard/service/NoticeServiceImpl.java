@@ -17,7 +17,7 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Autowired
 	private NoticeRepository noticeRepository;
-
+	
 	public HashMap<String, Object> NoticeMainPage(Integer pageNum) {
 		HashMap<String, Object> results = new HashMap<String, Object>();
 		Page<Notice> page = null;
@@ -26,7 +26,7 @@ public class NoticeServiceImpl implements NoticeService {
 			results.put("TotalPage", page.getTotalPages());
 			results.put("NoticeList", page.getContent());
 		} catch (Exception ex) {
-
+			throw ex;
 		}
 		return results;
 	}
@@ -35,17 +35,21 @@ public class NoticeServiceImpl implements NoticeService {
 		Notice result = new Notice();
 		try {
 			result = noticeRepository.findOne(indexNum);
+			result.setHit(result.getHit() + 1);
+			NoticeCreateOrUpdate(result);
 		} catch (Exception ex) {
-
+			throw ex;
 		}
 		return result;
 	}
 
-	public Boolean NoticeCreate(Notice notice) {
-		noticeRepository.saveAndFlush(notice);
+	public Boolean NoticeCreateOrUpdate(Notice notice) {
+		try{
+			noticeRepository.saveAndFlush(notice);
+		}catch (Exception ex){
+			throw ex;
+		}
 		return true;
 	}
-	
-
 
 }

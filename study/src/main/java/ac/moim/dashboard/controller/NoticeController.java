@@ -47,18 +47,25 @@ public class NoticeController {
 	/*Redirect Page*/
 	
 	
-	
 	/*Post*/
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String NoticeCreate(Notice notice, String userName) {
 		notice.setInputUser(userName);
-		noticeService.NoticeCreate(notice);
+		noticeService.NoticeCreateOrUpdate(notice);
 		return "views/notice/main";
 	}
 	/*Post*/
 	
+	/*Put*/
+	@RequestMapping(value = "/edit", method = RequestMethod.POST)
+	public String NoticeUpdate(Notice notice, String userName) {
+		notice.setInputUser(userName);
+		noticeService.NoticeCreateOrUpdate(notice);
+		return "views/notice/main";
+	}
+	/*Put*/
 	
-	
+		
 	/*Delete*/
 	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
 	public String NoticeDelete() {

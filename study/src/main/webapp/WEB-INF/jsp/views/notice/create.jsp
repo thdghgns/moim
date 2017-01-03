@@ -7,7 +7,7 @@
 				<h2>공지사항 쓰기</h2>
 				<div class="form-group">
 					<input type="text" name="name" class="form-control"
-						id="notice-title" required="required" placeholder="Title">
+						id="notice-create-title" required="required" placeholder="Title">
 				</div>
 				<div class="form-group">
 					<textarea name="message" id="notice-create-content" required="required"
@@ -31,10 +31,9 @@
 			if($("span#current-user")[0].innerHTML != ""){
 				userName=$("span#current-user")[0].innerHTML;
 			}
-			
 			var params = {
-				"title" : $("#notice-title").val(),
-				"content" : $("#notice-content").val(),
+				"title" : $("#notice-create-title").val(),
+				"content" : $("#notice-create-content").val(),
 				"userName" : userName
 			}
 			$.ajax({
