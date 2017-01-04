@@ -12,8 +12,9 @@
 							<b>제목 : <span id='notice-detail-title'>${detailList.title}</span></b>
 						</h1>
 						<h5 class='pull-right'>
-							<b>작성자 : <span id='notice-detail-user'>${detailList.inputUser}</span></b> &nbsp; &nbsp; &nbsp; &nbsp;
-							&nbsp; <b>작성날짜 : ${detailList.inputDate}</b>
+							<b>작성자 : <span id='notice-detail-user'>${detailList.inputUser}</span></b>
+							&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b>작성날짜 :
+								${detailList.inputDate}</b>
 						</h5>
 					</blockquote>
 				</div>
@@ -57,11 +58,6 @@
 			$("#notice-detail-content").attr('readonly', 'readonly');
 		});
 
-		$("#notice-detail-delete").on('click', function() {
-			var deleteConfirm = confirm("삭제 하시겠습니까?");
-			alert(deleteConfirm);
-		});
-
 		$("#notice-detail-modify").on('click', function() {
 			var modifyConfirm = confirm("수정 하시겠습니까?");
 			if (modifyConfirm) {
@@ -73,9 +69,32 @@
 					"content" : $("#notice-detail-content").val(),
 					"userName" : $("span#notice-detail-user")[0].innerHTML
 				}
+
 				$.ajax({
 					type : "POST",
 					url : "/notice/edit",
+					data : params,
+					success : function(args) {
+						alert("success");
+						window.location.href = "/notice/main";
+					},
+					error : function(e) {
+						alert("error");
+					}
+				});
+			}
+		});
+
+		$("#notice-detail-delete").on('click', function() {
+			var deleteConfirm = confirm("삭제 하시겠습니까?");
+			if (deleteConfirm) {
+				var params = {
+					"id" : $("#notice-detail-id")[0].innerHTML
+				}
+
+				$.ajax({
+					type : "POST",
+					url : "/notice/delete",
 					data : params,
 					success : function(args) {
 						alert("success");
