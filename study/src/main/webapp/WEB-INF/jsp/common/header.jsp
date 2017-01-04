@@ -23,7 +23,7 @@
 					</a>
 					<div class="search">
 						<a href="/login" class="fa fa-google-plus"></a>
-						<span id=current-user ></span>
+						<span id=current-user ><%=userName%></span>
 					</div>
 				</div>
 

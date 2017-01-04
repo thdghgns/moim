@@ -74,6 +74,7 @@ public class LoginController {
 		User user = userService.saveUser(person);
 		if(user != null) {
 			session.setAttribute("userId", user.getId());
+			session.setAttribute("userName", user.getName());
 			session.setAttribute("expireTime", expireTime);
 			session.setAttribute("accessGrant", accessGrant);
 		}
@@ -87,6 +88,7 @@ public class LoginController {
 	public String logout(HttpSession session) {
 
 		session.removeAttribute("userId");
+		session.removeAttribute("userName");
 		session.removeAttribute("expireTime");
 		session.removeAttribute("accessGrant");
 
