@@ -1,5 +1,12 @@
 package ac.moim.study.controller;
 
+import ac.moim.common.dto.CityDto;
+import ac.moim.common.dto.StateDto;
+import ac.moim.common.dto.SubjectDto;
+import ac.moim.common.repository.SubjectRepository;
+import ac.moim.common.service.CityService;
+import ac.moim.common.service.StateService;
+import ac.moim.common.service.SubjectService;
 import ac.moim.study.dto.StudyDto;
 import ac.moim.study.entity.Study;
 import ac.moim.study.exception.StudyBadRequestException;
@@ -42,8 +49,26 @@ public class StudyController {
 	@Autowired
 	private StudyMemberService studyMemberService;
 
+	@Autowired
+	private SubjectService subjectService;
+
+	@Autowired
+	private StateService stateService;
+
+	@Autowired
+	private CityService cityService;
+
 	@RequestMapping(value = "/create-form", method = RequestMethod.GET)
-	public String getStudyForm() {
+	public String getStudyForm(Model model) {
+
+		List<SubjectDto.Response> subjectList = subjectService.getAllSubject();
+		List<StateDto.Response> stateList = stateService.getAllState();
+		List<CityDto.Response> cityList = cityService.getAllCity();
+
+		model.addAttribute("subjectList", subjectList);
+		model.addAttribute("stateList", stateList);
+		model.addAttribute("cityList", cityList);
+
 		return "views/study/create";
 	}
 

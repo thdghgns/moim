@@ -39,12 +39,13 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			return false;
 		}
 
-		if (expireTime != null && expireTime < System.currentTimeMillis()) {
-			AccessGrant accessGrant = (AccessGrant)session.getAttribute("AccessGrant");
-			String accessToken = accessGrant.getRefreshToken();
-
-			session.setAttribute("expireTime", expireTime);
-		}
+		// TODO : refresh 추가
+//		if (expireTime != null && expireTime < System.currentTimeMillis()) {
+//			AccessGrant accessGrant = (AccessGrant)session.getAttribute("AccessGrant");
+//			String accessToken = accessGrant.getRefreshToken();
+//
+//			session.setAttribute("expireTime", expireTime);
+//		}
 
 		return true;
 	}

@@ -28,13 +28,13 @@ public class Subject extends BaseEntity implements Serializable {
 	private String name;
 
 	@Column(name = "parent_id")
-	private int parentId;
+	private Integer parentId = 0;
 
 	@Column(name = "level")
-	private int level;
+	private int level = 1;
 
 	@Column(name = "seq")
-	private int seq;
+	private int seq = 1;
 
 	@Column(name = "delete_check")
 	private boolean deleteCheck = false;

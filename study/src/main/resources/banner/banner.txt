@@ -1,0 +1,2 @@
+MOIM
+${spring-boot.formatted-version}
