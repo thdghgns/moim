@@ -19,7 +19,7 @@
 				<c:forEach var="contents" items="${noticeList}">
 					<div class="divTableRow">
 						<div class="divTableCell orderCell">${contents.id}</div>
-						<div class="divTableCell subjectCell">${contents.title}</div>
+						<div class="divTableCell subjectCell"><a href="/notice/detail?indexNum=${contents.id}">${contents.title}</a></div>
 						<div class="divTableCell dateCell">${contents.inputDate}</div>
 						<div class="divTableCell writerCell">${contents.inputUser}</div>
 						<div class="divTableCell hitsCell">${contents.hit}</div>
@@ -30,8 +30,6 @@
 		<div class="pull-right">
 			<ul class="nav navbar-nav post-nav">
 				<li><a href="/notice/create"><i class="fa fa-tag"></i>Creative</a></li>
-				<li><a href="#"><i class="fa fa-pencil-square-o"></i>Edit</a></li>
-				<li><a href="#"><i class="fa fa-times"></i>Delete</a></li>
 			</ul>
 		</div>
 	</div>
