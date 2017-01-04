@@ -30,7 +30,7 @@
                             <h3>스터디 주제</h3>
                         </td>
                         <td>
-                            <select name="subject">
+                            <select name="subject" id="subject">
                                 <c:forEach var="subject" items="${subjectList}">
                                     <option value="${subject.id}">${subject.name}</option>
                                 </c:forEach>
@@ -92,12 +92,35 @@
             $(this).attr('hidden',false);
             $(this).attr('selected',false);
 
-            if ($(this).context.label != "default") {
+            if ($(this).context.label == "default") {
                 $(this).attr('selected',true);
             }
 
             if ($(this).context.label != $('#state option:selected').val()) {
                 $(this).attr('hidden',true);
+            }
+        });
+    });
+    $("#study-create-submit").on('click', function() {
+        var params = {
+            "subjectId" : $('#subject option:selected').val(),
+            "title" : $("#study-title").val(),
+            "cityCode" : $('#city option:selected').val(),
+            "intro" : $("#study-intro").val(),
+            "memberLimit" : $("#study-member-limit").val()
+        }
+        $.ajax({
+            type : "POST",
+            url : "/study",
+            data : JSON.stringify(params),
+            dataType : "html",
+            contentType : "application/json; charset=UTF-8",
+            success : function(args) {
+                alert("success");
+                window.location.href = "/studyMain";
+            },
+            error : function(e) {
+                alert("error");
             }
         });
     });

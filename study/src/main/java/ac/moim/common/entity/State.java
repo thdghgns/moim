@@ -2,6 +2,7 @@ package ac.moim.common.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,6 +13,7 @@ import java.util.List;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
+@ToString(exclude = {"cityList"})
 @Entity
 @Table(name = "state")
 public class State extends BaseEntity implements Serializable {
