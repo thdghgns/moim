@@ -27,14 +27,9 @@
 <script>
 	$(document).ready(function() {
 		$("#notice-create-submit").on('click', function() {
-			var userName = "unknown";
-			if($("span#current-user")[0].innerHTML != ""){
-				userName=$("span#current-user")[0].innerHTML;
-			}
 			var params = {
 				"title" : $("#notice-create-title").val(),
-				"content" : $("#notice-create-content").val(),
-				"userName" : userName
+				"content" : $("#notice-create-content").val()
 			}
 			$.ajax({
 				type : "POST",
