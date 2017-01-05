@@ -42,4 +42,11 @@ public class IndexController {
 		return "views/mypageMain";
 	}
 	
+	
+	@RequestMapping(value = "/mypageMyIfo", method = RequestMethod.GET)
+	public String MypageMyIfo(){
+
+		return "views/mypage/myInfo";
+	}
+	
 }
