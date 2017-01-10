@@ -38,73 +38,71 @@
 </body>
 
 <script>
-	$(document).ready(function() {
-		$("#notice-detail-edit").on('click', function() {
-			$("#notice-detail-modify").show();
-			$("#notice-detail-cancel").show();
-			$("#notice-detail-edit").hide();
-			$("#notice-detail-delete").hide();
+	$("#notice-detail-edit").on('click', function() {
+		$("#notice-detail-modify").show();
+		$("#notice-detail-cancel").show();
+		$("#notice-detail-edit").hide();
+		$("#notice-detail-delete").hide();
 
-			$("#notice-detail-content").removeAttr('readonly');
-			$("#notice-detail-content").focus();
-		});
+		$("#notice-detail-content").removeAttr('readonly');
+		$("#notice-detail-content").focus();
+	});
 
-		$("#notice-detail-cancel").on('click', function() {
-			$("#notice-detail-modify").hide();
-			$("#notice-detail-cancel").hide();
-			$("#notice-detail-edit").show();
-			$("#notice-detail-delete").show();
+	$("#notice-detail-cancel").on('click', function() {
+		$("#notice-detail-modify").hide();
+		$("#notice-detail-cancel").hide();
+		$("#notice-detail-edit").show();
+		$("#notice-detail-delete").show();
 
-			$("#notice-detail-content").attr('readonly', 'readonly');
-		});
+		$("#notice-detail-content").attr('readonly', 'readonly');
+	});
 
-		$("#notice-detail-modify").on('click', function() {
-			var modifyConfirm = confirm("수정 하시겠습니까?");
-			if (modifyConfirm) {
-				var userName = "unknown";
+	$("#notice-detail-modify").on('click', function() {
+		var modifyConfirm = confirm("수정 하시겠습니까?");
+		if (modifyConfirm) {
+			var userName = "unknown";
 
-				var params = {
-					"id" : $("#notice-detail-id")[0].innerHTML,
-					"title" : $("#notice-detail-title")[0].innerHTML,
-					"content" : $("#notice-detail-content").val(),
-					"userName" : $("span#notice-detail-user")[0].innerHTML
-				}
-
-				$.ajax({
-					type : "POST",
-					url : "/notice/edit",
-					data : params,
-					success : function(args) {
-						alert("success");
-						window.location.href = "/notice/main";
-					},
-					error : function(e) {
-						alert("error");
-					}
-				});
+			var params = {
+				"id" : $("#notice-detail-id")[0].innerHTML,
+				"title" : $("#notice-detail-title")[0].innerHTML,
+				"content" : $("#notice-detail-content").val(),
+				"userName" : $("span#notice-detail-user")[0].innerHTML
 			}
-		});
 
-		$("#notice-detail-delete").on('click', function() {
-			var deleteConfirm = confirm("삭제 하시겠습니까?");
-			if (deleteConfirm) {
-				var params = {
-					"id" : $("#notice-detail-id")[0].innerHTML
+			$.ajax({
+				type : "POST",
+				url : "/notice/edit",
+				data : params,
+				success : function(args) {
+					alert("success");
+					window.location.href = "/notice/main";
+				},
+				error : function(e) {
+					alert("error");
 				}
+			});
+		}
+	});
 
-				$.ajax({
-					type : "POST",
-					url : "/notice/delete",
-					data : params,
-					success : function(args) {
-						alert("success");
-						window.location.href = "/notice/main";
-					},
-					error : function(e) {
-						alert("error");
-					}
-				});
+	$("#notice-detail-delete").on('click', function() {
+		var deleteConfirm = confirm("삭제 하시겠습니까?");
+		if (deleteConfirm) {
+			var params = {
+				"id" : $("#notice-detail-id")[0].innerHTML
 			}
-		});
+
+			$.ajax({
+				type : "POST",
+				url : "/notice/delete",
+				data : params,
+				success : function(args) {
+					alert("success");
+					window.location.href = "/notice/main";
+				},
+				error : function(e) {
+					alert("error");
+				}
+			});
+		}
 	});
 </script>

@@ -10,8 +10,9 @@
 						id="notice-create-title" required="required" placeholder="Title">
 				</div>
 				<div class="form-group">
-					<textarea name="message" id="notice-create-content" required="required"
-						class="form-control" rows="8" placeholder="Your text here"></textarea>
+					<textarea name="message" id="notice-create-content"
+						required="required" class="form-control" rows="8"
+						placeholder="Your text here"></textarea>
 				</div>
 				<div class="form-group">
 					<input type="submit" name="submit" class="btn btn-submit"
@@ -25,24 +26,22 @@
 
 
 <script>
-	$(document).ready(function() {
-		$("#notice-create-submit").on('click', function() {
-			var params = {
-				"title" : $("#notice-create-title").val(),
-				"content" : $("#notice-create-content").val()
+	$("#notice-create-submit").on('click', function() {
+		var params = {
+			"title" : $("#notice-create-title").val(),
+			"content" : $("#notice-create-content").val()
+		}
+		$.ajax({
+			type : "POST",
+			url : "/notice/create",
+			data : params,
+			success : function(args) {
+				alert("success");
+				window.location.href = "/notice/main";
+			},
+			error : function(e) {
+				alert("error");
 			}
-			$.ajax({
-				type : "POST",
-				url : "/notice/create",
-				data : params,
-				success : function(args) {
-					alert("success");
-					window.location.href = "/notice/main";
-				},
-				error : function(e) {
-					alert("error");
-				}
-			});
 		});
 	});
 </script>
