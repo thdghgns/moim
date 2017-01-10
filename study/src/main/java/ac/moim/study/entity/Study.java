@@ -5,6 +5,7 @@ import ac.moim.common.entity.City;
 import ac.moim.common.entity.Subject;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,9 +16,9 @@ import java.util.List;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
+@ToString(exclude = {"studyMemberList", "commentList", "resourceList"})
 @Entity
 @Table(name = "study")
-@SuppressWarnings("serial")
 public class Study extends BaseEntity implements Serializable {
 
 	@Id

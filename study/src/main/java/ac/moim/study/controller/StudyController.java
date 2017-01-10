@@ -6,12 +6,18 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ac.moim.common.dto.CityDto;
 import ac.moim.common.dto.StateDto;
@@ -47,6 +53,7 @@ public class StudyController {
 
 	@Autowired
 	private CityService cityService;
+	
 
 	@RequestMapping(value = "/create-form", method = RequestMethod.GET)
 	public String getStudyForm(Model model) {
@@ -82,10 +89,9 @@ public class StudyController {
 	}
 	
 	@RequestMapping(value="/main", method = RequestMethod.GET)
-	public String studyMain(Model model){
-		
-		
-		List<Study> studyList = studyService.findAll();
+	public String studyMain(Model model, @PageableDefault(sort = { "id" }, direction = Direction.DESC, size = 10) Pageable pageable){
+	
+		Page<Study> studyList = studyService.findAll(pageable);
 		List<SubjectDto.Response> subjectList = subjectService.getAllSubject();
 		List<StateDto.Response> stateList = stateService.getAllState();
 		List<CityDto.Response> cityList = cityService.getAllCity();
@@ -94,6 +100,16 @@ public class StudyController {
 		model.addAttribute("stateList", stateList);
 		model.addAttribute("studyList", studyList);
 		model.addAttribute("subjectList", subjectList);
+		
+		return "views/study/main";
+	}
+	
+	@RequestMapping(value="/select-search", method=RequestMethod.GET)
+	@ResponseBody
+	public String SelectSearchStudy(@RequestParam(required = false) Integer cityCode
+			, @RequestParam(required = false) Integer subjectId){
+		studyService.findByCityCode(cityCode);
+		studyService.findBySubjectId(subjectId);
 		
 		return "views/study/main";
 	}

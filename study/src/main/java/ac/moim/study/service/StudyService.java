@@ -2,7 +2,10 @@ package ac.moim.study.service;
 
 import java.util.List;
 
-import ac.moim.common.entity.City;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.ui.Model;
+
 import ac.moim.study.dto.StudyDto;
 import ac.moim.study.entity.Study;
 
@@ -12,6 +15,8 @@ import ac.moim.study.entity.Study;
 public interface StudyService {
 	
 	public List<Study> findAll();
-	public List<Study> findByCityId(City cityId);
+	public List<Study> findBySubjectId(Integer subjectId);
+	public List<Study> findByCityCode(Integer cityCode);
 	public Study saveStudy(StudyDto.Request study);
+	public Page<Study> findAll(Pageable pageable);
 }
