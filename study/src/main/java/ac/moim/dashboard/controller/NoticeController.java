@@ -1,7 +1,8 @@
 package ac.moim.dashboard.controller;
 
 import java.util.HashMap;
-import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,7 +50,11 @@ public class NoticeController {
 	
 	/*Post*/
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String NoticeCreate(Notice notice, String userName) {
+	public String NoticeCreate(HttpSession session, Notice notice) {
+		String userName = (String)session.getAttribute("userName");
+		if(userName == null){
+			userName = "unknown";
+		}
 		notice.setInputUser(userName);
 		noticeService.NoticeCreateOrUpdate(notice);
 		return "views/notice/main";
@@ -67,8 +72,9 @@ public class NoticeController {
 	
 		
 	/*Delete*/
-	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-	public String NoticeDelete() {
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public String NoticeDelete(Integer id) {
+		noticeService.NoticeDelete(id);
 		return "views/notice/main";
 	}
 	/*Delete*/

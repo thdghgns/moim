@@ -38,7 +38,7 @@
 							</li>
 							<li class="dropdown"
 								style="padding: 0px 15px 0px 15px !important; font-size: 20"><a
-								href="/studyMain"><strong>Study</strong></a>
+								href="/study/main"><strong>Study</strong></a>
 								<hr />
 								<ul role="menu" class="sub-menu">
 									<li><a href="/study">IT</a></li>

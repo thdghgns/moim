@@ -130,7 +130,7 @@
             contentType: "application/json; charset=UTF-8",
             success: function (args) {
                 alert("success");
-                window.location.href = "/studyMain";
+                window.location.href = "/study/main";
             },
             error: function (e) {
                 alert("error");

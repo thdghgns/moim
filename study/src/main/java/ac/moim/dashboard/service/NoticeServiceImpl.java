@@ -51,5 +51,14 @@ public class NoticeServiceImpl implements NoticeService {
 		}
 		return true;
 	}
+	
+	public Boolean NoticeDelete(Integer id){
+		try{
+			noticeRepository.delete(id);
+		}catch (Exception ex){
+			throw ex;
+		}
+		return true;
+	}
 
 }

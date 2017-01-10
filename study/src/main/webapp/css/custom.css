@@ -41,7 +41,15 @@ div.orderCell.divTableCell {
 	width: 5%;
 }
 
+div.cityCell.divTableCell {
+	width: 5%;
+}
+
 div.subjectCell.divTableCell {
+	width: 5%;
+}
+
+div.titleCell.divTableCell {
 	width: 50%;
 }
 

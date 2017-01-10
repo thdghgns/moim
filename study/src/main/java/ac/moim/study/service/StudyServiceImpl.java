@@ -3,6 +3,8 @@ package ac.moim.study.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ac.moim.common.entity.City;
@@ -31,7 +33,7 @@ public class StudyServiceImpl implements StudyService {
 
 	@Override
 	public Study saveStudy(StudyDto.Request request) {
-		Study study =  studyRepository.saveAndFlush(toEntity(request));
+		Study study = studyRepository.saveAndFlush(toEntity(request));
 
 		return study;
 	}
@@ -50,18 +52,33 @@ public class StudyServiceImpl implements StudyService {
 
 	@Override
 	public List<Study> findAll() {
-		
+
 		List<Study> studyList;
 		studyList = studyRepository.findAll();
-		
+
 		return studyList;
 	}
 
 	@Override
-	public List<Study> findByCityId(City cityId) {
+	public List<Study> findBySubjectId(Integer subjectId) {
+		List<Study> studyList = studyRepository.findBySubjectId(subjectId);
+		return studyList;
+	}
+
+	@Override
+	public List<Study> findByCityCode(Integer cityCode) {
+		List<Study> studyList = studyRepository.findByCityId(cityCode);
+
+		return studyList;
+
+	}
+
+	@Override
+	public Page<Study> findAll(Pageable pageable) {
 		
-		List<Study> studyList = studyRepository.findByCityId(cityId);
-		
+		Page<Study> studyList;
+		studyList = studyRepository.findAll(pageable);
+
 		return studyList;
 	}
 }
