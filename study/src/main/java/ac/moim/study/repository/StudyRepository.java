@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import ac.moim.common.entity.City;
+import ac.moim.common.entity.Subject;
 import ac.moim.study.entity.Study;
 
 /**
@@ -13,5 +14,6 @@ import ac.moim.study.entity.Study;
  */
 public interface StudyRepository extends JpaRepository<Study, Integer>, JpaSpecificationExecutor<Study> {
 	
-	List<Study> findByCityId(City cityId);
+	List<Study> findByCityId(Integer cityId);
+	List<Study> findBySubjectId(Integer SubjectId);
 }
