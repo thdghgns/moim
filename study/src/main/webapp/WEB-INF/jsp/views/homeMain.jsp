@@ -1,17 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<head>
-<script type="text/javascript">
-	function clickTitleEvent(title) {
-		window.open('/study_info', '_self');
-		
-	}
-
-	function clickUserEvent(user) {
-		$('[data-submenu]').submenupicker();
-	}
-</script>
-</head>
 <body>
 	<div class="container">
 		<section role="main" id="content" class="content left">
@@ -156,4 +144,14 @@
 		</footer>
 	</div>
 </body>
-</html>
+
+<script type="text/javascript">
+	function clickTitleEvent(title) {
+		window.open('/study_info', '_self');
+
+	}
+
+	function clickUserEvent(user) {
+		$('[data-submenu]').submenupicker();
+	}
+</script>

@@ -3,6 +3,7 @@ package ac.moim.dashboard.entity;
 import ac.moim.common.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import java.util.Set;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
+@ToString(exclude = "answerList")
 @Entity
 @Table(name = "question")
 public class Question extends BaseEntity implements Serializable {
