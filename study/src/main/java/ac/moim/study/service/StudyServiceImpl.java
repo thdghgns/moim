@@ -43,7 +43,7 @@ public class StudyServiceImpl implements StudyService {
 		study.setIntro(request.getIntro());
 		study.setMemberLimit(request.getMemberLimit());
 		study.setCityId(cityRepository.findOne(request.getCityCode()));
-		study.setSubjectId(subjectRepository.findOne(Integer.valueOf(request.getSubjectId())));
+		study.setSubjectId(subjectRepository.findOne(request.getSubjectId()));
 
 		return study;
 	}
