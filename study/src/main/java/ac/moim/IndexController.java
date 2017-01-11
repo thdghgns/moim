@@ -46,7 +46,7 @@ public class IndexController {
 	@RequestMapping(value = "/mypageMyIfo", method = RequestMethod.GET)
 	public String MypageMyIfo(){
 
-		return "views/mypage/myInfo";
+		return "views/mypage/update";
 	}
 	
 }

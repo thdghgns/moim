@@ -8,9 +8,12 @@ import ac.moim.common.service.CityService;
 import ac.moim.common.service.StateService;
 import ac.moim.common.service.SubjectService;
 import ac.moim.user.entity.User;
+import ac.moim.user.repository.UserRepository;
 import ac.moim.user.service.UserService;
 
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,7 +38,8 @@ public class UserController {
 	private StateService stateService;
 	@Autowired
 	private SubjectService subjectService;
-	
+	@Autowired
+	private UserRepository userRepository;
 	@RequestMapping(value = "{userId}", method = RequestMethod.GET)
 	public String getUser(@PathVariable(value = "userId")String userId) {
 
@@ -44,8 +48,8 @@ public class UserController {
 	}
 	
 
-	@RequestMapping(value = "/update", method = RequestMethod.GET)
-	public String updateMyInfo(String userId, ModelMap model) {
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String searchMyInfo(String userId, ModelMap model) {
 			
 
 	//	User user = userService.getUser(userId);
@@ -56,6 +60,15 @@ public class UserController {
 		model.addAttribute("cityList",cityList);
 		model.addAttribute("stateList",stateList);
 		model.addAttribute("subjectList",subjectList);
+	
+		return "views/mypage/update";
+	}
+	
+	
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String updateMyInfo(HttpSession session, User user) {
+		userService.UserCreateOrUpdate(user);
+
 	
 		return "views/mypage/update";
 	}
