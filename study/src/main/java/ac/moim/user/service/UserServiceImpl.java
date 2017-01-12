@@ -28,9 +28,18 @@ public class UserServiceImpl implements UserService{
 	// TODO : cache 적용
 	@Override
 	public User getUser(String userId) {
+		try{
 		return userRepository.findOne(userId);
+		}catch(Exception ex){
+			throw ex;
+		}
+		
 	}
 
+	public void UserCreateOrUpdate(User user){
+		userRepository.saveAndFlush(user);
+	}
+	
 	private User personToUser(Person person) {
 		User user = new User();
 

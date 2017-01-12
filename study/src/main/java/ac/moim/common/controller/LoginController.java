@@ -76,7 +76,6 @@ public class LoginController {
 			session.setAttribute("userId", user.getId());
 			session.setAttribute("userName", user.getName());
 			session.setAttribute("expireTime", expireTime);
-			session.setAttribute("accessGrant", accessGrant);
 		}
 
 		model.addAttribute("current-user", user.getName());
@@ -90,7 +89,6 @@ public class LoginController {
 		session.removeAttribute("userId");
 		session.removeAttribute("userName");
 		session.removeAttribute("expireTime");
-		session.removeAttribute("accessGrant");
 
 		return "views/homeMain";
 	}

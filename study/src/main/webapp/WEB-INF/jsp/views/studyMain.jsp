@@ -10,12 +10,12 @@
 		</div>
 		<div class="btn-group" style="padding: 10px; float: left;">
 			<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-				시/도 <span class="caret"></span>
-			</a>
+			시/도 <span class="caret"></span>
+		</a>
 			<ul class="dropdown-menu" role="menu">
-				<li>IT</a></li>
-				<li>English</a></li>
-				<li>Chinese</a></li>
+				<li>IT</li>
+				<li>English</li>
+				<li>Chinese</li>
 			</ul>
 		</div>
 
@@ -24,9 +24,9 @@
 				구/군/동 <span class="caret"></span>
 			</a>
 			<ul class="dropdown-menu" role="menu">
-				<li>IT</a></li>
-				<li>English</a></li>
-				<li>Chinese</a></li>
+				<li>IT</li>
+				<li>English</li>
+				<li>Chinese</li>
 			</ul>
 		</div>
 
@@ -50,7 +50,7 @@
 	</div>
 	<div class="container">
 
-		<button type="button" class="btn btn-warning btn-block">스터디
+		<button type="button" class="btn btn-warning btn-block" onclick="createStudy();">스터디
 			만들기</button>
 		<div class="w_list w_normal"
 			style="*zoom: 1; padding: 5px 5px 5px 5px !important;">
@@ -86,3 +86,9 @@
 		</div>
 	</div>
 </body>
+
+<script>
+	function createStudy() {
+		window.location.href = "/study/create-form";
+	}
+</script>
