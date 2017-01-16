@@ -9,4 +9,6 @@ import java.util.List;
  */
 public interface StateService {
 	public List<StateDto.Response> getAllState();
+
+	public StateDto.Response getState(int stateid);
 }

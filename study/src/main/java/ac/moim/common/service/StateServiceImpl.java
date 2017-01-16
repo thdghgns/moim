@@ -1,8 +1,10 @@
 package ac.moim.common.service;
 
 import ac.moim.common.dto.StateDto;
+import ac.moim.common.dto.StateDto.Response;
 import ac.moim.common.entity.State;
 import ac.moim.common.repository.StateRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,5 +39,12 @@ public class StateServiceImpl implements StateService {
 		response.setName(state.getName());
 
 		return response;
+	}
+	
+	public StateDto.Response getState(int stateid){
+		Response state = new StateDto.Response ();
+		state = entityToResponseDto(stateRepository.findOne(stateid));
+		
+		return state;
 	}
 }

@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface CityService {
 	public List<CityDto.Response> getAllCity();
+	public CityDto.Response getCity(int code);
 }

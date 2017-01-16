@@ -29,7 +29,15 @@ public class CityServiceImpl implements CityService {
 
 		return responses;
 	}
-
+	
+	@Override
+	public CityDto.Response getCity(int code){
+		
+		CityDto.Response response = new CityDto.Response();
+		response = entityToResponseDto(cityRepository.getOne(code));
+		return response;
+		
+	}
 	private CityDto.Response entityToResponseDto(City city) {
 		CityDto.Response response = new CityDto.Response();
 
@@ -39,4 +47,6 @@ public class CityServiceImpl implements CityService {
 
 		return response;
 	}
+	
+	
 }

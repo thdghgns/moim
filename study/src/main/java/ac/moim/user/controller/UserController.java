@@ -11,8 +11,12 @@ import ac.moim.user.entity.User;
 import ac.moim.user.repository.UserRepository;
 import ac.moim.user.service.UserService;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +44,10 @@ public class UserController {
 	private SubjectService subjectService;
 	@Autowired
 	private UserRepository userRepository;
+	
+	
 	@RequestMapping(value = "{userId}", method = RequestMethod.GET)
+	
 	public String getUser(@PathVariable(value = "userId")String userId) {
 
 		User user = userService.getUser(userId);
@@ -49,17 +56,35 @@ public class UserController {
 	
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public String searchMyInfo(String userId, ModelMap model) {
+	public String searchMyInfo(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
 			
-
-	//	User user = userService.getUser(userId);
+		HttpSession session = request.getSession();
+		String userId = (String)session.getAttribute("userId");
+		
+		User user = userService.getUser(userId);
 		List<CityDto.Response> cityList = cityService.getAllCity();
 		List<StateDto.Response> stateList = stateService.getAllState();
 		List<SubjectDto.Response> subjectList = subjectService.getAllSubject();
+		//StateDto.Response userState = stateService.getState(user.getCityId().getStateId())
+		
+				
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String userBirthday ;
+		
+		if (user.getBirthday() != null){
+			userBirthday= sdf.format(user.getBirthday());
+			model.addAttribute("userBirthdate",userBirthday);
+		}
+		
+		
+				
 
 		model.addAttribute("cityList",cityList);
 		model.addAttribute("stateList",stateList);
 		model.addAttribute("subjectList",subjectList);
+		model.addAttribute("user",user);
+		
 	
 		return "views/mypage/update";
 	}
@@ -67,9 +92,9 @@ public class UserController {
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String updateMyInfo(HttpSession session, User user) {
+		String userId = (String)session.getAttribute("userId");
+		user.setId(userId);
 		userService.UserCreateOrUpdate(user);
-
-	
-		return "views/mypage/update";
+		return "/mypageMyIfo";
 	}
 }
