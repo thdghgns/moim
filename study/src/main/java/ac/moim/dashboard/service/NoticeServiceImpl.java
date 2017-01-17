@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import ac.moim.dashboard.dto.NoticeDto;
 import ac.moim.dashboard.entity.Notice;
 import ac.moim.dashboard.repository.NoticeRepository;
 
@@ -35,16 +36,25 @@ public class NoticeServiceImpl implements NoticeService {
 		Notice result = new Notice();
 		try {
 			result = noticeRepository.findOne(indexNum);
-			result.setHit(result.getHit() + 1);
-			NoticeCreateOrUpdate(result);
+			NoticeUpdate(result);
 		} catch (Exception ex) {
 			throw ex;
 		}
 		return result;
 	}
 
-	public Boolean NoticeCreateOrUpdate(Notice notice) {
+	public Boolean NoticeCreate(Notice notice) {
 		try{
+			noticeRepository.saveAndFlush(notice);
+		}catch (Exception ex){
+			throw ex;
+		}
+		return true;
+	}
+	
+	public Boolean NoticeUpdate(Notice notice) {
+		try{
+			notice.setHit(notice.getHit() + 1);
 			noticeRepository.saveAndFlush(notice);
 		}catch (Exception ex){
 			throw ex;

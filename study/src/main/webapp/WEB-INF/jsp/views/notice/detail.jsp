@@ -13,8 +13,9 @@
 						</h1>
 						<h5 class='pull-right'>
 							<b>작성자 : <span id='notice-detail-user'>${detailList.inputUser}</span></b>
-							&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b>작성날짜 :
-								${detailList.inputDate}</b>
+							&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+							<b>작성날짜 : ${detailList.inputDate}</b>
+							<b>조회수 : <span id='notice-detail-hit'>${detailList.hit}</span></b>
 						</h5>
 					</blockquote>
 				</div>
@@ -38,73 +39,77 @@
 </body>
 
 <script>
-	$(document).ready(function() {
-		$("#notice-detail-edit").on('click', function() {
-			$("#notice-detail-modify").show();
-			$("#notice-detail-cancel").show();
-			$("#notice-detail-edit").hide();
-			$("#notice-detail-delete").hide();
+	var originContents = '';
 
-			$("#notice-detail-content").removeAttr('readonly');
-			$("#notice-detail-content").focus();
-		});
+	$("#notice-detail-edit").on('click', function() {
+		$("#notice-detail-modify").show();
+		$("#notice-detail-cancel").show();
+		$("#notice-detail-edit").hide();
+		$("#notice-detail-delete").hide();
 
-		$("#notice-detail-cancel").on('click', function() {
-			$("#notice-detail-modify").hide();
-			$("#notice-detail-cancel").hide();
-			$("#notice-detail-edit").show();
-			$("#notice-detail-delete").show();
+		$("#notice-detail-content").removeAttr('readonly');
+		$("#notice-detail-content").focus();
+		
+		originContents = $("#notice-detail-content").val();
+	});
 
-			$("#notice-detail-content").attr('readonly', 'readonly');
-		});
+	$("#notice-detail-cancel").on('click', function() {
+		$("#notice-detail-modify").hide();
+		$("#notice-detail-cancel").hide();
+		$("#notice-detail-edit").show();
+		$("#notice-detail-delete").show();
 
-		$("#notice-detail-modify").on('click', function() {
-			var modifyConfirm = confirm("수정 하시겠습니까?");
-			if (modifyConfirm) {
-				var userName = "unknown";
+		$("#notice-detail-content").attr('readonly', 'readonly');
+		$("#notice-detail-content").val(originContents);
+	});
 
-				var params = {
-					"id" : $("#notice-detail-id")[0].innerHTML,
-					"title" : $("#notice-detail-title")[0].innerHTML,
-					"content" : $("#notice-detail-content").val(),
-					"userName" : $("span#notice-detail-user")[0].innerHTML
-				}
+	$("#notice-detail-modify").on('click', function() {
+		var modifyConfirm = confirm("수정 하시겠습니까?");
+		if (modifyConfirm) {
+			var userName = "unknown";
 
-				$.ajax({
-					type : "POST",
-					url : "/notice/edit",
-					data : params,
-					success : function(args) {
-						alert("success");
-						window.location.href = "/notice/main";
-					},
-					error : function(e) {
-						alert("error");
-					}
-				});
+			var params = {
+				"id" : $("#notice-detail-id")[0].innerHTML,
+				"title" : $("#notice-detail-title")[0].innerHTML,
+				"content" : $("#notice-detail-content").val(),
+				"hit" : $('#notice-detail-hit')[0].innerHTML,
+				"userName" : $("#notice-detail-user")[0].innerHTML
 			}
-		});
 
-		$("#notice-detail-delete").on('click', function() {
-			var deleteConfirm = confirm("삭제 하시겠습니까?");
-			if (deleteConfirm) {
-				var params = {
-					"id" : $("#notice-detail-id")[0].innerHTML
+			$.ajax({
+				type : "POST",
+				url : "/notice/edit",
+				data : params,
+				success : function(args) {
+					alert("success");
+					window.location.href = "/notice/main";
+				},
+				error : function(e) {
+					alert("error");
 				}
+			});
+		}
+	});
 
-				$.ajax({
-					type : "POST",
-					url : "/notice/delete",
-					data : params,
-					success : function(args) {
-						alert("success");
-						window.location.href = "/notice/main";
-					},
-					error : function(e) {
-						alert("error");
-					}
-				});
+	$("#notice-detail-delete").on('click', function() {
+		var deleteConfirm = confirm("삭제 하시겠습니까?");
+		if (deleteConfirm) {
+			var params = {
+				"id" : $("#notice-detail-id")[0].innerHTML
 			}
-		});
+
+			$.ajax({
+				type : "POST",
+				url : "/notice/delete",
+				data : params,
+				success : function(args) {
+					alert("success");
+					window.location.href = "/notice/main";
+				},
+				error : function(e) {
+					alert("error");
+				}
+			});
+		}
 	});
 </script>

@@ -1,11 +1,9 @@
 package ac.moim.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter
+public class SecurityConfig //extends WebSecurityConfigurerAdapter
 {
 	
 //	@Override
@@ -16,10 +14,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 //			.antMatchers("/**").permitAll();
 //	}
 	
-	@Override
-	public void configure(WebSecurity web) throws Exception
-	{
-		web.ignoring().antMatchers("/**");
-	}
+//	@Override
+//	public void configure(WebSecurity web) throws Exception
+//	{
+//		web.ignoring().antMatchers("/**");
+//	}
 	
 }

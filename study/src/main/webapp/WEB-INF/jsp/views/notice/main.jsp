@@ -7,22 +7,22 @@
 			<input type="text" class="search-form" autocomplete="off"
 				placeholder="Search"> <i class="fa fa-search"></i>
 		</div>
-		<div class="divTable">
-			<div class="divTableBody">
-				<div class="divTableRow">
-					<div class="divTableCell orderCell">순번</div>
-					<div class="divTableCell subjectCell">제목</div>
-					<div class="divTableCell dateCell">날짜</div>
-					<div class="divTableCell writerCell">작성자</div>
-					<div class="divTableCell hitsCell">조회수</div>
+		<div class="notice-div-table">
+			<div class="notice-div-table-body">
+				<div class="notice-div-table-row">
+					<div class="notice-div-table-cell orderCell">순번</div>
+					<div class="notice-div-table-cell subjectCell">제목</div>
+					<div class="notice-div-table-cell dateCell">날짜</div>
+					<div class="notice-div-table-cell writerCell">작성자</div>
+					<div class="notice-div-table-cell hitsCell">조회수</div>
 				</div>
 				<c:forEach var="contents" items="${noticeList}">
-					<div class="divTableRow">
-						<div class="divTableCell orderCell">${contents.id}</div>
-						<div class="divTableCell subjectCell"><a href="/notice/detail?indexNum=${contents.id}">${contents.title}</a></div>
-						<div class="divTableCell dateCell">${contents.inputDate}</div>
-						<div class="divTableCell writerCell">${contents.inputUser}</div>
-						<div class="divTableCell hitsCell">${contents.hit}</div>
+					<div class="notice-div-table-row">
+						<div class="notice-div-table-cell orderCell">${contents.id}</div>
+						<div class="notice-div-table-cell subjectCell"><a href="/notice/detail?indexNum=${contents.id}">${contents.title}</a></div>
+						<div class="notice-div-table-cell dateCell">${contents.inputDate}</div>
+						<div class="notice-div-table-cell writerCell">${contents.inputUser}</div>
+						<div class="notice-div-table-cell hitsCell">${contents.hit}</div>
 					</div>
 				</c:forEach>
 			</div>
