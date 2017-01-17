@@ -30,6 +30,7 @@ public class NoticeController {
 		HashMap<String, Object> results = noticeService.NoticeMainPage(pageNum, searchText);
 		model.addAttribute("totalPage", results.get("TotalPage"));
 		model.addAttribute("noticeList", results.get("NoticeList"));
+		model.addAttribute("searchText", searchText);
 		return "views/notice/main";
 	}
 	
