@@ -13,8 +13,9 @@
 						</h1>
 						<h5 class='pull-right'>
 							<b>작성자 : <span id='notice-detail-user'>${detailList.inputUser}</span></b>
-							&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b>작성날짜 :
-								${detailList.inputDate}</b>
+							&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+							<b>작성날짜 : ${detailList.inputDate}</b>
+							<b>조회수 : <span id='notice-detail-hit'>${detailList.hit}</span></b>
 						</h5>
 					</blockquote>
 				</div>
@@ -38,6 +39,8 @@
 </body>
 
 <script>
+	var originContents = '';
+
 	$("#notice-detail-edit").on('click', function() {
 		$("#notice-detail-modify").show();
 		$("#notice-detail-cancel").show();
@@ -46,6 +49,8 @@
 
 		$("#notice-detail-content").removeAttr('readonly');
 		$("#notice-detail-content").focus();
+		
+		originContents = $("#notice-detail-content").val();
 	});
 
 	$("#notice-detail-cancel").on('click', function() {
@@ -55,6 +60,7 @@
 		$("#notice-detail-delete").show();
 
 		$("#notice-detail-content").attr('readonly', 'readonly');
+		$("#notice-detail-content").val(originContents);
 	});
 
 	$("#notice-detail-modify").on('click', function() {
@@ -66,7 +72,8 @@
 				"id" : $("#notice-detail-id")[0].innerHTML,
 				"title" : $("#notice-detail-title")[0].innerHTML,
 				"content" : $("#notice-detail-content").val(),
-				"userName" : $("span#notice-detail-user")[0].innerHTML
+				"hit" : $('#notice-detail-hit')[0].innerHTML,
+				"userName" : $("#notice-detail-user")[0].innerHTML
 			}
 
 			$.ajax({
