@@ -97,7 +97,7 @@ public class StudyServiceTest {
 	public void testFindByCityId() throws Exception {
 		createStudyTestData();
 		City city = null;//= cityService.
-		List<Study> list = studyService.findByCityId(city);
+		//List<Study> list = studyService.findByCityId(city);
 	}
 
 	private void createStudyTestData() {

@@ -4,8 +4,8 @@
 <body>
 	<div class="container">
 		<div class="search-notice pull-right">
-			<input type="text" class="search-form" autocomplete="off"
-				placeholder="Search"> <i class="fa fa-search"></i>
+			<input id="notice-search-text" type="text" class="search-form" autocomplete="off"
+				placeholder="Search"> <i id="notice-search-form" class="fa fa-search"></i>
 		</div>
 		<div class="notice-div-table">
 			<div class="notice-div-table-body">
@@ -43,4 +43,8 @@
 		</ul>
 	</div>
 </body>
-<!-- DivTable.com -->
+<script>
+$("#notice-search-form").on('click', function() {
+	window.document.location.href = ''
+});
+</script>
