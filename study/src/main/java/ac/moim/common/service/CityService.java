@@ -11,4 +11,5 @@ import java.util.List;
 public interface CityService {
 	public List<CityDto.Response> getAllCity();
 	public City saveCity(CityDto.Request request);
+	public CityDto.Response getCity(int code);
 }

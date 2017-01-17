@@ -11,4 +11,6 @@ import java.util.List;
 public interface StateService {
 	public List<StateDto.Response> getAllState();
 	public State saveState(StateDto.Request request);
+
+	public StateDto.Response getState(int stateid);
 }
