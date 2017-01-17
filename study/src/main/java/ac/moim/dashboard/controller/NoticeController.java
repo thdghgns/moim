@@ -27,7 +27,6 @@ public class NoticeController {
 	public String NoticeMainPage(Model model, 
 			@RequestParam(value="pageNum", required=false, defaultValue="1") Integer pageNum, 
 			@RequestParam(value="searchText", required=false, defaultValue="") String searchText){	
-		
 		HashMap<String, Object> results = noticeService.NoticeMainPage(pageNum, searchText);
 		model.addAttribute("totalPage", results.get("TotalPage"));
 		model.addAttribute("noticeList", results.get("NoticeList"));

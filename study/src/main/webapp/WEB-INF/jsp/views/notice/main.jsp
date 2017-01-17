@@ -45,6 +45,6 @@
 </body>
 <script>
 $("#notice-search-form").on('click', function() {
-	window.document.location.href = ''
+	window.document.location.href = '/notice/main?searchText=' + $('#notice-search-text').val()
 });
 </script>
