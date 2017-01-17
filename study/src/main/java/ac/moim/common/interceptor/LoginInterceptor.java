@@ -29,13 +29,14 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		String userId = (String)session.getAttribute("userId");
 
 		if(expireTime == null || userId == null) {
+			response.sendRedirect("/login");
 			return false;
 		}
 
 		User user = userService.getUser(userId);
 
 		if(user == null) {
-			// invalid user
+			response.sendRedirect("/login");
 			return false;
 		}
 

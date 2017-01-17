@@ -2,7 +2,9 @@ package ac.moim.common.service;
 
 import ac.moim.common.dto.CityDto;
 import ac.moim.common.entity.City;
+import ac.moim.common.entity.State;
 import ac.moim.common.repository.CityRepository;
+import ac.moim.common.repository.StateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,9 @@ public class CityServiceImpl implements CityService {
 	@Autowired
 	private CityRepository cityRepository;
 
+	@Autowired
+	private StateRepository stateRepository;
+
 	@Override
 	public List<CityDto.Response> getAllCity() {
 
@@ -30,6 +35,27 @@ public class CityServiceImpl implements CityService {
 		return responses;
 	}
 
+	@Override
+	public City saveCity(CityDto.Request request) {
+
+		City city = new City();
+
+		State state = stateRepository.getOne(request.getStateId());
+		city.setStateId(state);
+		city.setCode(request.getCode());
+		city.setName(request.getName());
+
+		return cityRepository.saveAndFlush(city);
+	}
+	
+	@Override
+	public CityDto.Response getCity(int code){
+		
+		CityDto.Response response = new CityDto.Response();
+		response = entityToResponseDto(cityRepository.getOne(code));
+		return response;
+		
+	}
 	private CityDto.Response entityToResponseDto(City city) {
 		CityDto.Response response = new CityDto.Response();
 

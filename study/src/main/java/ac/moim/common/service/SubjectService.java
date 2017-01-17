@@ -1,6 +1,7 @@
 package ac.moim.common.service;
 
 import ac.moim.common.dto.SubjectDto;
+import ac.moim.common.entity.Subject;
 
 import java.util.List;
 
@@ -9,4 +10,5 @@ import java.util.List;
  */
 public interface SubjectService {
 	public List<SubjectDto.Response> getAllSubject();
+	public Subject saveSubject(SubjectDto.Request request);
 }

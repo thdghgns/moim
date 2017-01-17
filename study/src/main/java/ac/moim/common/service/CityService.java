@@ -1,6 +1,7 @@
 package ac.moim.common.service;
 
 import ac.moim.common.dto.CityDto;
+import ac.moim.common.entity.City;
 
 import java.util.List;
 
@@ -9,4 +10,6 @@ import java.util.List;
  */
 public interface CityService {
 	public List<CityDto.Response> getAllCity();
+	public City saveCity(CityDto.Request request);
+	public CityDto.Response getCity(int code);
 }

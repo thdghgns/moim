@@ -1,6 +1,7 @@
 package ac.moim.common.service;
 
 import ac.moim.common.dto.StateDto;
+import ac.moim.common.entity.State;
 
 import java.util.List;
 
@@ -9,4 +10,7 @@ import java.util.List;
  */
 public interface StateService {
 	public List<StateDto.Response> getAllState();
+	public State saveState(StateDto.Request request);
+
+	public StateDto.Response getState(int stateid);
 }
