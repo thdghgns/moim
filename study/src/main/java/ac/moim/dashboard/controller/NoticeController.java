@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ac.moim.dashboard.dto.NoticeDto;
 import ac.moim.dashboard.entity.Notice;
 import ac.moim.dashboard.service.NoticeService;
 
@@ -40,32 +41,43 @@ public class NoticeController {
 	public String NoticeCreatePage() {
 		return "views/notice/create";
 	}
-	
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public String NoticeEditPage() {
-		return "views/notice/edit";
-	}
 	/*Redirect Page*/
 	
 	
 	/*Post*/
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String NoticeCreate(HttpSession session, Notice notice) {
+	public String NoticeCreate(HttpSession session, NoticeDto.Request request) {
 		String userName = (String)session.getAttribute("userName");
 		if(userName == null){
 			userName = "unknown";
 		}
+		
+		Notice notice = new Notice();
+		notice.setTitle(request.getTitle());
+		notice.setContent(request.getContent());
 		notice.setInputUser(userName);
-		noticeService.NoticeCreateOrUpdate(notice);
+
+		noticeService.NoticeCreate(notice);
 		return "views/notice/main";
 	}
 	/*Post*/
 	
 	/*Put*/
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public String NoticeUpdate(Notice notice, String userName) {
+	public String NoticeUpdate(HttpSession session, NoticeDto.Request request, String userName) {
+		String modifyUserName = (String)session.getAttribute("userName");
+		if(userName == null){
+			userName = "unknown";
+		}		
+		Notice notice = new Notice();
+		notice.setId(request.getId());
+		notice.setTitle(request.getTitle());
+		notice.setContent(request.getContent());
+		notice.setHit(request.getHit() - 1);
 		notice.setInputUser(userName);
-		noticeService.NoticeCreateOrUpdate(notice);
+		notice.setModifyUser(modifyUserName);
+		
+		noticeService.NoticeUpdate(notice);
 		return "views/notice/main";
 	}
 	/*Put*/
