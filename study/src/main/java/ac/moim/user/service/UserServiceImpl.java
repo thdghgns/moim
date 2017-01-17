@@ -16,7 +16,8 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	UserRepository userRepository;
 
-	public void saveUser(UserDto.Request user) {
+	public User saveUser(UserDto.Request user) {
+		return userRepository.saveAndFlush(toEntity(user));
 	}
 
 	// TODO : cache 삭제 적용
@@ -33,7 +34,7 @@ public class UserServiceImpl implements UserService{
 		}catch(Exception ex){
 			throw ex;
 		}
-		
+
 	}
 
 	public void UserCreateOrUpdate(User user){
@@ -49,6 +50,19 @@ public class UserServiceImpl implements UserService{
 		user.setGender(person.getGender());
 		user.setBirthday(person.getBirthday());
 		user.setIntro(person.getAboutMe());
+
+		return user;
+	}
+
+	private User toEntity(UserDto.Request request) {
+		User user = new User();
+
+		user.setId(request.getId());
+		user.setName(request.getName());
+		user.setMail(request.getMail());
+		user.setGender(request.getGender());
+		user.setBirthday(request.getBirthday());
+		user.setIntro(request.getIntro());
 
 		return user;
 	}

@@ -28,18 +28,22 @@ public class StudyMemberServiceImpl implements StudyMemberService {
 	private StudyRepository studyRepository;
 
 	@Override
-	public void saveStudyMember(StudyMemberDto.Request request) {
+	public StudyMember saveStudyMember(StudyMemberDto.Request request) {
 
 		StudyMember studyMember = toEntity(request.getStudyId(), request.getUserId(), request.getClassifier());
 
-		studyMemberRepository.saveAndFlush(studyMember);
+		return saveStudyMember(studyMember);
 	}
 
 	@Override
-	public void saveStudyMember(int studyId, String userId) {
+	public StudyMember saveStudyMember(int studyId, String userId) {
 		StudyMember studyMember = toEntity(studyId, userId, "leader");
 
-		studyMemberRepository.saveAndFlush(studyMember);
+		return saveStudyMember(studyMember);
+	}
+
+	private StudyMember saveStudyMember(StudyMember studyMember) {
+		return studyMemberRepository.saveAndFlush(studyMember);
 	}
 
 	private StudyMember toEntity(int studyId, String uesrId, String classifier) {

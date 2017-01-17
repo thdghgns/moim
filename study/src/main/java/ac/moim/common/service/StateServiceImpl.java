@@ -30,6 +30,16 @@ public class StateServiceImpl implements StateService {
 		return stateList;
 	}
 
+	@Override
+	public State saveState(StateDto.Request request) {
+		State state = new State();
+
+		state.setCode(request.getId());
+		state.setName(request.getName());
+
+		return stateRepository.saveAndFlush(state);
+	}
+
 	private StateDto.Response entityToResponseDto(State state) {
 		StateDto.Response response = new StateDto.Response();
 

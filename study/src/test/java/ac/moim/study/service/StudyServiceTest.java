@@ -1,13 +1,9 @@
 package ac.moim.study.service;
 
-import ac.moim.StudyApplicationTests;
-import ac.moim.common.entity.City;
 import ac.moim.common.service.CityService;
 import ac.moim.config.ServiceTestConfiguration;
 import ac.moim.study.dto.StudyDto;
 import ac.moim.study.entity.Study;
-import org.hamcrest.Matcher;
-import org.hamcrest.core.Is;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,11 +12,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by SONG_HOHOON on 2017-01-05.
@@ -42,6 +37,7 @@ public class StudyServiceTest {
 	private List<StudyDto.Request> requestList;
 
 	private int studyCount;
+	private int subjectId;
 	private int cityId;
 
 	@Before
@@ -49,6 +45,7 @@ public class StudyServiceTest {
 		studyList = new ArrayList<>();
 		requestList = new ArrayList<>();
 		studyCount = 30;
+		subjectId = 1;
 		cityId = 27290;
 
 		String str;
@@ -61,7 +58,7 @@ public class StudyServiceTest {
 			studyRequest.setIntro(str);
 			studyRequest.setMemberLimit(i);
 			studyRequest.setCityCode(cityId);
-			studyRequest.setSubjectId(1);
+			studyRequest.setSubjectId(subjectId);
 
 			requestList.add(studyRequest);
 		}
@@ -69,7 +66,7 @@ public class StudyServiceTest {
 
 	@Test
 	public void testSaveStudy() throws Exception {
-		createStudyTestData();
+		createTestData();
 
 		for(int i = 0; i < studyCount; i++) {
 			study = studyList.get(i);
@@ -83,7 +80,8 @@ public class StudyServiceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		createStudyTestData();
+		createTestData();
+
 		List<Study> list = studyService.findAll();
 
 		for(Study i : studyList) {
@@ -95,13 +93,21 @@ public class StudyServiceTest {
 
 	@Test
 	public void testFindByCityId() throws Exception {
-		createStudyTestData();
-		City city = null;//= cityService.
-		List<Study> list = studyService.findByCityId(city);
+		createTestData();
+
+		List<Study> list = studyService.findByCityCode(cityId);
+		assertTrue(list.size() >=studyCount);
 	}
 
-	private void createStudyTestData() {
-		// create study
+	@Test
+	public void testFindBySubjectId() throws Exception {
+		createTestData();
+
+		List<Study> list = studyService.findBySubjectId(subjectId);
+		assertTrue(list.size() >=studyCount);
+	}
+
+	private void createTestData() {
 		for(int i = 0; i < studyCount; i++) {
 			studyList.add(studyService.saveStudy(requestList.get(i)));
 		}

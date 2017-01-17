@@ -29,6 +29,12 @@ public class SubjectServiceImpl implements SubjectService {
 		return subjectList;
 	}
 
+	@Override
+	public Subject saveSubject(SubjectDto.Request request) {
+		Subject subject = toEntity(request);
+		return subjectRepository.saveAndFlush(subject);
+	}
+
 	private SubjectDto.Response entityToResponseDto(Subject subject) {
 		SubjectDto.Response response = new SubjectDto.Response();
 
@@ -39,5 +45,17 @@ public class SubjectServiceImpl implements SubjectService {
 		response.setLevel(subject.getLevel());
 
 		return response;
+	}
+
+	private Subject toEntity(SubjectDto.Request request) {
+		Subject subject = new Subject();
+
+		subject.setId(request.getId());
+		subject.setName(request.getName());
+		subject.setLevel(request.getLevel());
+		subject.setParentId(request.getParentId());
+		subject.setSeq(request.getSeq());
+
+		return subject;
 	}
 }
