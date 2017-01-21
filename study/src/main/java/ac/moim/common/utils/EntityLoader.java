@@ -56,7 +56,7 @@ public class EntityLoader {
 		try {
 
 			BufferedReader readerState = new BufferedReader(new FileReader(
-					"./src/main/resources/address/state/시도.txt"));
+					"./src/main/resources/address/state/sido.txt"));
 			while ((strState = readerState.readLine()) != null) {
 				String[] splitState = strState.split("\t");
 				stateCode = Integer.valueOf(splitState[0]);
