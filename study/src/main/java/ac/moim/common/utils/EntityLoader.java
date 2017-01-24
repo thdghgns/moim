@@ -1,9 +1,6 @@
 package ac.moim.common.utils;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +10,7 @@ import ac.moim.common.entity.Subject;
 import ac.moim.common.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
@@ -61,7 +59,7 @@ public class EntityLoader {
 		try {
 			Resource stateResource = applicationContext.getResource("classpath:address/state/sido.txt");
 
-			BufferedReader readerState = new BufferedReader(new FileReader(stateResource.getFile()));
+			BufferedReader readerState = new BufferedReader(new InputStreamReader(stateResource.getInputStream()));
 			while ((strState = readerState.readLine()) != null) {
 				String[] splitState = strState.split("\t");
 				stateCode = Integer.valueOf(splitState[0]);
@@ -73,7 +71,7 @@ public class EntityLoader {
 
 				Resource cityResource = applicationContext.getResource("classpath:address/city/"+stateCode+".txt");
 
-				BufferedReader readerCity = new BufferedReader(new FileReader(cityResource.getFile()));
+				BufferedReader readerCity = new BufferedReader(new InputStreamReader(cityResource.getInputStream()));
 				while ((strCity = readerCity.readLine()) != null) {
 					String[] splitCity = strCity.split("\t");
 					cityCode = Integer.valueOf(splitCity[0]);
