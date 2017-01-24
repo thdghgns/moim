@@ -15,6 +15,7 @@
 							<b>작성자 : <span id='notice-detail-user'>${detailList.inputUser}</span></b>
 							&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
 							<b>작성날짜 : ${detailList.inputDate}</b>
+							&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
 							<b>조회수 : <span id='notice-detail-hit'>${detailList.hit}</span></b>
 						</h5>
 					</blockquote>
