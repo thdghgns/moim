@@ -63,14 +63,14 @@
 								  <div class="form-group">
 								    <label class="col-sm-4 control-label">사는 곳</label>
 								    <div class="col-sm-3">
-								       <select name="state" class="form-control" id="state"  disabled ="disabled" value="${user.city_id.name}">
+								       <select name="state" class="form-control" id="state"  disabled ="disabled" >
 											<c:forEach var="state" items="${stateList}">
 												<option value="${state.id}">${state.name}</option>
 											</c:forEach>
 										</select>
 								    </div>
 								    <div class="col-sm-3">
-								       <select name="city" class="form-control" id="city" disabled ="disabled" value="${user.city_id.name}">
+								       <select name="city" class="form-control" id="city" disabled ="disabled" >
 											<c:forEach var="city" items="${cityList}">
 												<option value="${city.code}">${city.name}</option>
 											</c:forEach>

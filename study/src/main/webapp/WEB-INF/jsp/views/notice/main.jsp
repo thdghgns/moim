@@ -2,10 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <body>
+
 	<div class="container">
 		<div class="search-notice pull-right">
-			<input type="text" class="search-form" autocomplete="off"
-				placeholder="Search"> <i class="fa fa-search"></i>
+			<input id="notice-search-text" type="text" class="search-form" autocomplete="off"
+				placeholder="Search"> <i id="notice-search-form" class="fa fa-search"></i>
 		</div>
 		<div class="notice-div-table">
 			<div class="notice-div-table-body">
@@ -37,10 +38,15 @@
 		<ul class="pagination">
 			<li><a href="#">left</a></li>
 			<c:forEach var="i" begin="1" end="${totalPage}" step="1">
-				<li class="notice-page-num"><a href="/notice/main?pageNum=${i}">${i}</a></li>
+				<li class="notice-page-num"><a href="/notice/main?pageNum=${i}&searchText=${searchText}">${i}</a></li>
 			</c:forEach>
 			<li><a href="#">right</a></li>
 		</ul>
 	</div>
 </body>
-<!-- DivTable.com -->
+<script>
+
+$("#notice-search-form").on('click', function() {
+	window.document.location.href = '/notice/main?searchText=' + $('#notice-search-text').val();
+});
+</script>
