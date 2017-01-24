@@ -100,8 +100,9 @@ public class EntityLoader {
 
 		BufferedReader readerSubject = null;
 		try {
-			readerSubject = new BufferedReader(new FileReader(
-					"./src/main/resources/subject/subject.txt"));
+			Resource subjectResource = applicationContext.getResource("classpath:subject/subject.txt");
+
+			readerSubject = new BufferedReader(new InputStreamReader(subjectResource.getInputStream()));
 
 			while ((strSubject = readerSubject.readLine()) != null) {
 				Subject subject = new Subject();
