@@ -12,6 +12,8 @@ import javax.annotation.PostConstruct;
 import ac.moim.common.entity.Subject;
 import ac.moim.common.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import ac.moim.common.entity.City;
@@ -27,6 +29,9 @@ import ac.moim.study.repository.StudyRepository;
 
 @Component
 public class EntityLoader {
+
+	@Autowired
+	ApplicationContext applicationContext;
 
 	@Autowired
 	StateRepository stateRepository;
@@ -54,9 +59,9 @@ public class EntityLoader {
 		City city = new City();
 
 		try {
+			Resource stateResource = applicationContext.getResource("classpath:address/state/sido.txt");
 
-			BufferedReader readerState = new BufferedReader(new FileReader(
-					"./src/main/resources/address/state/sido.txt"));
+			BufferedReader readerState = new BufferedReader(new FileReader(stateResource.getFile()));
 			while ((strState = readerState.readLine()) != null) {
 				String[] splitState = strState.split("\t");
 				stateCode = Integer.valueOf(splitState[0]);
@@ -66,8 +71,9 @@ public class EntityLoader {
 				state.setInputUser("admin");
 				stateRepository.save(state);
 
-				BufferedReader readerCity = new BufferedReader(
-						new FileReader("./src/main/resources/address/city/"+stateCode+".txt"));
+				Resource cityResource = applicationContext.getResource("classpath:address/city/"+stateCode+".txt");
+
+				BufferedReader readerCity = new BufferedReader(new FileReader(cityResource.getFile()));
 				while ((strCity = readerCity.readLine()) != null) {
 					String[] splitCity = strCity.split("\t");
 					cityCode = Integer.valueOf(splitCity[0]);
