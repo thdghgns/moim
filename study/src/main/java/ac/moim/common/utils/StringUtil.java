@@ -23,6 +23,8 @@ public class StringUtil {
 			map.put("message", e.getMessage());
 
 			result = MapToJsonString(map);
+
+			System.out.println(e);
 		}
 
 		return result;

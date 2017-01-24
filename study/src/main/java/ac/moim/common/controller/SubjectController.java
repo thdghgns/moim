@@ -25,6 +25,7 @@ public class SubjectController {
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String getAllSubject(Model model) {
 		List<SubjectDto.Response> subjectList = subjectService.getAllSubject();
+		model.addAttribute("subjectList", subjectList);
 
 		return "";
 	}

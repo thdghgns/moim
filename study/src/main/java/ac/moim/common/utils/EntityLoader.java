@@ -87,7 +87,6 @@ public class EntityLoader {
 			readerState.close();
 		} catch (IOException e) {
 			System.out.println(e);
-			System.exit(1);
 		}
 
 	}
@@ -118,7 +117,7 @@ public class EntityLoader {
 			}
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println(e);
 		}
 
 		subjectRepository.save(subjectList);

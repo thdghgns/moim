@@ -51,9 +51,7 @@ public class CityServiceImpl implements CityService {
 	@Override
 	public CityDto.Response getCity(int code){
 		
-		CityDto.Response response = new CityDto.Response();
-		response = entityToResponseDto(cityRepository.getOne(code));
-		return response;
+		return entityToResponseDto(cityRepository.getOne(code));
 		
 	}
 	private CityDto.Response entityToResponseDto(City city) {
