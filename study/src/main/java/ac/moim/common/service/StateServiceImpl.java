@@ -52,9 +52,6 @@ public class StateServiceImpl implements StateService {
 	}
 	
 	public StateDto.Response getState(int stateid){
-		Response state = new StateDto.Response ();
-		state = entityToResponseDto(stateRepository.findOne(stateid));
-		
-		return state;
+		return entityToResponseDto(stateRepository.findOne(stateid));
 	}
 }

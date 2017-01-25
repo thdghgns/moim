@@ -47,10 +47,11 @@ public class UserController {
 	
 	
 	@RequestMapping(value = "{userId}", method = RequestMethod.GET)
-	
-	public String getUser(@PathVariable(value = "userId")String userId) {
+	public String getUser(ModelMap model, @PathVariable(value = "userId")String userId) {
 
 		User user = userService.getUser(userId);
+		model.addAttribute("user", user);
+
 		return "views/mypage/myInfo";
 	}
 	

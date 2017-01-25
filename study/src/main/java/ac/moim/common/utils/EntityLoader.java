@@ -1,9 +1,6 @@
 package ac.moim.common.utils;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +9,9 @@ import javax.annotation.PostConstruct;
 import ac.moim.common.entity.Subject;
 import ac.moim.common.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import ac.moim.common.entity.City;
@@ -27,6 +27,9 @@ import ac.moim.study.repository.StudyRepository;
 
 @Component
 public class EntityLoader {
+
+	@Autowired
+	ApplicationContext applicationContext;
 
 	@Autowired
 	StateRepository stateRepository;
@@ -54,9 +57,9 @@ public class EntityLoader {
 		City city = new City();
 
 		try {
+			Resource stateResource = applicationContext.getResource("classpath:address/state/sido.txt");
 
-			BufferedReader readerState = new BufferedReader(new FileReader(
-					"./src/main/resources/address/state/시도.txt"));
+			BufferedReader readerState = new BufferedReader(new InputStreamReader(stateResource.getInputStream()));
 			while ((strState = readerState.readLine()) != null) {
 				String[] splitState = strState.split("\t");
 				stateCode = Integer.valueOf(splitState[0]);
@@ -66,8 +69,9 @@ public class EntityLoader {
 				state.setInputUser("admin");
 				stateRepository.save(state);
 
-				BufferedReader readerCity = new BufferedReader(
-						new FileReader("./src/main/resources/address/city/"+stateCode+".txt"));
+				Resource cityResource = applicationContext.getResource("classpath:address/city/"+stateCode+".txt");
+
+				BufferedReader readerCity = new BufferedReader(new InputStreamReader(cityResource.getInputStream()));
 				while ((strCity = readerCity.readLine()) != null) {
 					String[] splitCity = strCity.split("\t");
 					cityCode = Integer.valueOf(splitCity[0]);
@@ -83,7 +87,6 @@ public class EntityLoader {
 			readerState.close();
 		} catch (IOException e) {
 			System.out.println(e);
-			System.exit(1);
 		}
 
 	}
@@ -96,8 +99,9 @@ public class EntityLoader {
 
 		BufferedReader readerSubject = null;
 		try {
-			readerSubject = new BufferedReader(new FileReader(
-					"./src/main/resources/subject/subject.txt"));
+			Resource subjectResource = applicationContext.getResource("classpath:subject/subject.txt");
+
+			readerSubject = new BufferedReader(new InputStreamReader(subjectResource.getInputStream()));
 
 			while ((strSubject = readerSubject.readLine()) != null) {
 				Subject subject = new Subject();
@@ -113,7 +117,7 @@ public class EntityLoader {
 			}
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println(e);
 		}
 
 		subjectRepository.save(subjectList);

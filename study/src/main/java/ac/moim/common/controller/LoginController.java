@@ -76,9 +76,9 @@ public class LoginController {
 			session.setAttribute("userId", user.getId());
 			session.setAttribute("userName", user.getName());
 			session.setAttribute("expireTime", expireTime);
+			model.addAttribute("current-user", user.getName());
 		}
 
-		model.addAttribute("current-user", user.getName());
 
 		return "views/homeMain";
 	}
