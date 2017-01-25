@@ -22,8 +22,17 @@
 						</h1>
 					</a>
 					<div class="search">
-						<a href="/login" class="fa fa-google-plus"></a> <span
-							id=current-user><%=userName%></span>
+						<% if(userName =="") { %>
+							<a href="/login" class="fa fa-google-plus"></a>
+						<% } else { %>
+							<div class="dropdown">
+								<a href="#"><span id='current-user'><%=userName%></span></a>
+								<div class="dropdown-content">
+							    	<a href="#">내 정보</a>
+							    	<a href="/logout">로그아웃</a>
+							  	</div>
+						  	</div>
+						<% } %>
 					</div>
 				</div>
 			</div>
