@@ -14,40 +14,14 @@ public class IndexController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String Index(Model model) {
-		return "views/homeMain";
+		return "/views/index";
 	}
 	
-	@RequestMapping(value = "/homeMain", method = RequestMethod.GET)
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String Welcome(Model model, @RequestParam(value="name", required=false, defaultValue="World") String name) {
 
 		model.addAttribute("name", name);
-		return "views/homeMain";
-	}
-	
-	@RequestMapping(value = "/studyMain", method = RequestMethod.GET)
-	public String StudyMain(){
+		return "/views/index";
+	}	
 
-		return "views/studyMain";
-	}
-	
-	@RequestMapping(value = "/noticeMain", method = RequestMethod.GET)
-	public String NoticeMain(){
-
-		return "views/noticeMain";
-	}
-	
-	@RequestMapping(value = "/mypageMain", method = RequestMethod.GET)
-	public String MyPageMain(){
-
-		return "views/mypageMain";
-	}
-	
-	
-	@RequestMapping(value = "/mypageMyIfo", method = RequestMethod.GET)
-	public String MypageMyIfo(){
-		
-
-		return "views/mypage/update";
-	}
-	
 }
