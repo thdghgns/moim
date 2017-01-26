@@ -81,4 +81,24 @@ public class StudyServiceImpl implements StudyService {
 
 		return studyList;
 	}
+
+	@Override
+	public List<Study> findByTitleIgnoreCaseContaining(String keyword) {
+		List<Study> studyList = studyRepository.findByTitleIgnoreCaseContaining(keyword);
+		return studyList;
+	}
+
+	@Override
+	public List<Study> findByTitleAndIntroIgnoreCaseContaining(String keyword, String keyword2) {
+		List<Study> studyList = studyRepository.findByTitleAndIntroIgnoreCaseContaining(keyword, keyword2);
+		return studyList;
+	}
+
+	@Override
+	public List<Study> findByInputUserIgnoreCaseContaining(String keyword) {
+		List<Study> studyList = studyRepository.findByInputUserIgnoreCaseContaining(keyword);
+		return studyList;
+	}
+
+
 }

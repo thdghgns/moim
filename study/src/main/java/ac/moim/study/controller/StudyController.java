@@ -113,4 +113,34 @@ public class StudyController {
 		
 		return "views/study/main";
 	}
+	
+
+	/**
+	 * 스터디 목록 검색 (AJAX)
+	 * @param keyword, searchType
+	 * @return
+	 */
+	@RequestMapping(value="/search", method=RequestMethod.POST)
+	public @ResponseBody List<Study> SearchStudy(@RequestParam(required = false) String keyword, @RequestParam(required = false) String searchType){
+		
+		List<Study> studyList = null;
+		
+		if(searchType.equals("title"))
+		{
+			studyList = studyService.findByTitleIgnoreCaseContaining(keyword);
+			System.out.println(studyList);
+		}
+		else if(searchType.equals("title_content"))
+		{
+			studyList = studyService.findByTitleAndIntroIgnoreCaseContaining(keyword, keyword);
+			System.out.println(studyList);
+		}
+		else
+		{
+			studyList = studyService.findByInputUserIgnoreCaseContaining(keyword);
+		}
+		return studyList;
+	}
+	
+	
 }

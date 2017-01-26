@@ -21,6 +21,11 @@ import java.util.List;
 @Table(name = "study")
 public class Study extends BaseEntity implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -35,10 +40,14 @@ public class Study extends BaseEntity implements Serializable {
 
 	@Column(name = "intro")
 	private String intro;
+	
+	@Column(name = "input_user")
+	private String inputUser;
 
 	@ManyToOne
 	@JoinColumn(name = "city_id")
 	private City cityId;
+	
 
 	@Column(name = "member_count")
 	private int memberCount;

@@ -19,4 +19,7 @@ public interface StudyService {
 	public List<Study> findByCityCode(Integer cityCode);
 	public Study saveStudy(StudyDto.Request study);
 	public Page<Study> findAll(Pageable pageable);
+	public List<Study> findByTitleIgnoreCaseContaining(String keyword);
+	public List<Study> findByTitleAndIntroIgnoreCaseContaining(String keyword, String keyword2);
+	List<Study> findByInputUserIgnoreCaseContaining(String keyword);
 }
