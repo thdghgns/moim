@@ -16,4 +16,7 @@ public interface StudyRepository extends JpaRepository<Study, Integer>, JpaSpeci
 	
 	List<Study> findByCityId(Integer cityId);
 	List<Study> findBySubjectId(Integer SubjectId);
+	List<Study> findByTitleIgnoreCaseContaining(String keyword);
+	List<Study> findByTitleAndIntroIgnoreCaseContaining(String keyword, String keyword2);
+	List<Study> findByInputUserIgnoreCaseContaining(String keyword);
 }

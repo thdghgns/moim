@@ -26,6 +26,7 @@ public class StudyDto {
 
 		@NotNull
 		private String intro;
+		
 
 		@NotNull
 		@Range(min = 1, max = 30)

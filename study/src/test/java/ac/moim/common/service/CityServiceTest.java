@@ -1,26 +1,17 @@
 package ac.moim.common.service;
 
-import ac.moim.common.dto.CityDto;
-import ac.moim.common.dto.StateDto;
-import ac.moim.common.entity.State;
-import ac.moim.common.utils.EntityLoader;
-import ac.moim.config.ServiceTestConfiguration;
+import static org.junit.Assert.assertTrue;
+import java.util.List;
+import javax.transaction.Transactional;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import javax.transaction.Transactional;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.List;
-
-import static org.junit.Assert.*;
+import ac.moim.common.dto.CityDto;
+import ac.moim.common.dto.StateDto;
+import ac.moim.config.ServiceTestConfiguration;
 
 /**
  * Created by SONG_HOHOON on 2017-01-16.

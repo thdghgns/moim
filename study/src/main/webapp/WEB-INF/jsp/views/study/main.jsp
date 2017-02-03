@@ -68,7 +68,8 @@
 				</c:forEach>
 			</div>
 		</div>
-		<select style="float: left; padding: 5px; margin: 5px"> 검색 조건
+		<select style="float: left; padding: 5px; margin: 5px" id="searchType">
+			검색 조건
 			<option value="title">제목</option>
 			<option value="title_content">제목+내용</option>
 			<option value="writer">작성자</option>
@@ -88,6 +89,7 @@
 <script type="text/javascript">
 	//주소 선택
 	$(function() {
+			
 		$('#stateSelect').on('change', function() {
 			var stateId = $('#stateSelect option:selected').val();
 			var cityId = $(this).context.label;
@@ -122,11 +124,44 @@
 		})
 
 		// 스터디 검색 조회
-
-		$('#search_content_btn')
-		on('click', function() {
+		$('#search_content_btn').on('click', function() {
 			var search = $('#search_content').val();
-			alert('입력하세요');
+			var params = { "keyword" : search,
+				     "searchType" : $('#searchType').val()}
+			
+			if ( search == "") {
+				alert("검색어를 입력하세요")
+			} 
+			else {
+				$.ajax({
+					url : "/study/search",
+					type : "POST",
+					data : params,
+					dataType: json,
+					success:function(args){
+						alert(args);
+						var result = "";
+						divTableRow.html('');
+						
+						$.each(args, function (id, study){
+							result += '<div class="divTableCell orderCell">'+ study.id +'</div>'+
+								'<div class="divTableCell cityCell">'+study.cityId.stateId.name+','+'<br />'+study.cityId.name+
+							'</div>'+
+							'<div class="divTableCell subjectCell" value="'+study.subjectId+'">'+study.subjectId.name+'</div>'+
+							'<div class="divTableCell titleCell">'+study.title+'</div>'
+							'<div class="divTableCell dateCell">'+study.inputDate+'</div>'
+							'<div class="divTableCell writerCell">'+study.inputUser+'</div>'
+							'<div class="divTableCell hitsCell">'+study.hit+'</div>'
+						});
+						
+						divTableRow.html(result);
+						
+					},
+					error:function(e){
+						alert("error");
+					}
+				});
+			}
 		})
 	});
 </script>
