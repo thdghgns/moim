@@ -75,19 +75,53 @@ div.hitsCell.divTableCell {
 .navbar-nav.post-nav li {
 	margin-right: 30px;
 }
-
-#notice-create-content {
-	height: 500px;
-	resize: none;
+/* top menu*/
+#top-menus{
+    left: 25% !important;
 }
 
-#notice-detail{
-	padding-bottom: 15px;
-	color : #907171;
+.top-menu{
+	padding: 2px 15px 2px 15px !important; 
+	font-size: 22;
 }
 
-#notice-detail-content {
-	height: 500px;
-	resize: none;
-	background-color: #FFFFFF;
+#current-user{
+	font-size: 12;
+	color: #524e5f;
 }
+/* top menu*/
+
+/* Dropdown LoginID Menu */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 100px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    font-size: 10pt;
+}
+
+.dropdown-content a {
+    color: #686868;
+    padding: 5px 5px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+	background-color: #f1f1f1
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+/* Dropdown LoginID Menu */
