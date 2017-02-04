@@ -18,6 +18,7 @@ public class CityDto {
 		@NotNull
 		private String name;
 	}
+	
 	@Data
 	public static class Response implements Serializable {
 		private Integer code;

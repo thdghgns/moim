@@ -41,6 +41,6 @@ public class Subject extends BaseEntity implements Serializable {
 	@Column(name = "delete_check")
 	private boolean deleteCheck = false;
 
-	@OneToMany(mappedBy = "subjectId", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "subject", fetch = FetchType.LAZY)
 	private List<Study> studyList;
 }

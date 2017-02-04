@@ -1,8 +1,12 @@
 package ac.moim.common.service;
 
+import ac.moim.common.dto.CityDto;
 import ac.moim.common.dto.SubjectDto;
+import ac.moim.common.dto.SubjectDto.Response;
+import ac.moim.common.entity.City;
 import ac.moim.common.entity.Subject;
 import ac.moim.common.repository.SubjectRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,4 +62,17 @@ public class SubjectServiceImpl implements SubjectService {
 
 		return subject;
 	}
+
+	@Override
+	public Subject findById(Integer subjectId) {
+		Subject subject = subjectRepository.findById(subjectId);
+		
+		return subject;
+	}
+
+	@Override
+	public Response getSubject(Integer subjectId) {
+		return entityToResponseDto(subjectRepository.getOne(subjectId));
+	}
+	
 }

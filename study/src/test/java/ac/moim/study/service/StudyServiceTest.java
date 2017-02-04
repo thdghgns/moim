@@ -38,7 +38,7 @@ public class StudyServiceTest {
 
 	private int studyCount;
 	private int subjectId;
-	private int cityId;
+	private int cityCode;
 
 	@Before
 	public void setup() {
@@ -46,7 +46,7 @@ public class StudyServiceTest {
 		requestList = new ArrayList<>();
 		studyCount = 30;
 		subjectId = 1;
-		cityId = 27290;
+		cityCode = 27290;
 
 		String str;
 		// create study request object list (30)
@@ -57,7 +57,7 @@ public class StudyServiceTest {
 			studyRequest.setTitle(str);
 			studyRequest.setIntro(str);
 			studyRequest.setMemberLimit(i);
-			studyRequest.setCityCode(cityId);
+			studyRequest.setCityCode(cityCode);
 			studyRequest.setSubjectId(subjectId);
 
 			requestList.add(studyRequest);
@@ -92,10 +92,10 @@ public class StudyServiceTest {
 	}
 
 	@Test
-	public void testFindByCityId() throws Exception {
+	public void testFindByCity_Code() throws Exception {
 		createTestData();
 
-		List<Study> list = studyService.findByCityCode(cityId);
+		List<Study> list = studyService.findByCityCode(cityCode);
 		assertTrue(list.size() >=studyCount);
 	}
 

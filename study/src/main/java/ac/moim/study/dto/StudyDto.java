@@ -1,10 +1,12 @@
 package ac.moim.study.dto;
 
-import lombok.Data;
-import org.hibernate.validator.constraints.Range;
+import java.io.Serializable;
 
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
+
+import lombok.Data;
+
+import org.hibernate.validator.constraints.Range;
 
 /**
  * Created by SONG_HOHOON on 2016-12-26.
@@ -12,8 +14,6 @@ import java.io.Serializable;
 public class StudyDto {
 	@Data
 	public static class Request implements Serializable{
-
-		private static final long serialVersionUID = -2230848846689871655L;
 
 		@NotNull
 		private int subjectId;

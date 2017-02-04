@@ -5,6 +5,7 @@ import ac.moim.common.entity.City;
 import ac.moim.common.entity.State;
 import ac.moim.common.repository.CityRepository;
 import ac.moim.common.repository.StateRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,6 +55,7 @@ public class CityServiceImpl implements CityService {
 		return entityToResponseDto(cityRepository.getOne(code));
 		
 	}
+	
 	private CityDto.Response entityToResponseDto(City city) {
 		CityDto.Response response = new CityDto.Response();
 
@@ -62,5 +64,13 @@ public class CityServiceImpl implements CityService {
 		response.setStateId(city.getStateId().getCode());
 
 		return response;
+	}
+
+	@Override
+	public City findByCode(Integer cityCode) {
+		
+		City city = cityRepository.findByCode(cityCode);
+		
+		return city;
 	}
 }
