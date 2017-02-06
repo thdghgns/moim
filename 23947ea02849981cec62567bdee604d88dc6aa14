@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fabf19d9_9b6fcb2a",
+        "filename": "study/src/main/webapp/WEB-INF/jsp/views/index.jsp",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1010409
+      },
+      "writtenOn": "2017-02-06T07:29:38Z",
+      "side": 1,
+      "message": "gerrit",
+      "range": {
+        "startLine": 4,
+        "startChar": 6,
+        "endLine": 4,
+        "endChar": 7
+      },
+      "revId": "23947ea02849981cec62567bdee604d88dc6aa14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
