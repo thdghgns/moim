@@ -34,13 +34,14 @@
 					<option value="${subject.id}">${subject.name}</option>
 				</c:forEach>
 			</select>
-
+			
+			<input type="fa-search" style="float: left; padding: 6px; margin-left: 10px;" id="search_content">
 			<button type="submit" id="studySearch" class="btn btn-warning"
 				style="padding: 8px; margin-left: 10px;">찾기</button>
 		</div>
 
 		<button type="button" class="btn btn-warning btn-block"
-			style="margin: 15px;" onclick="location.href='/study/create-form'">스터디
+			style="margin-top: 15px; margin-bottom:15px" onclick="location.href='/study/create-form'">스터디
 			만들기</button>
 		<div class="divTable">
 			<div class="divTableBody">
@@ -53,13 +54,13 @@
 					<div class="divTableCell writerCell">작성자</div>
 					<div class="divTableCell hitsCell">조회수</div>
 				</div>
-				<c:forEach var="study" items="${studyList.content}">
+				<c:forEach var="study" items="${studyList}">
 					<div class="divTableRow">
 						<div class="divTableCell orderCell">${study.id}</div>
-						<div class="divTableCell cityCell" value="${study.cityId}">${study.cityId.stateId.name},
-							<br /> ${study.cityId.name}
+						<div class="divTableCell cityCell" value="${study.city.code}">${study.city.stateId.name},
+							<br /> ${study.city.name}
 						</div>
-						<div class="divTableCell subjectCell" value="${study.subjectId}">${study.subjectId.name}</div>
+						<div class="divTableCell subjectCell" value="${study.subject}">${study.subject.name}</div>
 						<div class="divTableCell titleCell">${study.title}</div>
 						<div class="divTableCell dateCell">${study.inputDate}</div>
 						<div class="divTableCell writerCell">${study.inputUser}</div>
@@ -68,17 +69,10 @@
 				</c:forEach>
 			</div>
 		</div>
-		<select style="float: left; padding: 5px; margin: 5px"> 검색 조건
-			<option value="title">제목</option>
-			<option value="title_content">제목+내용</option>
-			<option value="writer">작성자</option>
-		</select> <input type="fa-search" style="margin: 5px;" id="search_content">
-		<button type="submit" id="search_content_btn">검색</button>
-
 		<div class="blog-pagination">
 			<ul class="pagination">
 				<li><a href="#">left</a></li>
-				<c:forEach var="i" begin="1" end="${studyList.size}" step="1">
+				<c:forEach var="i" begin="1" end="${study.size}" step="1">
 
 				</c:forEach>
 				<li><a href="#">right</a></li>
@@ -88,6 +82,7 @@
 <script type="text/javascript">
 	//주소 선택
 	$(function() {
+			
 		$('#stateSelect').on('change', function() {
 			var stateId = $('#stateSelect option:selected').val();
 			var cityId = $(this).context.label;
@@ -111,22 +106,14 @@
 			var stateId = $('#stateSelect option:selected').val();
 			var cityId = $('#citySelect option:selected').val();
 			var subjectId = $('#subjectSelect option:selected').val();
-
-			if (stateId == "" && cityId == "" && subjectId == "") {
-				$('.divTableRow').css("display", "");
-			} else if (cityId != "" && subjectId == "") {
-
-			} else {
-
-			}
-		})
-
-		// 스터디 검색 조회
-
-		$('#search_content_btn')
-		on('click', function() {
+			
 			var search = $('#search_content').val();
-			alert('입력하세요');
+			var params = { "keyword" : search,
+				     "searchType" : $('#searchType').val()}
+			
+			
+			window.document.location.href = '/study/main?searchText=' + search + '&subjectId='+subjectId + '&cityCode=' + cityId;
+			
 		})
 	});
 </script>

@@ -33,9 +33,9 @@ public class City extends BaseEntity implements Serializable {
 	@Column(name = "name", nullable = false, length = 20)
 	private String name;
 
-	@OneToMany(mappedBy = "cityId", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
 	private List<Study> studyList;
 
-	@OneToMany(mappedBy = "cityId", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
 	private List<User> userList;
 }
