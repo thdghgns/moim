@@ -4,6 +4,7 @@ import ac.moim.common.dto.CityDto;
 import ac.moim.common.dto.StateDto;
 import ac.moim.common.dto.SubjectDto;
 import ac.moim.common.entity.City;
+import ac.moim.common.entity.State;
 import ac.moim.common.service.CityService;
 import ac.moim.common.service.StateService;
 import ac.moim.common.service.SubjectService;
@@ -11,6 +12,7 @@ import ac.moim.user.entity.User;
 import ac.moim.user.repository.UserRepository;
 import ac.moim.user.service.UserService;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,11 +50,10 @@ public class UserController {
 	
 	
 	@RequestMapping(value = "{userId}", method = RequestMethod.GET)
-	public String getUser(ModelMap model, @PathVariable(value = "userId")String userId) {
+	
+	public String getUser(@PathVariable(value = "userId")String userId) {
 
 		User user = userService.getUser(userId);
-		model.addAttribute("user", user);
-
 		return "views/mypage/myInfo";
 	}
 	
@@ -74,11 +76,21 @@ public class UserController {
 		String userBirthday ;
 		
 		if (user.getBirthday() != null){
+		System.out.println(user.getBirthday());
 			userBirthday= sdf.format(user.getBirthday());
 			model.addAttribute("userBirthdate",userBirthday);
 		}
-		
-		
+		if(user.getCityId() != null){
+		City userCity= new City();
+		userCity = user.getCityId();
+		model.addAttribute("userCity",userCity);
+			
+			if(user.getCityId().getStateId()!=null){
+			State userState = new State();
+			 userState = user.getCityId().getStateId();
+			model.addAttribute("userState",userState);
+			}
+		}
 				
 
 		model.addAttribute("cityList",cityList);
@@ -86,16 +98,19 @@ public class UserController {
 		model.addAttribute("subjectList",subjectList);
 		model.addAttribute("user",user);
 		
+		
 	
 		return "views/mypage/update";
 	}
 	
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String updateMyInfo(HttpSession session, User user) {
+	public String updateMyInfo(HttpSession session,HttpServletResponse response, User user) throws IOException {
 		String userId = (String)session.getAttribute("userId");
 		user.setId(userId);
 		userService.UserCreateOrUpdate(user);
-		return "/mypageMyIfo";
+		
+		response.sendRedirect("/user/search");
+		return "views/mypage/update";
 	}
 }

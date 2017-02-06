@@ -6,10 +6,6 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,11 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import ac.moim.common.dto.CityDto;
 import ac.moim.common.dto.StateDto;
 import ac.moim.common.dto.SubjectDto;
+import ac.moim.common.entity.City;
+import ac.moim.common.entity.Subject;
 import ac.moim.common.service.CityService;
 import ac.moim.common.service.StateService;
 import ac.moim.common.service.SubjectService;
@@ -35,7 +32,6 @@ import ac.moim.study.service.StudyService;
  * Created by SONG_HOHOON on 2016-12-26.
  */
 @Controller
-
 @RequestMapping(value = "/study")
 public class StudyController {
 
@@ -53,7 +49,6 @@ public class StudyController {
 
 	@Autowired
 	private CityService cityService;
-	
 
 	@RequestMapping(value = "/create-form", method = RequestMethod.GET)
 	public String getStudyForm(Model model) {
@@ -70,7 +65,8 @@ public class StudyController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public String saveStudy(HttpSession httpSession, @RequestBody @Valid StudyDto.Request request, BindingResult result) {
+	public String saveStudy(HttpSession httpSession,
+			@RequestBody @Valid StudyDto.Request request, BindingResult result) {
 
 		if (result.hasErrors()) {
 			String code = "bad.request";
@@ -82,65 +78,48 @@ public class StudyController {
 		String userId = String.valueOf(httpSession.getAttribute("userId"));
 		Study study = studyService.saveStudy(request);
 
-		if(study != null)
+		if (study != null)
 			studyMemberService.saveStudyMember(study.getId(), userId);
 
 		return "views/study/main";
 	}
+
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	public String studyMain(
+			Model model,
+			@RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+			@RequestParam(value = "searchText", required = false, defaultValue = "") String searchText,
+			@RequestParam(value = "subjectId", required = false, defaultValue = "") Integer subjectId,
+			@RequestParam(value = "cityCode", required = false, defaultValue = "") Integer cityCode) {
+
+		List<Study> studyList;
+		City city = cityService.findByCode(cityCode);
+		Subject subject = subjectService.findById(subjectId);
 	
-	@RequestMapping(value="/main", method = RequestMethod.GET)
-	public String studyMain(Model model, @PageableDefault(sort = { "id" }, direction = Direction.DESC, size = 10) Pageable pageable){
-	
-		Page<Study> studyList = studyService.findAll(pageable);
+		
+		if (subjectId == null && cityCode == null) {
+			studyList = studyService.findAll(pageNum, searchText);
+		} else if (subjectId == null) {
+			studyList = studyService.findAllByCityCode(pageNum, searchText,
+					city.getCode());
+		} else if (cityCode == null) {
+			studyList = studyService.findAllBySubjectId(pageNum, searchText,
+					subject.getId());
+		} else {
+			studyList = studyService.findAll(pageNum, searchText, subject.getId(),
+					city.getCode());
+		}
+
 		List<SubjectDto.Response> subjectList = subjectService.getAllSubject();
 		List<StateDto.Response> stateList = stateService.getAllState();
 		List<CityDto.Response> cityList = cityService.getAllCity();
-		
+
 		model.addAttribute("cityList", cityList);
 		model.addAttribute("stateList", stateList);
-		model.addAttribute("studyList", studyList);
 		model.addAttribute("subjectList", subjectList);
-		
-		return "views/study/main";
-	}
-	
-	@RequestMapping(value="/select-search", method=RequestMethod.GET)
-	@ResponseBody
-	public String SelectSearchStudy(@RequestParam(required = false) Integer cityCode
-			, @RequestParam(required = false) Integer subjectId){
-		studyService.findByCityCode(cityCode);
-		studyService.findBySubjectId(subjectId);
-		
-		return "views/study/main";
-	}
-	
 
-	/**
-	 * 스터디 목록 검색 (AJAX)
-	 * @param keyword, searchType
-	 * @return
-	 */
-	@RequestMapping(value="/search", method=RequestMethod.POST)
-	public @ResponseBody List<Study> SearchStudy(@RequestParam(required = false) String keyword, @RequestParam(required = false) String searchType){
-		
-		List<Study> studyList = null;
-		
-		if(searchType.equals("title"))
-		{
-			studyList = studyService.findByTitleIgnoreCaseContaining(keyword);
-			System.out.println(studyList);
-		}
-		else if(searchType.equals("title_content"))
-		{
-			studyList = studyService.findByTitleAndIntroIgnoreCaseContaining(keyword, keyword);
-			System.out.println(studyList);
-		}
-		else
-		{
-			studyList = studyService.findByInputUserIgnoreCaseContaining(keyword);
-		}
-		return studyList;
+		model.addAttribute("studyList", studyList);
+
+		return "views/study/main";
 	}
-	
-	
 }

@@ -35,8 +35,8 @@ public class User extends BaseEntity implements Serializable {
 	private String mail;
 
 	@ManyToOne
-	@JoinColumn(name = "city_id")
-	private City cityId;
+	@JoinColumn(name = "city_code")
+	private City city;
 
 	@Column(name = "gender")
 	private String gender;

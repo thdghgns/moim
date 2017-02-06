@@ -33,7 +33,7 @@ public class Study extends BaseEntity implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "subject_id")
-	private Subject subjectId;
+	private Subject subject;
 
 	@Column(name = "title")
 	private String title;
@@ -45,8 +45,8 @@ public class Study extends BaseEntity implements Serializable {
 	private String inputUser;
 
 	@ManyToOne
-	@JoinColumn(name = "city_id")
-	private City cityId;
+	@JoinColumn(name = "city_code")
+	private City city;
 	
 
 	@Column(name = "member_count")

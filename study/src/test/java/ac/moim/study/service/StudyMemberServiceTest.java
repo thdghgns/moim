@@ -37,7 +37,7 @@ public class StudyMemberServiceTest {
 	private StudyMemberService studyMemberService;
 
 	private final int subjectId = 1;
-	private final int cityId = 27290;
+	private final int cityCode = 27290;
 	private final int memberLimit = 30;
 	private Study study;
 
@@ -45,7 +45,7 @@ public class StudyMemberServiceTest {
 	public void setup() {
 		StudyDto.Request request = new StudyDto.Request();
 		request.setSubjectId(subjectId);
-		request.setCityCode(cityId);
+		request.setCityCode(cityCode);
 		request.setMemberLimit(memberLimit);
 		request.setTitle("test study");
 		request.setIntro("test study intro");
