@@ -80,14 +80,14 @@ public class UserController {
 			userBirthday= sdf.format(user.getBirthday());
 			model.addAttribute("userBirthdate",userBirthday);
 		}
-		if(user.getCityId() != null){
+		if(user.getCity() != null){
 		City userCity= new City();
-		userCity = user.getCityId();
+		userCity = user.getCity();
 		model.addAttribute("userCity",userCity);
 			
-			if(user.getCityId().getStateId()!=null){
+			if(user.getCity().getStateId()!=null){
 			State userState = new State();
-			 userState = user.getCityId().getStateId();
+			 userState = user.getCity().getStateId();
 			model.addAttribute("userState",userState);
 			}
 		}
