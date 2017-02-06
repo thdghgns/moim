@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<body>
+<!-- index.jsp -->
+<body> 
 	<div class="container">
 		<section role="main" id="content" class="content left">
 			<div class="xe-widget-wrapper">
