@@ -86,7 +86,8 @@ div.hitsCell.divTableCell {
 }
 
 #current-user{
-	font-size: 14;
+	font-size: 12;
+	color: #524e5f;
 }
 /* top menu*/
 
@@ -107,7 +108,7 @@ div.hitsCell.divTableCell {
 }
 
 .dropdown-content a {
-    color: black;
+    color: #686868;
     padding: 5px 5px;
     text-decoration: none;
     display: block;
