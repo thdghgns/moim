@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!-- index.jsp made by lim_yungyoo -->
+<!-- index.jsp made -->
 <body> 
 	<div class="container">
 		<section role="main" id="content" class="content left">
