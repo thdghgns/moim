@@ -8,7 +8,7 @@
 
 	if (session.getAttribute("userName") != null) {
 		userName = (String) session.getAttribute("userName");
-	} ;
+	}
 %>
 <header id="header">
 	<div class="container">
@@ -22,56 +22,29 @@
 						</h1>
 					</a>
 					<div class="search">
-						<a href="/login" class="fa fa-google-plus"></a>
-						<span id=current-user ><%=userName%></span>
+						<a href="/login" class="fa fa-google-plus"></a> <span
+							id=current-user><%=userName%></span>
 					</div>
 				</div>
-
 			</div>
 			<div class="container">
 				<div class="text-center">
-					<div class="collapse navbar-collapse">
+					<div id='top-menus' class="collapse navbar-collapse">
 						<ul class="nav navbar-nav">
-							<li class="active"
-								style="padding: 0px 15px 0px 15px !important; font-size: 20">
-								<a href="/homeMain"><strong>home</strong></a>
+							<li class='top-menu'><a href="/homeMain"><strong>Home</strong></a>
 							</li>
-							<li class="dropdown"
-								style="padding: 0px 15px 0px 15px !important; font-size: 20"><a
-								href="/study/main"><strong>Study</strong></a>
-								<hr />
-								<ul role="menu" class="sub-menu">
-									<li><a href="/study">IT</a></li>
-									<li><a href="/study">English</a></li>
-									<li><a href="/study">Chinese</a></li>
-								</ul></li>
-							<li class="dropdown"
-								style="padding: 0px 15px 0px 15px !important; font-size: 20"><a
-								href="/notice/main"><span><strong>Notice</strong></span></a>
-								<hr />
-								<ul role="menu" class="sub-menu">
-									<li><a href="/board1">Notice</a></li>
-									<li><a href="/board2">Q&A</a></li>
-									<li><a href="/board3">AD</a></li>
-								</ul></li>
-							<li class="dropdown"
-								style="padding: 0px 15px 0px 15px !important; font-size: 20"><a
-								href="/mypageMain"><span><strong>My Page</strong></span></a>
-								<hr />
-								<ul role="menu" class="sub-menu">
-									<li><a href="/mystudy">My Study</a></li>
-									<li><a href="/myinfo">My Info</a></li>
-								</ul></li>
-
-							<li class="dropdown"
-								style="padding: 0px 15px 0px 15px !important; font-size: 20"><a
-								onclick="javascript:clickTotalMenu(this)"><span><strong>TotalMenu</strong></span></a>
+							<li class='top-menu'><a href="/study/main"><strong>Study</strong></a>
 							</li>
+							<li class='top-menu'><a href="/notice/main"><strong>Notice</strong></a></li>
+							<li class='top-menu'><a href="/mypageMain"><strong>My
+										Study</strong></a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 		</div>
+
 	</div>
+
 </header>
 

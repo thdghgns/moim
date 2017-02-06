@@ -91,3 +91,12 @@ div.hitsCell.divTableCell {
 	resize: none;
 	background-color: #FFFFFF;
 }
+
+#top-menus{
+    left: 25% !important;
+}
+
+.top-menu{
+	padding: 2px 15px 2px 15px !important; 
+	font-size: 22;
+}
