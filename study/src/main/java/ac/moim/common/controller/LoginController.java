@@ -53,16 +53,17 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/oauth2callback")
-	public String oauth2Callback(HttpSession session, Model model, @RequestParam(value = "code")String code) {
+	public RedirectView oauth2Callback(HttpSession session, Model model, @RequestParam(value = "code") String code) {
 
 		OAuth2Operations oAuth2Operations = googleConnectionFactory.getOAuthOperations();
-		AccessGrant accessGrant = oAuth2Operations.exchangeForAccess(code, googleOAuth2Parameters.getRedirectUri(), null);
+		AccessGrant accessGrant = oAuth2Operations.exchangeForAccess(code, googleOAuth2Parameters.getRedirectUri(),
+				null);
 		String accessToken = accessGrant.getAccessToken();
-		Long expireTime =  accessGrant.getExpireTime();
+		Long expireTime = accessGrant.getExpireTime();
 
 		if (expireTime != null && expireTime < System.currentTimeMillis()) {
 			accessToken = accessGrant.getRefreshToken();
-			log.info("accessToken is expired. refresh token = {}" , accessToken);
+			log.info("accessToken is expired. refresh token = {}", accessToken);
 		}
 
 		Connection<Google> connection = googleConnectionFactory.createConnection(accessGrant);
@@ -72,15 +73,14 @@ public class LoginController {
 		Person person = plusOperations.getGoogleProfile();
 
 		User user = userService.saveUser(person);
-		if(user != null) {
+		if (user != null) {
 			session.setAttribute("userId", user.getId());
 			session.setAttribute("userName", user.getName());
 			session.setAttribute("expireTime", expireTime);
 			model.addAttribute("current-user", user.getName());
 		}
 
-
-		return "views/homeMain";
+		return new RedirectView("/index");
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -90,6 +90,6 @@ public class LoginController {
 		session.removeAttribute("userName");
 		session.removeAttribute("expireTime");
 
-		return "views/homeMain";
+		return "/views/index";
 	}
 }
