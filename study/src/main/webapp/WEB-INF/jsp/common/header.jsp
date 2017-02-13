@@ -16,7 +16,7 @@
 			style="width: 500px; height: 100px;">
 			<div class="container">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="/index">
+					<a class="navbar-brand" href="/">
 						<h1>
 							<img src="../images/logo1.png" alt="Moim"> Moim
 						</h1>
@@ -40,7 +40,7 @@
 				<div class="text-center">
 					<div id='top-menus' class="collapse navbar-collapse">
 						<ul class="nav navbar-nav">
-							<li class='top-menu'><a href="/index"><strong>Home</strong></a>
+							<li class='top-menu'><a href="/"><strong>Home</strong></a>
 							</li>
 							<li class='top-menu'><a href="/study/main"><strong>Study</strong></a>
 							</li>
