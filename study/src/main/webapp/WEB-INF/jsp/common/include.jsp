@@ -15,3 +15,4 @@
 <link href="../css/notice.css?v=0.1" rel="stylesheet">
 
 <script  src="../js/jquery.js"></script> 
+<script src="../js/jquery.bpopup.min.js"></script>

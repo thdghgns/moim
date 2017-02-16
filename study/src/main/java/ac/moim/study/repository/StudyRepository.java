@@ -24,4 +24,5 @@ public interface StudyRepository extends JpaRepository<Study, Integer>, JpaSpeci
 	Page<Study> findByTitleIgnoreCaseContainingAndSubjectIdAndCityCode(String searchText, int SubjectId, int cityCode, Pageable pageRequest);
 	Page<Study> findByTitleIgnoreCaseContainingAndCityCode(String searchText, int cityCode, Pageable pageRequest);
 	Page<Study> findByTitleIgnoreCaseContainingAndSubjectId(String searchText, int SubjectId, Pageable pageRequest);
+	Study findById(Integer Id);
 }

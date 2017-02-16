@@ -166,4 +166,11 @@ public class StudyServiceImpl implements StudyService {
 		return studyList;
 	}
 	
+
+	@Override
+	public Study findById(int studyId){
+		Study study = studyRepository.findById(studyId);
+		
+		return study;
+	}
 }

@@ -18,6 +18,7 @@ import ac.moim.common.dto.CityDto;
 import ac.moim.common.dto.StateDto;
 import ac.moim.common.dto.SubjectDto;
 import ac.moim.common.entity.City;
+import ac.moim.common.entity.State;
 import ac.moim.common.entity.Subject;
 import ac.moim.common.service.CityService;
 import ac.moim.common.service.StateService;
@@ -121,5 +122,34 @@ public class StudyController {
 		model.addAttribute("studyList", studyList);
 
 		return "views/study/main";
+	}
+	
+
+	@RequestMapping(value="/detail",method = RequestMethod.GET)
+	public String studyDetail(Model model,@RequestParam(value = "studyId",required = false, defaultValue="" ) Integer studyId){
+		Study study = studyService.findById(1);
+		Subject studySubject = study.getSubject();
+		City studyCity =study.getCity();
+		State studySate=studyCity.getStateId();
+		model.addAttribute("study",study);
+		model.addAttribute("studySubject",studySubject);
+		model.addAttribute("studyCity",studyCity);
+		model.addAttribute("studyState",studySate);
+		
+		return "views/study/detail";
+	}
+	
+	@RequestMapping(value="/enroll",method = RequestMethod.GET)
+	public String studyEnroll(Model model,@RequestParam(value = "studyId",required = false, defaultValue="" ) Integer studyId){
+		Study study = studyService.findById(1);
+		Subject studySubject = study.getSubject();
+		City studyCity =study.getCity();
+		State studySate=studyCity.getStateId();
+		model.addAttribute("study",study);
+		model.addAttribute("studySubject",studySubject);
+		model.addAttribute("studyCity",studyCity);
+		model.addAttribute("studyState",studySate);
+		
+		return "views/study/detail";
 	}
 }
