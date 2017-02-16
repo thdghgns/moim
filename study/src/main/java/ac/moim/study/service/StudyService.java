@@ -20,4 +20,6 @@ public interface StudyService {
 	public List<Study> findAllBySubjectId(Integer pageNum, String searchText, int subjectId);
 	public List<Study> findAllByCityCode(Integer pageNum, String searchText, int cityCode);
 	public Study findById(int studyId);
+	List<Study> findTop3BySubjectStudy(Integer subjectId);
+
 }
