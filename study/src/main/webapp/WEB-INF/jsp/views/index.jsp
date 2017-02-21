@@ -23,12 +23,14 @@
 									<table class="table" style="font-size: 14">
 										<tbody>
 											<tr>
-												<div class="divTableRow">
-													<div class="divTableCell titleCell">${studyObject.title}</div>
-													<div class="divTableCell dateCell">${studyObject.inputDate}</div>
-													<div class="divTableCell writerCell">${studyObject.inputUser}</div>
-													<div class="divTableCell hitsCell">${studyObject.hit}</div>
-												</div>
+												<button class="btn btn-default" id ="studySelect" value ="${studyObject.id}" style="border: 0px " onclick="studyClick(this)">
+													
+														<div class="divTableCell titleCell">${studyObject.title}</div>
+														<div class="divTableCell dateCell">${studyObject.inputDate}</div>
+														<div class="divTableCell writerCell">${studyObject.inputUser}</div>
+														<div class="divTableCell hitsCell">${studyObject.hit}</div>
+													</button>
+											
 											</tr>
 										</tbody>
 									</table>
@@ -54,4 +56,12 @@
 	function clickUserEvent(user) {
 		$('[data-submenu]').submenupicker();
 	}
+	
+	function studyClick(obj)
+	{
+		alert(obj.value);
+		window.document.location.href ='/study/detail?studyId=' + obj.value;
+	}
+	
+	
 </script>

@@ -16,8 +16,9 @@
 
 
         <form class="form-horizontal">
+   
             <div class="form-group">
-                <label for="study-title" class="col-md-3 col-sm-12 control-label">스터디 이름</label>
+                <label for="study-title" class="col-md-4 control-label">스터디 이름</label>               
 
                 <div id="study-title" class="col-md-4 col-sm-12">
                     <text id="title" name="title"  class="form-control">${study.title}
@@ -25,7 +26,7 @@
                 <div class="col-md-5"></div>
             </div>
             <div class="form-group">
-                <label for="study-subject" class="col-md-3 col-sm-12 control-label">스터디 주제</label>
+                <label for="study-subject" class="col-md-4 control-label">스터디 주제</label>
 
                 <div id="study-subject" class="col-md-4 col-sm-12">
                 <text id = "subject" name="subject" class="form-control">${studySubject.name}
@@ -34,35 +35,35 @@
                 <div class="col-md-7"></div>
             </div>
             <div class="form-group">
-                <label for="study-city" class="col-md-3 col-sm-12 control-label">모임지역</label>
+                <label for="study-city" class="col-md-4  control-label">모임지역</label>
 
                 <div id="study-city">
-                    <div class="col-md-2 col-sm-6">
+                    <div class="col-md-2 ">
                   	  <text id ="city" name = "city" class="form-control"> ${studyState.name }
                     </div>
-                    <div class="col-md-2 col-sm-6">
+                    <div class="col-md-2 ">
 						<text id ="state" name = "state" class="form-control">${studyCity.name}
                     </div>
                 </div>
 
             </div>
             <div class="form-group">
-                <label for="study-intro" class="col-md-3 col-sm-12 control-label">스터디 소개</label>
+                <label for="study-intro" class="col-md-4 control-label">스터디 소개</label>
 
-                <div id="study-intro" class="col-md-4 col-sm-12">
+                <div id="study-intro" class="col-md-4 ">
                     <text id="intro" name="intro" required="required" class="form-control"
                               rows="8">${study.intro}</text>
                 </div>
                 <div class="col-md-3"></div>
             </div>
             <div class="form-group">
-                <label for="study-limit" class="col-md-3 col-sm-12 control-label">현재인원/모집인원</label>
+                <label for="study-limit" class="col-md-4 control-label">현재인원/모집인원</label>
 
                 <div id="study-limit">
-                    <div class="col-md-2 col-sm-8">
+                    <div class="col-md-2 ">
                         <text id="limit" name="limit" type=number class="form-control">  ${study.memberCount} / ${study.memberLimit}
                     </div>
-                    <label class="col-md-1 col-sm-4 control-label"> 명
+                    <label class="col-md-1 control-label"> 명
                     </label>
                  </div>                    
                     <div class="col-md-9"></div>
@@ -70,8 +71,8 @@
  
             </div>
             <div class="form-group">
-                <div class="col-md-3"></div>
-                <div class="col-md-3 col-sm-12">
+                <div class="col-md-4"></div>
+                <div class="col-md-3 ">
                     <input type="button" name="submit" class="btn btn-submit"
                            id="study-enroll" value="가입하기">
                 </div>
@@ -84,7 +85,7 @@
            <a class="b-close" style=" cursor: pointer; color: #3f9798; font-size:x-large">x</a>
 	       	<h3>가입인사를 해주세요 </h3>
 	       	<br>
-	    		<input type="text" class="form-control" >
+	    		<input type="text" id="content" class="form-control" >
 	    		<input type ="button" class="btn btn-submit" id="comment-insert" value="등록하기"></input>
 	       		
 	       	</div>
@@ -117,6 +118,9 @@ $("#comment-insert").on('click',function(e){
 	alert("click");
 	
 })
+$('#comment-insert').on('click',function(e){
+	window.document.location.href = '/study/enroll?studyId=' +${study.id} + '&content='+$("#content").value; 
+});
 
 </script>
 
