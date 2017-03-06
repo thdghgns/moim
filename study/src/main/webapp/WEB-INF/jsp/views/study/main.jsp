@@ -61,7 +61,7 @@
 							<br /> ${study.city.name}
 						</div>
 						<div class="divTableCell subjectCell" value="${study.subject}">${study.subject.name}</div>
-						<div class="divTableCell titleCell">${study.title}</div>
+						<div class="divTableCell titleCell"><a href="/study/detail?studyId=${study.id}">${study.title}</a></div>
 						<div class="divTableCell dateCell">${study.inputDate}</div>
 						<div class="divTableCell writerCell">${study.inputUser}</div>
 						<div class="divTableCell hitsCell">${study.hit}</div>

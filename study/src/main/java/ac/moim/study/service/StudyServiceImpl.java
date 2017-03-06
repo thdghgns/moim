@@ -78,7 +78,7 @@ public class StudyServiceImpl implements StudyService {
 
 	@Override
 	public List<Study> findByInputUserIgnoreCaseContaining(String keyword) {
-		List<Study> studyList = studyRepository
+		List<Study> studyList = studyRepository 
 				.findByInputUserIgnoreCaseContaining(keyword);
 		return studyList;
 	}
@@ -165,5 +165,22 @@ public class StudyServiceImpl implements StudyService {
 
 		return studyList;
 	}
+
+	@Override
+	public List<Study> findTop3BySubjectStudy(Integer subjectId) {
+		
+		List<Study> studyList;
+		
+		studyList = studyRepository.findTop3BySubjectStudy(subjectId);
+		
+		return studyList;
+	}
 	
+
+	@Override
+	public Study findById(int studyId){
+		Study study = studyRepository.findById(studyId);
+		
+		return study;
+	}
 }

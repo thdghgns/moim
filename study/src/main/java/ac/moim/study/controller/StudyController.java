@@ -18,13 +18,18 @@ import ac.moim.common.dto.CityDto;
 import ac.moim.common.dto.StateDto;
 import ac.moim.common.dto.SubjectDto;
 import ac.moim.common.entity.City;
+import ac.moim.common.entity.State;
 import ac.moim.common.entity.Subject;
 import ac.moim.common.service.CityService;
 import ac.moim.common.service.StateService;
 import ac.moim.common.service.SubjectService;
+import ac.moim.study.dto.CommentDto;
 import ac.moim.study.dto.StudyDto;
+import ac.moim.study.dto.StudyMemberDto;
+import ac.moim.study.entity.Comment;
 import ac.moim.study.entity.Study;
 import ac.moim.study.exception.StudyBadRequestException;
+import ac.moim.study.service.CommentService;
 import ac.moim.study.service.StudyMemberService;
 import ac.moim.study.service.StudyService;
 
@@ -49,6 +54,9 @@ public class StudyController {
 
 	@Autowired
 	private CityService cityService;
+	
+	@Autowired
+	private CommentService commentService;
 
 	@RequestMapping(value = "/create-form", method = RequestMethod.GET)
 	public String getStudyForm(Model model) {
@@ -121,5 +129,42 @@ public class StudyController {
 		model.addAttribute("studyList", studyList);
 
 		return "views/study/main";
+	}
+	
+
+	@RequestMapping(value="/detail",method = RequestMethod.GET)
+	public String studyDetail(Model model,@RequestParam(value = "studyId",required = false, defaultValue="" ) Integer studyId){
+		Study study = studyService.findById(studyId);
+		Subject studySubject = study.getSubject();
+		City studyCity =study.getCity();
+		State studySate=studyCity.getStateId();
+		model.addAttribute("study",study);
+		model.addAttribute("studySubject",studySubject);
+		model.addAttribute("studyCity",studyCity);
+		model.addAttribute("studyState",studySate);
+		
+		return "views/study/detail";
+	}
+	
+	@RequestMapping(value="/enroll",method = RequestMethod.GET)
+	public String studyEnroll(Model model, HttpSession httpSession,
+			@RequestParam(value = "studyId",required = false, defaultValue="" ) Integer studyId,
+			@RequestParam(value = "content",required = false, defaultValue="" ) String content){
+	
+		
+		StudyMemberDto.Request requestStudyMember = new StudyMemberDto.Request();
+		requestStudyMember.setStudyId(studyId);
+		requestStudyMember.setUserId(httpSession.getId());
+		requestStudyMember.setClassifier("member");
+		studyMemberService.saveStudyMember(requestStudyMember);
+		
+		CommentDto.Request requestComment = new CommentDto.Request ();
+		requestComment.setContent(content);
+		requestComment.setStudyId(studyId);
+		commentService.saveComment(requestComment);
+		
+		
+		
+		return "views/study/detail";
 	}
 }
