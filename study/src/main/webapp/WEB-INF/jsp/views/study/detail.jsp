@@ -20,9 +20,9 @@
 				<div style="padding-right: 10%, padding-left:10%">
 					<h2 align="center">스터디에 가입해보세요</h2>
 
-					<form action ="/study-member" class="form-horizontal">
+					<form action ="/study-member" method = "POST" class="form-horizontal">
 					<div style =" display : none">
-						<input  id="studyId" value="${study.id}"> 
+						<input  id="studyId" name="studyId" value="${study.id}"> 
 					</div>
 							<div class="form-group">
 							<label for="study-title" class="col-md-4 control-label">스터디
@@ -82,25 +82,32 @@
 						<div class="form-group">
 							<div class="col-md-4"></div>
 							<div class="col-md-3 ">
-								<input type="button" name="submit" class="btn btn-submit"
+								<input type="button" name="classifier" class="btn btn-submit"
 									id="study-enroll" value="가입하기">
 							</div>
 							<div class="col-md-3"></div>
 						</div>
-				
-				</form>
+			</form>		
+			<form action ="/study-member" method = "POST" >
 				<div class="pop" id="element_to_pop_up" style="display: none;">
+			
+						<input type="hidden" id="studyId" name="studyId" value="${study.id}"> 
+			
 
 					<div class="container" style="width: 400px; height: 200px;">
 						<a class="b-close"
 							style="cursor: pointer; color: #3f9798; font-size: x-large">x</a>
 						<h3>가입인사를 해주세요</h3>
-						<br> <input type="text" id="content" class="form-control">
-						<input type="button" class="btn btn-submit" id="comment-insert"
+						<br> <input type="text" id="contentInput" class="form-control">
+						<input type="submit" class="btn btn-submit" id="comment-insert"
 							value="등록하기"></input>
 
 					</div>
-
+				</div>
+				
+			</form>
+			
+	
 
 
 				</div>
@@ -116,21 +123,41 @@
 
 <script>
 	$("#study-enroll").on('click', function(e) {
+		
+		var str =   "<%=session.getAttribute("userId")%>";
+		if(str == null){
+			alert("로그인하세요");
+		};
 		e.preventDefault();
 		$('#element_to_pop_up').bPopup({
 
 		});
 	});
 	$("#comment-insert").on('click', function(e) {
-		alert("click");
+		
+
 		var studyId = $('#studyId').val();
-		var content = $('#content').val();
+		var content = $('#contentInput').val();
 		
-		alert('studyId');
+		//alert($('#contentInput').val());
 		
-		window.document.location.href = '/study/enroll?studyId=' +studyId+'&content=' +content ;
+		window.document.location.href = '/studyMember/enroll?studyId=' +studyId+'&content=' +content ;
 
-
+/* 
+		var form= document.createElement("form");
+		form.setAttribute("method","POST");
+		form.setAttribute("action","/study-member")
+		var param=document.createElement("input");
+		param.setAttribute("type","hidden");
+		param.setAttribute("name","studyId");
+		param.setAttribute("value",studyId);
+		
+		form.appendChild(param);
+		
+		form.submit();
+*/		
+		
+		
 	});
 
 </script>

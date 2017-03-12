@@ -87,7 +87,7 @@ public class StudyController {
 		Study study = studyService.saveStudy(request);
 
 		if (study != null)
-			studyMemberService.saveStudyMember(study.getId(), userId);
+			studyMemberService.saveStudyMember(study.getId(), userId,"leader");
 
 		return "views/study/main";
 	}
@@ -146,26 +146,4 @@ public class StudyController {
 		return "views/study/detail";
 	}
 	
-	@RequestMapping(value="/enroll",method = RequestMethod.GET)
-	public String studyEnroll(Model model, HttpSession httpSession,
-			@RequestParam(value = "studyId",required = false, defaultValue="" ) Integer studyId,
-			@RequestParam(value = "content",required = false, defaultValue="" ) String content){
-	
-		
-		StudyMemberDto.Request requestStudyMember = new StudyMemberDto.Request();
-		requestStudyMember.setStudyId(studyId);
-		requestStudyMember.setUserId(httpSession.getId());
-		requestStudyMember.setClassifier("member");
-		studyMemberService.saveStudyMember(requestStudyMember);
-		
-		CommentDto.Request requestComment = new CommentDto.Request ();
-		if(content != null){
-		requestComment.setContent(content);
-		requestComment.setStudyId(studyId);
-		commentService.saveComment(requestComment);
-		}
-		
-		
-		return "views/study/detail";
-	}
 }

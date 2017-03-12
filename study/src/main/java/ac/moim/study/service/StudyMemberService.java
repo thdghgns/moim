@@ -8,5 +8,5 @@ import ac.moim.study.entity.StudyMember;
  */
 public interface StudyMemberService {
 	public StudyMember saveStudyMember(StudyMemberDto.Request request);
-	public StudyMember saveStudyMember(int studyId, String userId);
+	public StudyMember saveStudyMember(int studyId, String userId,String classifier );
 }

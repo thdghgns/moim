@@ -162,12 +162,7 @@ $('#stateList').on('change', function () {
 });
 
 	$("#saveBtn").on('click',function(){	
-	alert('inputNickName'+$("#inputNickName").val());
-	alert($(":input:radio[name=inlineRadioOptions]:checked").val());
-	alert('cityList'+$("#cityList option:selected").val());
-	alert('birthday'+$("#birthday").val());
-	
-	alert('introduce'+$("#myIntro").val());
+
 		var params={
 				"mail" : $("#inputGoogleID").val(),
 				"name" : $("#inputNickName").val(),
