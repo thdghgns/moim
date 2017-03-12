@@ -159,10 +159,11 @@ public class StudyController {
 		studyMemberService.saveStudyMember(requestStudyMember);
 		
 		CommentDto.Request requestComment = new CommentDto.Request ();
+		if(content != null){
 		requestComment.setContent(content);
 		requestComment.setStudyId(studyId);
 		commentService.saveComment(requestComment);
-		
+		}
 		
 		
 		return "views/study/detail";
