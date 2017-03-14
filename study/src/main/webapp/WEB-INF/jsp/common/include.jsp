@@ -14,5 +14,7 @@
 <link href="../css/custom.css?v=0.1" rel="stylesheet">
 <link href="../css/notice.css?v=0.1" rel="stylesheet">
 
+<link href="../css/mypage.css?v=0.1" rel="stylesheet">
+
 <script  src="../js/jquery.js"></script> 
 <script src="../js/jquery.bpopup.min.js"></script>

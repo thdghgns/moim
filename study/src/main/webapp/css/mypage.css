@@ -1,0 +1,72 @@
+/* mypage css */
+#mypage-wrap {
+	display: block;
+	height: 100%;
+	font-size : 11pt;
+}
+
+#mypage-wrap #mypage-header{
+}
+
+#mypage-wrap #mypage-content{
+	overflow:hidden;
+	padding-top:24px;
+	width:60pc;
+	margin:auto;
+}
+#mypage-wrap #mypage-content .user-photo{
+	float: left;
+	width : 72px;
+	height : 72px;
+	border-radius:50%;
+	display: inline-block;
+	background-image:  url(../images/profile.png);
+	background-size : cover;
+	background-position : 50% 50%;
+}
+#mypage-wrap #mypage-content .user-name{
+	box-sizing : border-box;
+	height : 100%;
+	border-bottom : 1px solid #6a6e73;
+	font-size : 16pt;
+	color : #ffffff;
+}
+#mypage-wrap #mypage-content #tabs{
+	margin-left : 81pt;
+	padding-top : 22px;
+	padding-bottom : 22px;
+}
+
+
+#mypage-wrap #mypage-content #tabs #tab-box{
+	margin-left:-20px;
+	display:block;
+	padding-top : 10px;
+	
+}
+
+#mypage-wrap #mypage-content #tabs .tab.selected{
+	color : #a01212;
+	border-bottom:3px solid #a01212;
+	font-weight: 700;
+	padding-right: 25px
+	
+}
+
+#mypage-wrap #mypage-content #tabs .tab{
+	color : #808080;
+	font-weight: 700;
+	padding-right: 25px
+	
+}
+
+#mypage-studyList-section{
+	margin:50px auto 75pt;
+	padding : 24px;
+	width : 60pc;
+	background:#fff;
+	box-sizing: border-box;
+	display:block;
+}
+
+

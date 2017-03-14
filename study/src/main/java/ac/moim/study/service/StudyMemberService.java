@@ -1,6 +1,9 @@
 package ac.moim.study.service;
 
+import java.util.List;
+
 import ac.moim.study.dto.StudyMemberDto;
+import ac.moim.study.entity.Study;
 import ac.moim.study.entity.StudyMember;
 
 /**
@@ -9,4 +12,6 @@ import ac.moim.study.entity.StudyMember;
 public interface StudyMemberService {
 	public StudyMember saveStudyMember(StudyMemberDto.Request request);
 	public StudyMember saveStudyMember(int studyId, String userId);
+	public List<Study> findByUserId(String userId);
+	public List<Study> findByUserIdAndClassifier(String userId, String classifier);
 }

@@ -9,12 +9,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import ac.moim.common.entity.City;
-import ac.moim.common.entity.Subject;
 import ac.moim.common.repository.CityRepository;
 import ac.moim.common.repository.SubjectRepository;
-import ac.moim.common.service.CityService;
-import ac.moim.common.service.SubjectService;
 import ac.moim.study.dto.StudyDto;
 import ac.moim.study.entity.Study;
 import ac.moim.study.repository.StudyRepository;

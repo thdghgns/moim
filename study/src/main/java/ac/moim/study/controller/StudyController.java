@@ -1,5 +1,6 @@
 package ac.moim.study.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -26,7 +27,6 @@ import ac.moim.common.service.SubjectService;
 import ac.moim.study.dto.CommentDto;
 import ac.moim.study.dto.StudyDto;
 import ac.moim.study.dto.StudyMemberDto;
-import ac.moim.study.entity.Comment;
 import ac.moim.study.entity.Study;
 import ac.moim.study.exception.StudyBadRequestException;
 import ac.moim.study.service.CommentService;
@@ -127,7 +127,7 @@ public class StudyController {
 		model.addAttribute("subjectList", subjectList);
 
 		model.addAttribute("studyList", studyList);
-
+			
 		return "views/study/main";
 	}
 	

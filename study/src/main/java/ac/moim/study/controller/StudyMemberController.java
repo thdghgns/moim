@@ -31,8 +31,11 @@ public class StudyMemberController {
 			throw new StudyBadRequestException(code, message);
 		}
 
+		
 		studyMemberService.saveStudyMember(studyMember);
 
 		return "";
 	}
+	
+	
 }
