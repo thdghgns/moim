@@ -80,7 +80,7 @@ public class LoginController {
 			model.addAttribute("current-user", user.getName());
 		}
 
-		return new RedirectView("/index");
+		return new RedirectView("/");
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)

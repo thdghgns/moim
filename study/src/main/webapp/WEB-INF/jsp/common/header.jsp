@@ -30,6 +30,7 @@
 								<div class="dropdown-content">
 							    	<a href="#">내 정보</a>
 							    	<a href="/logout">로그아웃</a>
+							    	<a href="/user/study">내 스터디</a>
 							  	</div>
 						  	</div>
 						<% } %>
@@ -40,13 +41,10 @@
 				<div class="text-center">
 					<div id='top-menus' class="collapse navbar-collapse">
 						<ul class="nav navbar-nav">
-							<li class='top-menu'><a href="/"><strong>Home</strong></a>
-							</li>
 							<li class='top-menu'><a href="/study/main"><strong>Study</strong></a>
 							</li>
 							<li class='top-menu'><a href="/notice/main"><strong>Notice</strong></a></li>
-							<li class='top-menu'><a href="/mypageMain"><strong>My
-										Study</strong></a></li>
+							<li class='top-menu'><a href="/user/study"><strong>My Study</strong></a></li>
 						</ul>
 					</div>
 				</div>

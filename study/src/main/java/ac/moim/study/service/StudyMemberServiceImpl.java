@@ -1,5 +1,11 @@
 package ac.moim.study.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import ac.moim.study.dto.StudyMemberDto;
 import ac.moim.study.entity.Study;
 import ac.moim.study.entity.StudyMember;
@@ -9,8 +15,6 @@ import ac.moim.study.repository.StudyRepository;
 import ac.moim.user.entity.User;
 import ac.moim.user.exception.UserNotFoundException;
 import ac.moim.user.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  * Created by SONG_HOHOON on 2016-12-29.
@@ -30,7 +34,8 @@ public class StudyMemberServiceImpl implements StudyMemberService {
 	@Override
 	public StudyMember saveStudyMember(StudyMemberDto.Request request) {
 
-		StudyMember studyMember = toEntity(request.getStudyId(), request.getUserId(), request.getClassifier());
+		StudyMember studyMember = toEntity(request.getStudyId(),
+				request.getUserId(), request.getClassifier());
 
 		return saveStudyMember(studyMember);
 	}
@@ -52,9 +57,9 @@ public class StudyMemberServiceImpl implements StudyMemberService {
 		User user = userRepository.findOne(uesrId);
 		Study study = studyRepository.findOne(studyId);
 
-		if(user == null)
+		if (user == null)
 			throw new UserNotFoundException();
-		else if(study == null)
+		else if (study == null)
 			throw new StudyNotFoundException();
 		else {
 			studyMember.setStudy(study);
@@ -65,5 +70,58 @@ public class StudyMemberServiceImpl implements StudyMemberService {
 
 			return studyMember;
 		}
+	}
+
+	@SuppressWarnings("null")
+	@Override
+	public List<Study> findByUserId(String userId) {
+
+		List<StudyMember> studyMemberList;
+		List<Study> studyList = new ArrayList<Study>();
+		// Page<StudyMember> studyMemberPage;
+		Study study;
+
+		try {
+			studyMemberList = studyMemberRepository.findByUserId(userId);
+
+		} catch (Exception ex) {
+			throw ex;
+		}
+
+		int studyMemberSize = studyMemberList.size();
+
+		for (int i = 0; i < studyMemberSize; i++) {
+			study = studyMemberList.get(i).getStudy();
+			studyList.add(study);
+			System.out.println(studyList);
+		}
+
+		return studyList;
+
+	}
+
+	@Override
+	public List<Study> findByUserIdAndClassifier(String userId, String classifier) {
+		List<StudyMember> studyMemberList;
+		List<Study> studyList = new ArrayList<Study>();
+		// Page<StudyMember> studyMemberPage;
+		Study study;
+
+		try {
+			studyMemberList = studyMemberRepository.findByUserIdAndClassifier(userId, classifier);
+
+		} catch (Exception ex) {
+			throw ex;
+		}
+
+		int studyMemberSize = studyMemberList.size();
+
+		for (int i = 0; i < studyMemberSize; i++) {
+			study = studyMemberList.get(i).getStudy();
+			studyList.add(study);
+			System.out.println(studyList);
+		}
+
+		return studyList;
 	}
 }
