@@ -41,8 +41,8 @@ public class StudyMemberServiceImpl implements StudyMemberService {
 	}
 
 	@Override
-	public StudyMember saveStudyMember(int studyId, String userId) {
-		StudyMember studyMember = toEntity(studyId, userId, "leader");
+	public StudyMember saveStudyMember(int studyId, String userId, String classifier) {
+		StudyMember studyMember = toEntity(studyId, userId, classifier);
 
 		return saveStudyMember(studyMember);
 	}
