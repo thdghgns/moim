@@ -1,6 +1,8 @@
 package ac.moim.dashboard.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ac.moim.common.service.GmailService;
 import ac.moim.dashboard.dto.NoticeDto;
 import ac.moim.dashboard.entity.Notice;
 import ac.moim.dashboard.service.NoticeService;
@@ -21,6 +24,9 @@ public class NoticeController {
 	
 	@Autowired
 	private NoticeService noticeService;
+	
+	@Autowired
+	private GmailService gmailService;
 	
 	/*Redirect Page*/
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
@@ -61,6 +67,17 @@ public class NoticeController {
 		notice.setInputUser(userName);
 
 		noticeService.NoticeCreate(notice);
+		
+		//temp gmail service
+		List<String> toMailList = new ArrayList<String>();
+		toMailList.add("lim_yungyoo@eland.co.kr");
+		
+		try {
+			gmailService.send(toMailList, "elandmoim@gamil.com", "Test Message", "Test Gmail", "gmail", "elandmoim", "dlfosemahdla");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return "views/notice/main";
 	}
 	/*Post*/
