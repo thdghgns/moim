@@ -73,8 +73,7 @@
 				"id" : $("#notice-detail-id")[0].innerHTML,
 				"title" : $("#notice-detail-title")[0].innerHTML,
 				"content" : $("#notice-detail-content").val(),
-				"hit" : $('#notice-detail-hit')[0].innerHTML,
-				"userName" : $("#notice-detail-user")[0].innerHTML
+				"hit" : $('#notice-detail-hit')[0].innerHTML
 			}
 
 			$.ajax({
@@ -86,7 +85,14 @@
 					window.location.href = "/notice/main";
 				},
 				error : function(e) {
-					alert("error");
+					if(JSON.parse(e.responseText).message == "NotEqualInputUser"){
+						alert("수정할 수 있는 권한이 없습니다.");
+					} else if(JSON.parse(e.responseText).message == "NotNullModifyUser") {
+						alert("로그인이 필요합니다.");
+					} else {
+						alert("error");
+					}
+					
 				}
 			});
 		}
@@ -108,7 +114,13 @@
 					window.location.href = "/notice/main";
 				},
 				error : function(e) {
-					alert("error");
+					if(JSON.parse(e.responseText).message == "NotEqualInputUser"){
+						alert("수정할 수 있는 권한이 없습니다.");
+					} else if(JSON.parse(e.responseText).message == "NotNullModifyUser") {
+						alert("로그인이 필요합니다.");
+					} else {
+						alert("error");
+					}
 				}
 			});
 		}

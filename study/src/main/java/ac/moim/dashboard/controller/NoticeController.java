@@ -40,9 +40,13 @@ public class NoticeController {
 		return "views/notice/main";
 	}
 	
-	@RequestMapping(value = "/detail", method = RequestMethod.GET)
-	public String NoticeDetailPage(Model model,  @RequestParam(value="indexNum", required=true) Integer indexNum){	
-		model.addAttribute("detailList", noticeService.NoticeDetailPage(indexNum));
+	@RequestMapping(value = "/detail", method = RequestMethod.GET) 
+	public String NoticeDetailPage(Model model,  @RequestParam(value="indexNum", required=true) Integer indexNum) throws Exception{	
+		try {
+			model.addAttribute("detailList", noticeService.NoticeDetailPage(indexNum));
+		} catch (Exception e) {
+			throw e;
+		}
 		return "views/notice/detail";
 	}
 	
@@ -55,18 +59,21 @@ public class NoticeController {
 	
 	/*Post*/
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String NoticeCreate(HttpSession session, NoticeDto.Request request) {
+	public String NoticeCreate(HttpSession session, NoticeDto.Request request) throws Exception{
 		String userName = (String)session.getAttribute("userName");
 		if(userName == null){
-			userName = "unknown";
+			throw new Exception("NotNullModifyUser");
 		}
 		
 		Notice notice = new Notice();
 		notice.setTitle(request.getTitle());
 		notice.setContent(request.getContent());
 		notice.setInputUser(userName);
-
-		noticeService.NoticeCreate(notice);
+		try {
+			noticeService.NoticeCreate(notice);
+		} catch (Exception e) {
+			throw e;
+		}
 		
 		//temp gmail service
 		List<String> toMailList = new ArrayList<String>();
@@ -84,20 +91,24 @@ public class NoticeController {
 	
 	/*Put*/
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public String NoticeUpdate(HttpSession session, NoticeDto.Request request, String userName) {
-		String modifyUserName = (String)session.getAttribute("userName");
+	public String NoticeUpdate(HttpSession session, NoticeDto.Request request) throws Exception {
+		Boolean result;
+		String userName = (String)session.getAttribute("userName");
 		if(userName == null){
-			userName = "unknown";
-		}		
+			throw new Exception("NotNullModifyUser");
+		}
 		Notice notice = new Notice();
 		notice.setId(request.getId());
 		notice.setTitle(request.getTitle());
 		notice.setContent(request.getContent());
 		notice.setHit(request.getHit() - 1);
 		notice.setInputUser(userName);
-		notice.setModifyUser(modifyUserName);
-		
-		noticeService.NoticeUpdate(notice);
+		notice.setModifyUser(userName);
+		result = noticeService.NoticeUpdate(notice);
+		if(!result){
+			throw new Exception("NotEqualInputUser");
+		}
+
 		return "views/notice/main";
 	}
 	/*Put*/
@@ -105,8 +116,17 @@ public class NoticeController {
 		
 	/*Delete*/
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public String NoticeDelete(Integer id) {
-		noticeService.NoticeDelete(id);
+	public String NoticeDelete(HttpSession session, Integer id) throws Exception{
+		Boolean result;
+		String userName = (String)session.getAttribute("userName");
+		if(userName == null){
+			throw new Exception("NotNullModifyUser");
+		}
+		
+		result = noticeService.NoticeDelete(id, userName);
+		if(!result){
+			throw new Exception("NotEqualInputUser");
+		}
 		return "views/notice/main";
 	}
 	/*Delete*/
