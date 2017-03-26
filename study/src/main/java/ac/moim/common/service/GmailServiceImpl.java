@@ -18,10 +18,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class GmailServiceImpl implements GmailService {
 
-	public void send(List<String> toMail, String fromMail, String message, String title, String gmail, String id, String pwd) throws Exception {
-
+	public void send(String title, String message, List<String> toMail) throws Exception {
+		String id = "elandmoim";
+		String pwd = "dlfosemahdla";		 
+		
 		Properties p = new Properties();
-		p.put("mail.smtp.user", "iyeon88@gmail.com");
+		p.put("mail.smtp.user", "elandmoim@gmail.com");
 		p.put("mail.smtp.host", "smtp.gmail.com");
 		p.put("mail.smtp.port", "465");
 		p.put("mail.smtp.starttls.enable", "true");
@@ -37,8 +39,6 @@ public class GmailServiceImpl implements GmailService {
 
 		MimeMessage msg = new MimeMessage(session);
 		msg.setSubject(title, "UTF-8");
-		Address fromAddr = new InternetAddress(fromMail); // 보내는 사람의 메일주소
-		msg.setFrom(fromAddr);
 		InternetAddress[] addressTo = new InternetAddress[toMail.size()];
 		for (int i = 0; i < toMail.size(); i++) {
 			addressTo[i] = new InternetAddress(toMail.get(i));
@@ -62,11 +62,7 @@ public class GmailServiceImpl implements GmailService {
 		}
 
 		public PasswordAuthentication getPasswordAuthentication() {
-			return new PasswordAuthentication(id, pwd); // 구글아이디는 구글계정에서
-																// @이후를 제외한 값이다.
-																// (예:
-																// abcd@gmail.com
-																// --> abcd)
+			return new PasswordAuthentication(id, pwd); 
 		}
 	}
 }

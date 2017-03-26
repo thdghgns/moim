@@ -73,7 +73,7 @@ public class NoticeController {
 		toMailList.add("lim_yungyoo@eland.co.kr");
 		
 		try {
-			gmailService.send(toMailList, "elandmoim@gamil.com", "Test Message", "Test Gmail", "gmail", "elandmoim", "dlfosemahdla");
+			gmailService.send("Test Gmail", "Test Message", toMailList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
