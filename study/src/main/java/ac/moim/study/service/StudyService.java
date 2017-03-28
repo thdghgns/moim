@@ -1,5 +1,6 @@
 package ac.moim.study.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import ac.moim.study.dto.StudyDto;
@@ -15,10 +16,10 @@ public interface StudyService {
 	public List<Study> findByCityCode(Integer cityCode);
 	public Study saveStudy(StudyDto.Request study);
 	public List<Study> findByInputUserIgnoreCaseContaining(String keyword);
-	public List<Study> findAll(Integer pageNum, String searchText, int subjectId, int cityCode);
-	public List<Study> findAll(Integer pageNum, String searchText);
-	public List<Study> findAllBySubjectId(Integer pageNum, String searchText, int subjectId);
-	public List<Study> findAllByCityCode(Integer pageNum, String searchText, int cityCode);
+	public HashMap<String, Object> findAll(Integer pageNum, String searchText, int subjectId, int cityCode);
+	public HashMap<String, Object> findAll(Integer pageNum, String searchText);
+	public HashMap<String, Object> findAllBySubjectId(Integer pageNum, String searchText, int subjectId);
+	public HashMap<String, Object> findAllByCityCode(Integer pageNum, String searchText, int cityCode);
 	public Study findById(int studyId);
 	List<Study> findTop3BySubjectStudy(Integer subjectId);
 
