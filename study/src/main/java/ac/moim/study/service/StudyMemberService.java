@@ -15,5 +15,9 @@ public interface StudyMemberService {
 	public StudyMember saveStudyMember(int studyId, String userId);
 	public List<Study> findByUserId(String userId);
 	public List<Study> findByUserIdAndClassifier(String userId, String classifier);
+    public StudyMember findByUserIdAndStudyId(String userId,int studyId);
+    public void deleteStudyMember(int studyId, String userId, String classifier);
+
+
 
 }

@@ -8,7 +8,7 @@
 	margin: 0 auto;
 	margin-top: 30px;
 	width: 400px;
-	height: 200px;
+	height: 350px;
 	background-color: #f5f5f5;
 }
 </style>
@@ -82,8 +82,12 @@
 						<div class="form-group">
 							<div class="col-md-4"></div>
 							<div class="col-md-3 ">
-								<input type="button" name="classifier" class="btn btn-submit"
+								<input type="button" name="classifier" class="btn btn-submit" style="display: none"
 									id="study-enroll" value="가입하기">
+								<input type="button" name="classifier" class="btn btn-submit" style="display: none"
+									id="study-quit" value="탈퇴하기">
+								<input type="button" name="classifier" class="btn btn-submit" style="display: none"
+									id="study-remove" value="삭제하기">
 							</div>
 							<div class="col-md-3"></div>
 						</div>
@@ -94,11 +98,15 @@
 						<input type="hidden" id="studyId" name="studyId" value="${study.id}"> 
 			
 
-					<div class="container" style="width: 400px; height: 200px;">
+					<div class="container" style="width: 400px; height: 200px;">					
+						<div style="text-align: right;">
+						
 						<a class="b-close"
-							style="cursor: pointer; color: #3f9798; font-size: x-large">x</a>
-						<h3>가입인사를 해주세요</h3>
-						<br> <input type="text" id="contentInput" class="form-control">
+							style="cursor: pointer; color: #3f9798; font-size: x-large ;  text-align: right;">x</a>
+					</div>
+					
+						<h5>가입인사를 해주세요~ 스터디장에게 메일이 발송됩니다.</h5>
+						<br> <textarea id="contentInput" class="form-control" rows="8"></textarea>
 						<input type="submit" class="btn btn-submit" id="comment-insert"
 							value="등록하기"></input>
 
@@ -122,6 +130,32 @@
 
 
 <script>
+
+$("#document").ready(function(){
+	var str ="${userClassifier}";
+	if(str == "leader"){
+		$("#study-enroll").hide();
+		$("#study-quit").hide();
+		$("#study-remove").show();
+		
+	}else if (str == "teamone"){
+		$("#study-enroll").hide();
+		$("#study-quit").show();
+		$("#study-remove").hide();
+		
+	}
+	else {		
+		$("#study-enroll").show();
+		$("#study-quit").hide();
+		$("#study-remove").hide();		
+	}
+});
+
+
+
+
+
+
 	$("#study-enroll").on('click', function(e) {
 		
 		var str =   "<%=session.getAttribute("userId")%>";
@@ -133,15 +167,20 @@
 
 		});
 	});
+	
+
+	
+	
 	$("#comment-insert").on('click', function(e) {
 		
 
 		var studyId = $('#studyId').val();
 		var content = $('#contentInput').val();
+		var userClassifier= "${userClassifier}";
 		
 		//alert($('#contentInput').val());
 		
-		window.document.location.href = '/studyMember/enroll?studyId=' +studyId+'&content=' +content ;
+		window.document.location.href = '/studyMember/enroll?studyId=' +studyId+'&content=' + content + '&userClassifier=' + userClassifier;
 
 /* 
 		var form= document.createElement("form");
@@ -157,6 +196,23 @@
 		form.submit();
 */		
 		
+		
+	});
+	
+
+	$("#study-quit").on('click', function(e) {
+		
+		var str =   "<%=session.getAttribute("userId")%>";
+		if(str == null){
+			alert("로그인하세요");
+		};
+		e.preventDefault();
+		alert ("정말 탈퇴하시겠습니까?")
+		var studyId = $('#studyId').val();
+		var content = $('#contentInput').val();
+		var userClassifier= "${userClassifier}";
+		window.document.location.href = '/studyMember/enroll?studyId=' +studyId+'&content=' + content + '&userClassifier=' + userClassifier;
+
 		
 	});
 

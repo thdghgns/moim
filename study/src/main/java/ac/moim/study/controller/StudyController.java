@@ -28,6 +28,7 @@ import ac.moim.study.dto.CommentDto;
 import ac.moim.study.dto.StudyDto;
 import ac.moim.study.dto.StudyMemberDto;
 import ac.moim.study.entity.Study;
+import ac.moim.study.entity.StudyMember;
 import ac.moim.study.exception.StudyBadRequestException;
 import ac.moim.study.service.CommentService;
 import ac.moim.study.service.StudyMemberService;
@@ -133,8 +134,25 @@ public class StudyController {
 	
 
 	@RequestMapping(value="/detail",method = RequestMethod.GET)
-	public String studyDetail(Model model,@RequestParam(value = "studyId",required = false, defaultValue="" ) Integer studyId){
+	public String studyDetail(HttpSession httpSession,Model model,@RequestParam(value = "studyId",required = false, defaultValue="" ) int studyId){
+		
+		
 		Study study = studyService.findById(studyId);
+		String userId = (String) httpSession.getAttribute("userId");
+		if( userId ==null){
+			return "redirect:" + "/login";
+		}
+		
+		StudyMember studyMember = studyMemberService.findByUserIdAndStudyId(userId, studyId);
+		if( studyMember == null ){
+			model.addAttribute("userClassifier","nonmembership");
+		}else{
+			
+				model.addAttribute("userClassifier",studyMember.getClassifier());
+		
+			
+		}
+		
 		Subject studySubject = study.getSubject();
 		City studyCity =study.getCity();
 		State studySate=studyCity.getStateId();
