@@ -25,3 +25,4 @@ nbdist/
 /.idea/
 /target/
 /.mvn/
+/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_9_3.xml
