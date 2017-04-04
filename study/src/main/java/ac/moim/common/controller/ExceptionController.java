@@ -1,6 +1,7 @@
 package ac.moim.common.controller;
 
 import ac.moim.study.exception.StudyBadRequestException;
+import ac.moim.user.exception.UserNotFoundException;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
@@ -21,7 +22,16 @@ public class ExceptionController {
 	@ResponseBody
 	@ResponseStatus(value= HttpStatus.BAD_REQUEST)
 	public String studyBadRequestExceptionHandler(HttpServletRequest request, HttpServletResponse response, Model model, StudyBadRequestException exception) {
+		model.addAttribute("code", exception.getCode());
+		model.addAttribute("message", exception.getMessage());
 
+		return "error";
+	}
+
+	@ExceptionHandler(value = UserNotFoundException.class)
+	@ResponseBody
+	@ResponseStatus(value= HttpStatus.BAD_REQUEST)
+	public String userNotFoundExceptionHandler(HttpServletRequest request, HttpServletResponse response, Model model, StudyBadRequestException exception) {
 		model.addAttribute("code", exception.getCode());
 		model.addAttribute("message", exception.getMessage());
 

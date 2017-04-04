@@ -3,9 +3,11 @@ package ac.moim.study.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import ac.moim.user.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -81,6 +83,8 @@ public class StudyController {
 			String message = "잘못된 요청입니다.";
 
 			throw new StudyBadRequestException(code, message);
+		} else if (httpSession.getAttribute("userId") == null) {
+			throw new UserNotFoundException("user.not.found", "사용자를 찾을 수 없습니다. 먼저 로그인하세요.");
 		}
 
 		String userId = String.valueOf(httpSession.getAttribute("userId"));
@@ -103,8 +107,8 @@ public class StudyController {
 		List<Study> studyList;
 		City city = cityService.findByCode(cityCode);
 		Subject subject = subjectService.findById(subjectId);
-	
-		
+
+
 		if (subjectId == null && cityCode == null) {
 			studyList = studyService.findAll(pageNum, searchText);
 		} else if (subjectId == null) {
@@ -142,10 +146,12 @@ public class StudyController {
 		model.addAttribute("studySubject",studySubject);
 		model.addAttribute("studyCity",studyCity);
 		model.addAttribute("studyState",studySate);
+		model.addAttribute("selectedMenu", "info");
 		
 		return "views/study/detail";
 	}
-	
+
+	// FIXME: content != undefined
 	@RequestMapping(value="/enroll",method = RequestMethod.GET)
 	public String studyEnroll(Model model, HttpSession httpSession,
 			@RequestParam(value = "studyId",required = false, defaultValue="" ) Integer studyId,
@@ -154,8 +160,13 @@ public class StudyController {
 		
 		StudyMemberDto.Request requestStudyMember = new StudyMemberDto.Request();
 		requestStudyMember.setStudyId(studyId);
-		requestStudyMember.setUserId(httpSession.getId());
+
+		// FIXME: session.getID()가 아니라 session에 저장된 attribute 중에 userId를 찾아야됨.
+		requestStudyMember.setUserId(String.valueOf(httpSession.getAttribute("userId")));
 		requestStudyMember.setClassifier("member");
+
+		// FIXME: saveStudyMember에서 이미 내가 leader로 있는 경우에 예외처리(지금은 leader->member로 update치고 있음
+		// FIXME: saveStudyMember는 study 테이블의 member_count도 업데이트 쳐야함
 		studyMemberService.saveStudyMember(requestStudyMember);
 		
 		CommentDto.Request requestComment = new CommentDto.Request ();
@@ -165,6 +176,16 @@ public class StudyController {
 		
 		
 		
+		return "views/study/detail";
+	}
+
+	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+	public String getStudyDashboard(Model model, @RequestParam(value = "studyId",required = false, defaultValue="" ) Integer studyId) {
+		Study study = studyService.findById(studyId);
+
+		model.addAttribute("study",study);
+		model.addAttribute("selectedMenu", "dashboard");
+
 		return "views/study/detail";
 	}
 }

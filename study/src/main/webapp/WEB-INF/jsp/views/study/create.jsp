@@ -129,11 +129,11 @@
             dataType: "html",
             contentType: "application/json; charset=UTF-8",
             success: function (args) {
-                alert("success");
+                alert("스터디가 생성되었습니다.");
                 window.location.href = "/study/main";
             },
             error: function (e) {
-                alert("error");
+                alert("스터디 생성 중 오류가 발생하였습니다.");
             }
         });
     });

@@ -2,6 +2,7 @@ package ac.moim.study.entity;
 
 import ac.moim.common.entity.BaseEntity;
 import ac.moim.common.entity.City;
+import ac.moim.common.entity.State;
 import ac.moim.common.entity.Subject;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -47,7 +48,6 @@ public class Study extends BaseEntity implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "city_code")
 	private City city;
-	
 
 	@Column(name = "member_count")
 	private int memberCount;
