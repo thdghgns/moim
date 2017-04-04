@@ -41,18 +41,19 @@ public class NoticeServiceImpl implements NoticeService {
 		return results;
 	}
 	
-	public Notice NoticeDetailPage(Integer indexNum){
-		Notice result = new Notice();
+	public Notice NoticeDetailPage(Integer indexNum) throws Exception{
+		Notice notice = new Notice();
 		try {
-			result = noticeRepository.findOne(indexNum);
-			NoticeUpdate(result);
+			notice = noticeRepository.findOne(indexNum);
+			notice.setHit(notice.getHit() + 1);
+			noticeRepository.saveAndFlush(notice);
 		} catch (Exception ex) {
 			throw ex;
 		}
-		return result;
+		return notice;
 	}
 
-	public Boolean NoticeCreate(Notice notice) {
+	public Boolean NoticeCreate(Notice notice) throws Exception{
 		try{
 			noticeRepository.saveAndFlush(notice);
 		}catch (Exception ex){
@@ -61,8 +62,11 @@ public class NoticeServiceImpl implements NoticeService {
 		return true;
 	}
 	
-	public Boolean NoticeUpdate(Notice notice) {
+	public Boolean NoticeUpdate(Notice notice) throws Exception {
 		try{
+			if(!notice.getModifyUser().equals(noticeRepository.findOne(notice.getId()).getInputUser())){
+				return false;
+			}
 			notice.setHit(notice.getHit() + 1);
 			noticeRepository.saveAndFlush(notice);
 		}catch (Exception ex){
@@ -71,8 +75,11 @@ public class NoticeServiceImpl implements NoticeService {
 		return true;
 	}
 	
-	public Boolean NoticeDelete(Integer id){
+	public Boolean NoticeDelete(Integer id, String userName){
 		try{
+			if(!userName.equals(noticeRepository.findOne(id).getInputUser())){
+				return false;
+			}
 			noticeRepository.delete(id);
 		}catch (Exception ex){
 			throw ex;
