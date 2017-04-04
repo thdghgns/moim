@@ -41,11 +41,24 @@ public class StudyMemberServiceImpl implements StudyMemberService {
 	}
 
 	@Override
-	public StudyMember saveStudyMember(int studyId, String userId) {
-		StudyMember studyMember = toEntity(studyId, userId, "leader");
+	public StudyMember saveStudyMember(int studyId, String userId, String classifier) {
+		StudyMember studyMember = toEntity(studyId, userId, classifier);
 
 		return saveStudyMember(studyMember);
 	}
+	
+	public void deleteStudyMember(int studyId, String userId, String classifier){
+		StudyMember studyMember = toEntity(studyId, userId, classifier);
+		
+		deleteStudyMember(studyMember);
+	}
+
+	private void deleteStudyMember(StudyMember studyMember) {
+		// TODO Auto-generated method stub
+		studyMemberRepository.delete(studyMember);
+	}
+	
+	
 
 	private StudyMember saveStudyMember(StudyMember studyMember) {
 		return studyMemberRepository.saveAndFlush(studyMember);
@@ -124,4 +137,21 @@ public class StudyMemberServiceImpl implements StudyMemberService {
 
 		return studyList;
 	}
+	
+	public StudyMember findByUserIdAndStudyId(String userId,int studyId){
+		
+		StudyMember StudyMember ; 
+
+			StudyMember = studyMemberRepository.findByUserIdAndStudyid(userId,studyId);
+
+
+		return StudyMember;
+	}
+
+	@Override
+	public StudyMember saveStudyMember(int studyId, String userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

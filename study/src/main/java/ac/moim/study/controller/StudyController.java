@@ -1,6 +1,7 @@
 package ac.moim.study.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +31,7 @@ import ac.moim.study.dto.CommentDto;
 import ac.moim.study.dto.StudyDto;
 import ac.moim.study.dto.StudyMemberDto;
 import ac.moim.study.entity.Study;
+import ac.moim.study.entity.StudyMember;
 import ac.moim.study.exception.StudyBadRequestException;
 import ac.moim.study.service.CommentService;
 import ac.moim.study.service.StudyMemberService;
@@ -91,7 +93,7 @@ public class StudyController {
 		Study study = studyService.saveStudy(request);
 
 		if (study != null)
-			studyMemberService.saveStudyMember(study.getId(), userId);
+			studyMemberService.saveStudyMember(study.getId(), userId,"leader");
 
 		return "views/study/main";
 	}
@@ -101,26 +103,27 @@ public class StudyController {
 			Model model,
 			@RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum,
 			@RequestParam(value = "searchText", required = false, defaultValue = "") String searchText,
-			@RequestParam(value = "subjectId", required = false, defaultValue = "") Integer subjectId,
-			@RequestParam(value = "cityCode", required = false, defaultValue = "") Integer cityCode) {
+			@RequestParam(value = "subjectId", required = false) Integer subjectId,
+			@RequestParam(value = "cityCode", required = false) Integer cityCode) {
 
-		List<Study> studyList;
+		HashMap<String, Object> results;
 		City city = cityService.findByCode(cityCode);
 		Subject subject = subjectService.findById(subjectId);
 
 
 		if (subjectId == null && cityCode == null) {
-			studyList = studyService.findAll(pageNum, searchText);
+			results = studyService.findAll(pageNum, searchText);
 		} else if (subjectId == null) {
-			studyList = studyService.findAllByCityCode(pageNum, searchText,
-					city.getCode());
+			results = studyService.findAllByCityCode(pageNum, searchText, city.getCode());
 		} else if (cityCode == null) {
-			studyList = studyService.findAllBySubjectId(pageNum, searchText,
-					subject.getId());
+			results = studyService.findAllBySubjectId(pageNum, searchText, subject.getId());
 		} else {
-			studyList = studyService.findAll(pageNum, searchText, subject.getId(),
-					city.getCode());
+			results = studyService.findAll(pageNum, searchText, subject.getId(), city.getCode());
 		}
+
+		model.addAttribute("searchText", searchText);
+		model.addAttribute("cityCode", cityCode);
+		model.addAttribute("subjectId", subjectId);
 
 		List<SubjectDto.Response> subjectList = subjectService.getAllSubject();
 		List<StateDto.Response> stateList = stateService.getAllState();
@@ -130,15 +133,33 @@ public class StudyController {
 		model.addAttribute("stateList", stateList);
 		model.addAttribute("subjectList", subjectList);
 
-		model.addAttribute("studyList", studyList);
+		model.addAttribute("totalPage", results.get("TotalPage"));
+		model.addAttribute("studyList", results.get("StudyList"));
 			
 		return "views/study/main";
 	}
 	
 
 	@RequestMapping(value="/detail",method = RequestMethod.GET)
-	public String studyDetail(Model model,@RequestParam(value = "studyId",required = false, defaultValue="" ) Integer studyId){
+	public String studyDetail(HttpSession httpSession,Model model,@RequestParam(value = "studyId",required = false, defaultValue="" ) int studyId){
+
+
 		Study study = studyService.findById(studyId);
+		String userId = (String) httpSession.getAttribute("userId");
+		if( userId ==null){
+			return "redirect:" + "/login";
+		}
+
+		StudyMember studyMember = studyMemberService.findByUserIdAndStudyId(userId, studyId);
+		if( studyMember == null ){
+			model.addAttribute("userClassifier","nonmembership");
+		}else{
+
+				model.addAttribute("userClassifier",studyMember.getClassifier());
+
+
+		}
+
 		Subject studySubject = study.getSubject();
 		City studyCity =study.getCity();
 		State studySate=studyCity.getStateId();
@@ -147,7 +168,7 @@ public class StudyController {
 		model.addAttribute("studyCity",studyCity);
 		model.addAttribute("studyState",studySate);
 		model.addAttribute("selectedMenu", "info");
-		
+
 		return "views/study/detail";
 	}
 
@@ -156,8 +177,8 @@ public class StudyController {
 	public String studyEnroll(Model model, HttpSession httpSession,
 			@RequestParam(value = "studyId",required = false, defaultValue="" ) Integer studyId,
 			@RequestParam(value = "content",required = false, defaultValue="" ) String content){
-	
-		
+
+
 		StudyMemberDto.Request requestStudyMember = new StudyMemberDto.Request();
 		requestStudyMember.setStudyId(studyId);
 
@@ -168,14 +189,14 @@ public class StudyController {
 		// FIXME: saveStudyMember에서 이미 내가 leader로 있는 경우에 예외처리(지금은 leader->member로 update치고 있음
 		// FIXME: saveStudyMember는 study 테이블의 member_count도 업데이트 쳐야함
 		studyMemberService.saveStudyMember(requestStudyMember);
-		
+
 		CommentDto.Request requestComment = new CommentDto.Request ();
 		requestComment.setContent(content);
 		requestComment.setStudyId(studyId);
 		commentService.saveComment(requestComment);
-		
-		
-		
+
+
+
 		return "views/study/detail";
 	}
 
@@ -188,4 +209,5 @@ public class StudyController {
 
 		return "views/study/detail";
 	}
+
 }

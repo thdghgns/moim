@@ -59,7 +59,7 @@
 	
 	function studyClick(obj)
 	{
-		alert(obj.value);
+
 		window.document.location.href ='/study/detail?studyId=' + obj.value;
 	}
 	

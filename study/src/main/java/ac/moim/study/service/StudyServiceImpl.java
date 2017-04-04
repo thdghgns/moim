@@ -1,5 +1,6 @@
 package ac.moim.study.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,9 +68,7 @@ public class StudyServiceImpl implements StudyService {
 	@Override
 	public List<Study> findByCityCode(Integer cityCode) {
 		List<Study> studyList = studyRepository.findByCityCode(cityCode);
-
 		return studyList;
-
 	}
 
 	@Override
@@ -80,11 +79,9 @@ public class StudyServiceImpl implements StudyService {
 	}
 
 	@Override
-	public List<Study> findAll(Integer pageNum, String searchText,
+	public HashMap<String, Object> findAll(Integer pageNum, String searchText,
 			int subjectId, int cityId) {
-
-		List<Study> studyList;
-
+		HashMap<String, Object> result = new HashMap<String, Object>();
 		Page<Study> studyPage = null;
 		try {
 			PageRequest pageRequest = new PageRequest(pageNum - 1, 10,
@@ -93,19 +90,18 @@ public class StudyServiceImpl implements StudyService {
 					.findByTitleIgnoreCaseContainingAndSubjectIdAndCityCode(
 							searchText, subjectId, cityId, pageRequest);
 
-			studyList = studyPage.getContent();
+			result.put("TotalPage", studyPage.getTotalPages());
+			result.put("StudyList", studyPage.getContent());
 		} catch (Exception ex) {
 			throw ex;
 		}
 
-		return studyList;
+		return result;
 	}
 
 	@Override
-	public List<Study> findAll(Integer pageNum, String searchText) {
-
-		List<Study> studyList;
-
+	public HashMap<String, Object> findAll(Integer pageNum, String searchText) {
+		HashMap<String, Object> result = new HashMap<String, Object>();
 		Page<Study> studyPage = null;
 		try {
 			PageRequest pageRequest = new PageRequest(pageNum - 1, 10,
@@ -113,18 +109,19 @@ public class StudyServiceImpl implements StudyService {
 			studyPage = studyRepository.findByTitleIgnoreCaseContaining(
 					searchText, pageRequest);
 
-			studyList = studyPage.getContent();
+			result.put("TotalPage", studyPage.getTotalPages());
+			result.put("StudyList", studyPage.getContent());
 		} catch (Exception ex) {
 			throw ex;
 		}
 
-		return studyList;
+
+		return result;
 	}
 
 	@Override
-	public List<Study> findAllBySubjectId(Integer pageNum, String searchText, int subjectId) {
-		List<Study> studyList;
-		
+	public HashMap<String, Object> findAllBySubjectId(Integer pageNum, String searchText, int subjectId) {
+		HashMap<String, Object> result = new HashMap<String, Object>();		
 		Page<Study> studyPage = null;
 		try {
 			PageRequest pageRequest = new PageRequest(pageNum - 1, 10,
@@ -132,20 +129,19 @@ public class StudyServiceImpl implements StudyService {
 			studyPage = studyRepository
 					.findByTitleIgnoreCaseContainingAndSubjectId(searchText,
 							subjectId, pageRequest);
-
-			studyList = studyPage.getContent();
+			
+			result.put("TotalPage", studyPage.getTotalPages());
+			result.put("StudyList", studyPage.getContent());
 		} catch (Exception ex) {
 			throw ex;
 		}
 
-		return studyList;
+		return result;
 	}
 	
 	@Override
-	public List<Study> findAllByCityCode(Integer pageNum, String searchText, int cityId) {
-		List<Study> studyList;
-			
-		
+	public HashMap<String, Object> findAllByCityCode(Integer pageNum, String searchText, int cityId) {
+		HashMap<String, Object> result = new HashMap<String, Object>();		
 		Page<Study> studyPage = null;
 		try {
 			PageRequest pageRequest = new PageRequest(pageNum - 1, 10,
@@ -154,13 +150,16 @@ public class StudyServiceImpl implements StudyService {
 					.findByTitleIgnoreCaseContainingAndCityCode(searchText,
 							cityId, pageRequest);
 
-			studyList = studyPage.getContent();
+			result.put("TotalPage", studyPage.getTotalPages());
+			result.put("StudyList", studyPage.getContent());
 		} catch (Exception ex) {
 			throw ex;
 		}
 
-		return studyList;
+		return result;
 	}
+	
+
 
 	@Override
 	public List<Study> findTop3BySubjectStudy(Integer subjectId) {
