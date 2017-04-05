@@ -25,5 +25,6 @@ public interface StudyRepository extends JpaRepository<Study, Integer>, JpaSpeci
 	Study findById(Integer Id);
 	@Query(value = "select * from (select * from study group by study.subject_id, study.id order by study.id desc) as a where a.subject_id = ? limit 3", nativeQuery = true)
 	List<Study> findTop3BySubjectStudy(Integer subjectId);
+	
 
 }

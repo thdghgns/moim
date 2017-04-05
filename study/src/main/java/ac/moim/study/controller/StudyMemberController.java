@@ -90,7 +90,7 @@ public class StudyMemberController {
 				}
 			}	
 
-			return "views/study/detail";
+			return "views/mypage/myPage";
 			}
 		else{
 			return "redirect:" + "/login";

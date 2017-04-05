@@ -179,4 +179,10 @@ public class StudyServiceImpl implements StudyService {
 		
 		return study;
 	}
+
+	@Override
+	public Study saveStudy(Study study) {
+		
+		return  studyRepository.saveAndFlush(study);
+	}
 }
