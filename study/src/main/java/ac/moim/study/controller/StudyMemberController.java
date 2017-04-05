@@ -79,6 +79,9 @@ public class StudyMemberController {
 				studyMemberService.deleteStudyMember(studyId, userId, userClassifier);
 				
 			}else{
+				
+				
+				
 				StudyMember studyMember = studyMemberService.saveStudyMember(studyId, userId, "teamone");
 				if (studyMember != null) {
 					CommentDto.Request requestComment = new CommentDto.Request();
@@ -86,6 +89,8 @@ public class StudyMemberController {
 						requestComment.setContent(content);
 						requestComment.setStudyId(studyId);
 						commentService.saveComment(requestComment);
+						
+						
 					}
 				}
 			}	
