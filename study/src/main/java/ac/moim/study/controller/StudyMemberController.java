@@ -1,14 +1,10 @@
 package ac.moim.study.controller;
 
-import ac.moim.study.dto.CommentDto;
-import ac.moim.study.dto.StudyDto;
-import ac.moim.study.dto.StudyMemberDto;
-import ac.moim.study.entity.Study;
-import ac.moim.study.entity.StudyMember;
-import ac.moim.study.exception.StudyBadRequestException;
-import ac.moim.study.service.CommentService;
-import ac.moim.study.service.StudyMemberService;
-import ac.moim.study.service.StudyService;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,8 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
+import ac.moim.common.service.GmailService;
+import ac.moim.study.dto.CommentDto;
+import ac.moim.study.dto.StudyMemberDto;
+import ac.moim.study.entity.StudyMember;
+import ac.moim.study.exception.StudyBadRequestException;
+import ac.moim.study.service.CommentService;
+import ac.moim.study.service.StudyMemberService;
+import ac.moim.study.service.StudyService;
+import ac.moim.user.entity.User;
+import ac.moim.user.service.UserService;
+//import antlr.collections.List;
 
 /**
  * Created by SONG_HOHOON on 2016-12-29.
@@ -38,6 +43,12 @@ public class StudyMemberController {
 
 	@Autowired
 	private CommentService commentService;
+	
+	@Autowired
+	private GmailService gmailService;
+	
+	@Autowired
+	private UserService userService;
 
 	@RequestMapping(value = "/study-member", method = RequestMethod.POST)
 	public String saveStudyMember(@RequestBody @Valid int studyId, HttpSession httpSession, BindingResult result) {
@@ -78,8 +89,7 @@ public class StudyMemberController {
 			}else if(userClassifier.equals("teamone")){
 				studyMemberService.deleteStudyMember(studyId, userId, userClassifier);
 				
-			}else{
-				
+			}else{				
 				
 				
 				StudyMember studyMember = studyMemberService.saveStudyMember(studyId, userId, "teamone");
@@ -89,7 +99,20 @@ public class StudyMemberController {
 						requestComment.setContent(content);
 						requestComment.setStudyId(studyId);
 						commentService.saveComment(requestComment);
+						StudyMember studyMemberLeader  = studyMemberService.findByStudyIdAndClassifier(studyId, "leader");
+			
+						List<String> mailList = new ArrayList<String>();		  
+						mailList.add(studyMemberLeader.getUser().getMail());
+						String subject;
 						
+						User user = userService.getUser(userId);
+						subject = "[MOIM] '"+ studyMemberLeader.getStudy().getTitle() +"'에 새로운 회원" + user.getName() + "님이 가입하였습니다.";
+						try {
+							gmailService.send(subject, content,mailList);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						
 					}
 				}
