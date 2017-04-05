@@ -72,12 +72,13 @@
 		<div class="blog-pagination">
 			<ul class="pagination">
 				<li><a href="#">left</a></li>
-				<c:forEach var="i" begin="1" end="${study.size}" step="1">
-
+				<c:forEach var="i" begin="1" end="${totalPage}" step="1">
+					<li class="notice-page-num"><a href="/study/main?pageNum=${i}&searchText=${searchText}&subjectId=${subjectId}&cityCode=${cityCode}">${i}</a></li>
 				</c:forEach>
 				<li><a href="#">right</a></li>
 			</ul>
 		</div>
+	</div>
 </body>
 <script type="text/javascript">
 	//주소 선택

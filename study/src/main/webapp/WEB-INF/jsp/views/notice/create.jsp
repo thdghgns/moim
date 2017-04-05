@@ -40,7 +40,11 @@
 				window.location.href = "/notice/main";
 			},
 			error : function(e) {
-				alert("error");
+				if(JSON.parse(e.responseText).message == "NotNullModifyUser") {
+					alert("로그인이 필요합니다.");
+				} else {
+					alert("error");
+				}
 			}
 		});
 	});

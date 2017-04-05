@@ -1,6 +1,7 @@
 package ac.moim.study.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -98,27 +99,28 @@ public class StudyController {
 			Model model,
 			@RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum,
 			@RequestParam(value = "searchText", required = false, defaultValue = "") String searchText,
-			@RequestParam(value = "subjectId", required = false, defaultValue = "") Integer subjectId,
-			@RequestParam(value = "cityCode", required = false, defaultValue = "") Integer cityCode) {
+			@RequestParam(value = "subjectId", required = false) Integer subjectId,
+			@RequestParam(value = "cityCode", required = false) Integer cityCode) {
 
-		List<Study> studyList;
+		HashMap<String, Object> results;
 		City city = cityService.findByCode(cityCode);
 		Subject subject = subjectService.findById(subjectId);
 	
 		
 		if (subjectId == null && cityCode == null) {
-			studyList = studyService.findAll(pageNum, searchText);
+			results = studyService.findAll(pageNum, searchText);
 		} else if (subjectId == null) {
-			studyList = studyService.findAllByCityCode(pageNum, searchText,
-					city.getCode());
+			results = studyService.findAllByCityCode(pageNum, searchText, city.getCode());
 		} else if (cityCode == null) {
-			studyList = studyService.findAllBySubjectId(pageNum, searchText,
-					subject.getId());
+			results = studyService.findAllBySubjectId(pageNum, searchText, subject.getId());
 		} else {
-			studyList = studyService.findAll(pageNum, searchText, subject.getId(),
-					city.getCode());
+			results = studyService.findAll(pageNum, searchText, subject.getId(), city.getCode());	
 		}
 
+		model.addAttribute("searchText", searchText);
+		model.addAttribute("cityCode", cityCode);
+		model.addAttribute("subjectId", subjectId);	
+		
 		List<SubjectDto.Response> subjectList = subjectService.getAllSubject();
 		List<StateDto.Response> stateList = stateService.getAllState();
 		List<CityDto.Response> cityList = cityService.getAllCity();
@@ -127,7 +129,8 @@ public class StudyController {
 		model.addAttribute("stateList", stateList);
 		model.addAttribute("subjectList", subjectList);
 
-		model.addAttribute("studyList", studyList);
+		model.addAttribute("totalPage", results.get("TotalPage"));
+		model.addAttribute("studyList", results.get("StudyList"));
 			
 		return "views/study/main";
 	}
