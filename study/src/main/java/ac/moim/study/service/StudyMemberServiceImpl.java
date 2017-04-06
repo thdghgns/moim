@@ -154,4 +154,15 @@ public class StudyMemberServiceImpl implements StudyMemberService {
 		return null;
 	}
 
+	@Override
+	public StudyMember findByStudyIdAndClassifier(int studyId, String classifier) {
+		// TODO Auto-generated method stub
+		StudyMember StudyMember ; 
+
+		StudyMember = studyMemberRepository.findByStudyIdAndClassifier(studyId, classifier);
+
+
+	return StudyMember;
+	}
+
 }

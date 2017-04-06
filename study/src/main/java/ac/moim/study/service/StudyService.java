@@ -15,6 +15,7 @@ public interface StudyService {
 	public List<Study> findBySubjectId(Integer subjectId);
 	public List<Study> findByCityCode(Integer cityCode);
 	public Study saveStudy(StudyDto.Request study);
+	public Study saveStudy(Study study);
 	public List<Study> findByInputUserIgnoreCaseContaining(String keyword);
 	public HashMap<String, Object> findAll(Integer pageNum, String searchText, int subjectId, int cityCode);
 	public HashMap<String, Object> findAll(Integer pageNum, String searchText);
@@ -22,5 +23,6 @@ public interface StudyService {
 	public HashMap<String, Object> findAllByCityCode(Integer pageNum, String searchText, int cityCode);
 	public Study findById(int studyId);
 	List<Study> findTop3BySubjectStudy(Integer subjectId);
+	
 
 }

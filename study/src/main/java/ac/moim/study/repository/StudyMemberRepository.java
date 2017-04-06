@@ -31,4 +31,7 @@ public interface StudyMemberRepository extends JpaRepository<StudyMember, StudyM
 	
 	@Query(value = "select * from study_member where study_member.user_id=? and study_member.study_id=?", nativeQuery= true)
 	StudyMember findByUserIdAndStudyid (String userId,int study_id);
+	
+	@Query(value = "select * from study_member where study_member.study_id=? and study_member.classifier=?", nativeQuery= true)
+	StudyMember findByStudyIdAndClassifier (int study_id,String classifier);
 }
