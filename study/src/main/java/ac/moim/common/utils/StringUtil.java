@@ -1,9 +1,10 @@
 package ac.moim.common.utils;
 
-import java.util.Map;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by SONG_HOHOON on 2016-11-17.
@@ -26,6 +27,14 @@ public class StringUtil {
 
 			System.out.println(e);
 		}
+
+		return result;
+	}
+
+	public static <T> String listToJsonString(List<T> list) throws JsonProcessingException {
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		String result = objectMapper.writeValueAsString(list);
 
 		return result;
 	}
