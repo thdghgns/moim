@@ -24,6 +24,7 @@ import ac.moim.study.service.CommentService;
 import ac.moim.study.service.StudyMemberService;
 import ac.moim.study.service.StudyService;
 import ac.moim.user.entity.User;
+import ac.moim.user.exception.UserNotFoundException;
 import ac.moim.user.service.UserService;
 //import antlr.collections.List;
 
@@ -77,14 +78,17 @@ public class StudyMemberController {
 	public String studyEnroll(Model model, HttpSession httpSession,
 			@RequestParam(value = "studyId", required = false, defaultValue = "") Integer studyId,
 			@RequestParam(value = "content", required = false, defaultValue = "") String content,
-			@RequestParam(value = "userClassifier", required = false, defaultValue = "") String userClassifier) {
+			@RequestParam(value = "userClassifier", required = false, defaultValue = "") String userClassifier) throws Exception {
 
 		StudyMemberDto.Request requestStudyMember = new StudyMemberDto.Request();
 		requestStudyMember.setStudyId(studyId);
-		if (httpSession.getAttribute("userId") != null) {
-			String userId = String.valueOf(httpSession.getAttribute("userId"));
+		
+		String userId = (String)httpSession.getAttribute("userId");
+		if(userId == null){
+			//throw new UserNotFoundException("user.not.found", "사용자를 찾을 수 없습니다. 먼저 로그인하세요.");
+		}
 			if(userClassifier.equals("leader")){
-				//studyMemberService.
+		
 				
 			}else if(userClassifier.equals("teamone")){
 				studyMemberService.deleteStudyMember(studyId, userId, userClassifier);
@@ -120,10 +124,8 @@ public class StudyMemberController {
 
 			return "views/mypage/myPage";
 			}
-		else{
-			return "redirect:" + "/login";
-		}
+
 		
-	}
+
 
 }
