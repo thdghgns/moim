@@ -1,14 +1,11 @@
 package ac.moim.study.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import ac.moim.user.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,13 +26,17 @@ import ac.moim.common.service.StateService;
 import ac.moim.common.service.SubjectService;
 import ac.moim.study.dto.CommentDto;
 import ac.moim.study.dto.StudyDto;
+import ac.moim.study.dto.StudyHistoryDto;
 import ac.moim.study.dto.StudyMemberDto;
 import ac.moim.study.entity.Study;
+import ac.moim.study.entity.StudyHistory;
 import ac.moim.study.entity.StudyMember;
 import ac.moim.study.exception.StudyBadRequestException;
 import ac.moim.study.service.CommentService;
+import ac.moim.study.service.StudyHistoryService;
 import ac.moim.study.service.StudyMemberService;
 import ac.moim.study.service.StudyService;
+import ac.moim.user.exception.UserNotFoundException;
 
 /**
  * Created by SONG_HOHOON on 2016-12-26.
@@ -61,6 +62,9 @@ public class StudyController {
 	
 	@Autowired
 	private CommentService commentService;
+	
+	@Autowired
+	private StudyHistoryService studyHistoryService;
 
 	@RequestMapping(value = "/create-form", method = RequestMethod.GET)
 	public String getStudyForm(Model model) {
@@ -76,7 +80,7 @@ public class StudyController {
 		return "views/study/create";
 	}
 
-	@RequestMapping(value = "", method = RequestMethod.POST)
+	@RequestMapping(value = "/save-study", method = RequestMethod.POST)
 	public String saveStudy(HttpSession httpSession,
 			@RequestBody @Valid StudyDto.Request request, BindingResult result) {
 
@@ -95,7 +99,7 @@ public class StudyController {
 		if (study != null)
 			studyMemberService.saveStudyMember(study.getId(), userId,"leader");
 
-		return "views/study/main";
+		return null;
 	}
 
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
@@ -156,8 +160,6 @@ public class StudyController {
 		}else{
 
 				model.addAttribute("userClassifier",studyMember.getClassifier());
-
-
 		}
 
 		Subject studySubject = study.getSubject();
@@ -210,4 +212,44 @@ public class StudyController {
 		return "views/study/detail";
 	}
 
+	
+	
+	@RequestMapping(value="/history",method = RequestMethod.GET)
+	public String studyHistory(Model model, @RequestParam(value = "studyId",required = false, defaultValue="" ) Integer studyId){
+	
+		List<StudyHistory> studyHistoryList = studyHistoryService.findByStudyId(studyId);
+		Study study = studyService.findById(studyId);
+
+		model.addAttribute("study",study);
+		model.addAttribute("studyHistoryList", studyHistoryList);
+		model.addAttribute("studyId", studyId);
+		model.addAttribute("selectedMenu", "history");
+		
+		return "views/study/detail";
+	}
+	
+	
+	@RequestMapping(value="/history-add",method = RequestMethod.GET)
+	public String addStudyHistory(Model model, @RequestParam(value="studyId", required =false, defaultValue="") Integer studyId){
+		Study study = studyService.findById(studyId);
+
+		model.addAttribute("study",study);
+		model.addAttribute("studyId", studyId);
+		model.addAttribute("selectedMenu", "history-add");
+		
+		return "views/study/detail";
+	}
+	
+	@RequestMapping(value="/save-studyHistory",method = RequestMethod.POST)
+	public String saveStudyHistory(Model model, @RequestParam(value = "studyId",required = false, defaultValue="" ) Integer studyId, @RequestBody @Valid StudyHistoryDto.Request request){
+	
+		System.out.println(request.getStudyId());
+		studyHistoryService.saveStudyHistory(request);
+
+		model.addAttribute("selectedMenu", "history");
+
+		
+		return "views/study/detail";
+	}
+	
 }
