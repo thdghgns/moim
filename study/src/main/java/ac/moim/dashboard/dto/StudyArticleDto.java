@@ -10,7 +10,7 @@ import java.io.Serializable;
 /**
  * Created by thdghgns on 2017. 4. 5..
  */
-public class StudyDashboardDto {
+public class StudyArticleDto {
     @Data
     public static class Request implements Serializable{
         @NotNull

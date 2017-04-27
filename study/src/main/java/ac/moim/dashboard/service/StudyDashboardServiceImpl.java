@@ -1,6 +1,6 @@
 package ac.moim.dashboard.service;
 
-import ac.moim.dashboard.entity.StudyDashboard;
+import ac.moim.dashboard.entity.StudyArticle;
 import ac.moim.dashboard.repository.StudyDashboardRepository;
 import ac.moim.study.entity.Study;
 import ac.moim.study.repository.StudyRepository;
@@ -16,17 +16,24 @@ import java.util.List;
 @Service
 public class StudyDashboardServiceImpl implements StudyDashboardService {
 
-    @Autowired
-    StudyDashboardRepository studyDashboardRepository;
+	@Autowired
+	StudyDashboardRepository studyDashboardRepository;
 
-    @Autowired
-    StudyRepository studyRepository;
+	@Autowired
+	StudyRepository studyRepository;
 
-    @Override
-    public List<StudyDashboard> findAllByStudy(Integer studyId, Pageable pageable) {
-        Study study = studyRepository.findById(studyId);
-        List<StudyDashboard> studyDashboards = studyDashboardRepository.findByStudy(study, pageable);
+	@Override
+	public List<StudyArticle> findAllByStudy(Integer studyId, Pageable pageable) {
+		Study study = studyRepository.findById(studyId);
+		List<StudyArticle> studyDashboards = studyDashboardRepository.findByStudy(study, pageable);
 
-        return studyDashboards;
-    }
+		return studyDashboards;
+	}
+
+	@Override
+	public StudyArticle findOne(Long articleId) {
+		StudyArticle studyArticle = studyDashboardRepository.findOne(articleId);
+
+		return studyArticle;
+	}
 }

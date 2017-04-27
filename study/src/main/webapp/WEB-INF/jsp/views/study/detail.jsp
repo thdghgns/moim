@@ -51,6 +51,12 @@
                     <c:when test="${selectedMenu eq 'dashboard'}">
                         <jsp:include page="detail/study-dashboard.jsp" flush="true" />
                     </c:when>
+                    <c:when test="${selectedMenu eq 'article'}">
+                        <jsp:include page="detail/study-article.jsp" flush="true" />
+                    </c:when>
+                    <c:when test="${selectedMenu eq 'createArticle'}">
+                        <jsp:include page="detail/study-article-create.jsp" flush="true" />
+                    </c:when>
                 </c:choose>
             </div>
         </div>
@@ -74,7 +80,7 @@
         var study_info_url = domain + "/study/detail?studyId=" + ${study.id};
         $("#study-detail").attr("href", study_info_url);
 
-        var study_dashboard_url = domain + "/study/dashboard?studyId=" + ${study.id};
+        var study_dashboard_url = domain + "/study/articles?studyId=" + ${study.id};
         $("#study-dashboard").attr("href", study_dashboard_url);
 
         switch ("${selectedMenu}") {
@@ -83,6 +89,12 @@
                 break;
             case "dashboard":
                 $("#study-leftmenu-dashboard").attr("class", "active");
+                break;
+            case "article":
+            	$("#study-leftmenu-dashboard").attr("class", "active");
+                break;
+            case "createArticle":
+            	$("#study-leftmenu-dashboard").attr("class", "active");
                 break;
         }
     }
