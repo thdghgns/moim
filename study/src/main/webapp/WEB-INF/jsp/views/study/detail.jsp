@@ -19,8 +19,8 @@
             <div class="row">
                 <div class="action">
                     <div class="col-sm-12">
-                        <h1 class="title">스터디에 가입해보세요</h1>
-                        <p>Join us</p>
+                        <h1 class="title">${study.title}</h1>
+                        <p>${study.memberCount} / ${study.memberLimit}</p>
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                             <li id="study-leftmenu-detail"><a id="study-detail" href="#">스터디 소개<span class="pull-right"></span></a></li>
                             <li id="study-leftmenu-dashboard"><a id="study-dashboard" href="#">스터디 게시판<span class="pull-right"></span></a></li>
                             <li><a id="study-member" href="#">스터디 팀원<span class="pull-right"></span></a></li>
-                            <li><a id="study-history" href="#">스터디 기록<span class="pull-right"></span></a></li>
+                           <li id="study-leftmenu-history"><a id="study-history" href="#">스터디 기록<span class="pull-right"></span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -51,6 +51,13 @@
                     <c:when test="${selectedMenu eq 'dashboard'}">
                         <jsp:include page="detail/study-dashboard.jsp" flush="true" />
                     </c:when>
+
+                     <c:when test="${selectedMenu eq 'history'}">
+                        <jsp:include page="detail/study-history.jsp" flush="true" />
+                    </c:when>
+                    <c:when test="${selectedMenu eq 'history-add'}">
+                        <jsp:include page="detail/study-history-add.jsp" flush="true" />
+                    </c:when>
                     <c:when test="${selectedMenu eq 'article'}">
                         <jsp:include page="detail/study-article.jsp" flush="true" />
                     </c:when>
@@ -60,7 +67,6 @@
                 </c:choose>
             </div>
         </div>
-
     </div>
 </section>
 </body>
@@ -154,13 +160,22 @@ $("#document").ready(function(){
 
         var study_dashboard_url = domain + "/study/articles?studyId=" + ${study.id};
         $("#study-dashboard").attr("href", study_dashboard_url);
+        
+        var study_history_url = domain + "/study/history?studyId=" + ${study.id};
+        $("#study-history").attr("href", study_history_url);
 
+        var study_history_add_url = domain + "/study/history-add?studyId=" + ${study.id};
+        $("#study-history-add").attr("href", study_history_add_url);
+        
         switch ("${selectedMenu}") {
             case "info":
                 $("#study-leftmenu-detail").attr("class", "active");
                 break;
             case "dashboard":
                 $("#study-leftmenu-dashboard").attr("class", "active");
+                break;
+            case "history":
+                $("#study-leftmenu-history").attr("class", "active");
                 break;
             case "article":
             	$("#study-leftmenu-dashboard").attr("class", "active");

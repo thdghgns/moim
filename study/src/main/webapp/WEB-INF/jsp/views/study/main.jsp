@@ -41,8 +41,9 @@
 		</div>
 
 		<button type="button" class="btn btn-warning btn-block"
-			style="margin-top: 15px; margin-bottom:15px" onclick="location.href='/study/create-form'">스터디
-			만들기</button>
+			style="margin-top: 15px; margin-bottom:15px" onclick="location.href='/study/create-form'">스터디 만들기
+			</button>
+								
 		<div class="divTable">
 			<div class="divTableBody">
 				<div class="divTableRow">

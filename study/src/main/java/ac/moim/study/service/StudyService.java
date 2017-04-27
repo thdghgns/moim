@@ -23,6 +23,4 @@ public interface StudyService {
 	public HashMap<String, Object> findAllByCityCode(Integer pageNum, String searchText, int cityCode);
 	public Study findById(int studyId);
 	List<Study> findTop3BySubjectStudy(Integer subjectId);
-	
-
-}
+}	
