@@ -145,14 +145,15 @@ public class StudyController {
 	
 
 	@RequestMapping(value="/detail",method = RequestMethod.GET)
-	public String studyDetail(HttpSession httpSession,Model model,@RequestParam(value = "studyId",required = false, defaultValue="" ) int studyId){
+	public String studyDetail(HttpSession httpSession,Model model,@RequestParam(value = "studyId",required = false, defaultValue="" ) int studyId) throws Exception{
 
+	
 
 		Study study = studyService.findById(studyId);
 		String userId = (String) httpSession.getAttribute("userId");
 		if( userId ==null){
-			return "redirect:" + "/login";
-		}
+	//		throw new Exception("NotNullModifyUser");		
+			}
 
 		StudyMember studyMember = studyMemberService.findByUserIdAndStudyId(userId, studyId);
 		if( studyMember == null ){
@@ -186,7 +187,7 @@ public class StudyController {
 
 		// FIXME: session.getID()가 아니라 session에 저장된 attribute 중에 userId를 찾아야됨.
 		requestStudyMember.setUserId(String.valueOf(httpSession.getAttribute("userId")));
-		requestStudyMember.setClassifier("member");
+		requestStudyMember.setClassifier("teamone");
 
 		// FIXME: saveStudyMember에서 이미 내가 leader로 있는 경우에 예외처리(지금은 leader->member로 update치고 있음
 		// FIXME: saveStudyMember는 study 테이블의 member_count도 업데이트 쳐야함

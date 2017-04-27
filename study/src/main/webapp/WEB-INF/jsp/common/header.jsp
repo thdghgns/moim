@@ -18,7 +18,7 @@
 				<div class="navbar-header">
 					<a class="navbar-brand" href="/">
 						<h1>
-							<img src="../images/logo1.png" alt="Moim"> Moim
+							<img src="/images/logo1.png" alt="Moim"> Moim
 						</h1>
 					</a>
 					<div class="search">

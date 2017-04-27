@@ -51,36 +51,114 @@
                     <c:when test="${selectedMenu eq 'dashboard'}">
                         <jsp:include page="detail/study-dashboard.jsp" flush="true" />
                     </c:when>
+
                      <c:when test="${selectedMenu eq 'history'}">
                         <jsp:include page="detail/study-history.jsp" flush="true" />
                     </c:when>
                     <c:when test="${selectedMenu eq 'history-add'}">
                         <jsp:include page="detail/study-history-add.jsp" flush="true" />
                     </c:when>
+                    <c:when test="${selectedMenu eq 'article'}">
+                        <jsp:include page="detail/study-article.jsp" flush="true" />
+                    </c:when>
+                    <c:when test="${selectedMenu eq 'createArticle'}">
+                        <jsp:include page="detail/study-article-create.jsp" flush="true" />
+                    </c:when>
                 </c:choose>
             </div>
         </div>
-
     </div>
 </section>
 </body>
 
 
 <script>
-    $("#study-enroll").on('click', function (e) {
-        e.preventDefault();
-        $('#element_to_pop_up').bPopup({});
-    });
-    $('#comment-insert').on('click', function () {
-        window.document.location.href = '/study/enroll?studyId=' + ${study.id} +'&content=' + $("#content").value;
-    });
+
+
+
+$("#document").ready(function(){
+	
+	var str =   <%=session.getAttribute("userId")%>;
+	if(str == null){
+		alert("로그인하세요");
+		window.document.location.href ='/login'
+	};
+	var str ="${userClassifier}";
+	if(str == "leader"){
+		$("#study-enroll").hide();
+		$("#study-quit").hide();
+		$("#study-remove").show();
+		
+	}else if (str == "teamone"){
+		$("#study-enroll").hide();
+		$("#study-quit").show();
+		$("#study-remove").hide();
+		
+	}
+	else {		
+		$("#study-enroll").show();
+		$("#study-quit").hide();
+		$("#study-remove").hide();		
+	}
+});
+
+
+
+
+
+
+	$("#study-enroll").on('click', function(e) {
+		
+
+		e.preventDefault();
+		$('#element_to_pop_up').bPopup({
+
+		});
+	});
+	
+
+	
+	
+	$("#comment-insert").on('click', function(e) {
+		
+
+		var studyId = $('#studyId').val();
+		var content = $('#contentInput').val();
+		var userClassifier= "${userClassifier}";
+		
+		//alert($('#contentInput').val());
+		
+		window.document.location.href = '/studyMember/enroll?studyId=' +studyId+'&content=' + content + '&userClassifier=' + userClassifier;
+
+		
+		
+	});
+	
+
+	$("#study-quit").on('click', function(e) {
+		
+		var str =   "<%=session.getAttribute("userId")%>";
+		if(str == null){
+			alert("로그인하세요");
+		};
+		e.preventDefault();
+		alert ("정말 탈퇴하시겠습니까?")
+		var studyId = $('#studyId').val();
+		var content = $('#contentInput').val();
+		var userClassifier= "${userClassifier}";
+		window.document.location.href = '/studyMember/enroll?studyId=' +studyId+'&content=' + content + '&userClassifier=' + userClassifier;
+
+		
+	});
+
+   
     function onLoad() {
         var domain = window.location.protocol + "//" + window.location.host;
 
         var study_info_url = domain + "/study/detail?studyId=" + ${study.id};
         $("#study-detail").attr("href", study_info_url);
 
-        var study_dashboard_url = domain + "/study/dashboard?studyId=" + ${study.id};
+        var study_dashboard_url = domain + "/study/articles?studyId=" + ${study.id};
         $("#study-dashboard").attr("href", study_dashboard_url);
         
         var study_history_url = domain + "/study/history?studyId=" + ${study.id};
@@ -98,6 +176,12 @@
                 break;
             case "history":
                 $("#study-leftmenu-history").attr("class", "active");
+                break;
+            case "article":
+            	$("#study-leftmenu-dashboard").attr("class", "active");
+                break;
+            case "createArticle":
+            	$("#study-leftmenu-dashboard").attr("class", "active");
                 break;
         }
     }

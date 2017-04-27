@@ -6,11 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
 
 <div id="import_contents">
     <div class="col-md-12 col-sm-8">
@@ -101,5 +96,3 @@
 
     </div>
 </div>
-</body>
-</html>

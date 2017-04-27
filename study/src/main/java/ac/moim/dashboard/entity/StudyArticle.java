@@ -18,7 +18,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @ToString(exclude = "study")
 @Table(name = "study_dashboard")
-public class StudyDashboard extends BaseEntity implements Serializable{
+public class StudyArticle extends BaseEntity implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
