@@ -67,13 +67,85 @@
 
 
 <script>
-    $("#study-enroll").on('click', function (e) {
-        e.preventDefault();
-        $('#element_to_pop_up').bPopup({});
-    });
-    $('#comment-insert').on('click', function () {
-        window.document.location.href = '/study/enroll?studyId=' + ${study.id} +'&content=' + $("#content").value;
-    });
+
+
+
+$("#document").ready(function(){
+	
+	var str =   <%=session.getAttribute("userId")%>;
+	if(str == null){
+		alert("로그인하세요");
+		window.document.location.href ='/login'
+	};
+	var str ="${userClassifier}";
+	if(str == "leader"){
+		$("#study-enroll").hide();
+		$("#study-quit").hide();
+		$("#study-remove").show();
+		
+	}else if (str == "teamone"){
+		$("#study-enroll").hide();
+		$("#study-quit").show();
+		$("#study-remove").hide();
+		
+	}
+	else {		
+		$("#study-enroll").show();
+		$("#study-quit").hide();
+		$("#study-remove").hide();		
+	}
+});
+
+
+
+
+
+
+	$("#study-enroll").on('click', function(e) {
+		
+
+		e.preventDefault();
+		$('#element_to_pop_up').bPopup({
+
+		});
+	});
+	
+
+	
+	
+	$("#comment-insert").on('click', function(e) {
+		
+
+		var studyId = $('#studyId').val();
+		var content = $('#contentInput').val();
+		var userClassifier= "${userClassifier}";
+		
+		//alert($('#contentInput').val());
+		
+		window.document.location.href = '/studyMember/enroll?studyId=' +studyId+'&content=' + content + '&userClassifier=' + userClassifier;
+
+		
+		
+	});
+	
+
+	$("#study-quit").on('click', function(e) {
+		
+		var str =   "<%=session.getAttribute("userId")%>";
+		if(str == null){
+			alert("로그인하세요");
+		};
+		e.preventDefault();
+		alert ("정말 탈퇴하시겠습니까?")
+		var studyId = $('#studyId').val();
+		var content = $('#contentInput').val();
+		var userClassifier= "${userClassifier}";
+		window.document.location.href = '/studyMember/enroll?studyId=' +studyId+'&content=' + content + '&userClassifier=' + userClassifier;
+
+		
+	});
+
+   
     function onLoad() {
         var domain = window.location.protocol + "//" + window.location.host;
 
